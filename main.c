@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #include <stdbool.h>
 #include <math.h>
 #include <time.h>
@@ -28,15 +30,12 @@ int main(int argc, char *argv[]) {
     {
         while( SDL_PollEvent( &event ) != 0 )
         {
-
             if( event.type == SDL_QUIT )
             {
                 quit = true;
             }
         }
     }
-
-    //SDL_Delay(10000);
 
 
 
