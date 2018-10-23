@@ -16,26 +16,28 @@ int main(int argc, char *argv[]) {
 
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
 
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    SDL_SetRenderDrawColor(renderer, 100, 200, 55, 155);
 
     SDL_RenderClear(renderer);
 
     SDL_RenderPresent(renderer);
 
-    bool quit = false;
+    bool running = true;
 
     SDL_Event event;
 
-    while( !quit )
+    while( running )
     {
         while( SDL_PollEvent( &event ) != 0 )
         {
             if( event.type == SDL_QUIT )
             {
-                quit = true;
+                running = false;
+                break;
             }
         }
     }
+
 
 
 
