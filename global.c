@@ -4,5 +4,5 @@
 
 #include "global.h"
 
-int const width = 640;
-int const height = 480;
+int const ScreenWidth = 640;
+int const ScreenHeight = 480;
