@@ -1,4 +1,3 @@
-
 #include "global.h"
 #include "game.h"
 #include "farm.h"
