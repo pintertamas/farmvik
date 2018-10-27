@@ -3,11 +3,7 @@
 //
 
 #include "farm.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <math.h>
-#include <time.h>
+#include "global.h"
 
 typedef struct Termeny {
     int posx;  // x pozíció
@@ -29,7 +25,6 @@ void delay(int seconds)
     // looping until required time is not achieved
     while (clock() < start_time + ms);
 }
-
 
 int elultet(Termeny kukorica)
 {

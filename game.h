@@ -6,6 +6,6 @@
 #define FARMVILLE2_GAME_H
 
 
-int game();
+int init();
 
 #endif //FARMVILLE2_GAME_H
