@@ -14,10 +14,14 @@
 #include <math.h>
 #include <time.h>
 
-extern int const ScreenWidth;
-extern int const ScreenHeight;
+extern int const SCREEN_WIDTH;
+extern int const SCREEN_HEIGHT;
 SDL_Event windowEvent;
 SDL_Window *window;
 SDL_Renderer *renderer;
+SDL_Surface *imageSurface;
+extern const int NUMBER_OF_IMAGES;
+
+
 
 #endif //FARMVILLE2_GLOBAL_H

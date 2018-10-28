@@ -34,9 +34,9 @@ int elultet(Termeny kukorica)
 
     delay(10);
 
-    if(passedTime >= 10)
+    /*if(SDL_TICKS_PASSED(first_tick, SDL_GetTicks()) >= 1)
         kukorica.dev++;
-
+*/
     if(kukorica.dev >= 4)
         kukorica.isAlive = false;
 
