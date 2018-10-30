@@ -1,50 +1,44 @@
-#include <stdio.h>
-#include <SDL2\SDL.h>
-#include <SDL2\SDL_image.h>
-#include <SDL2\SDL_ttf.h>
-#include <stdbool.h>
-#include <math.h>
-#include <time.h>
 #include "global.h"
+#include "game.h"
+#include "farm.h"
+#include "textures.h"
 
-int main(int argc, char *argv[]) {
+int main( int argc, char **argv ) {
 
-    SDL_Init(SDL_INIT_VIDEO);
+    init();
 
-    SDL_Window *window = SDL_CreateWindow("Farmville", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
+    // Exiting the window
 
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
+    bool running = true;
 
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-
-    SDL_RenderClear(renderer);
-
-    SDL_RenderPresent(renderer);
-
-    bool quit = false;
-
-    SDL_Event event;
-
-    while( !quit )
+    while( running )
     {
-        while( SDL_PollEvent( &event ) != 0 )
-        {
+        SDL_RenderClear( renderer );
 
-            if( event.type == SDL_QUIT )
+        doRender(renderer);
+
+        SDL_RenderPresent( renderer );
+
+        SDL_Delay(10);
+
+        while( SDL_PollEvent( &windowEvent ) != 0 )
+        {
+            if( windowEvent.type == SDL_QUIT )
             {
-                quit = true;
+                running = false;
+                break;
             }
         }
+
     }
 
-    //SDL_Delay(10000);
+    // Close and destroy the window
 
+    SDL_DestroyWindow(window);
+    SDL_DestroyRenderer(renderer);
 
-
-
-
-
-
+    // Clean up
+    SDL_Quit();
 
     return 0;
 }

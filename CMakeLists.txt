@@ -3,7 +3,7 @@ project(farmville2 C)
 
 set(CMAKE_C_STANDARD 99)
 
-set(SOURCE_FILES main.c global.c global.h)
+set(SOURCE_FILES main.c global.c global.h farm.c farm.h game.c game.h textures.c textures.h)
 set(SDL2_INCLUDE_DIR C:/MinGW/include/SDL2)
 set(SDL2_LIBRARY C:/MinGW/lib)
 
