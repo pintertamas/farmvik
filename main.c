@@ -6,6 +6,7 @@
 int main( int argc, char **argv ) {
 
     init();
+    loadImage();
 
     // Exiting the window
 
@@ -14,8 +15,6 @@ int main( int argc, char **argv ) {
     while( running )
     {
         SDL_RenderClear( renderer );
-
-        loadImage();
 
         doRender(renderer);
 

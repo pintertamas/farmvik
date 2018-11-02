@@ -16,18 +16,17 @@ SDL_Texture *loadTexture(char *path) {
 
     if( NULL == image )
     {
-        printf( "Error: %s\n", SDL_GetError( ) );
+        printf( "Error1: %s\n", SDL_GetError( ) );
     } else {
 
         texture = SDL_CreateTextureFromSurface(renderer, image);
 
         if( NULL == texture )
         {
-            printf( "Error: %s\n", SDL_GetError( ) );
+            printf( "Error2: %s\n", SDL_GetError( ) );
         }
         SDL_FreeSurface(image);
     }
-
     return texture;
 }
 
