@@ -34,13 +34,12 @@ SDL_Texture *loadTexture(char *path) {
 void loadImage()
 {
     SDL_Texture *textures[NUMBER_OF_IMAGES];
-    textures[0] = loadTexture("Textures/Krumpli_mag_300x300.png");
-    textures[1] = loadTexture("Textures/Krumpli_kicsi_300x300.png");
-    textures[2] = loadTexture("Textures/Krumpli_nagy_300x300.png");
-
+    textures[0] = loadTexture("Textures/krumpli_mag_300x300.png");
+    textures[1] = loadTexture("Textures/krumpli_kicsi_300x300.png");
+    textures[2] = loadTexture("Textures/krumpli_nagy_300x300.png");
 }
 
-bool loadMedia()
+/*bool loadMedia()
 {
 
 
@@ -56,7 +55,7 @@ bool loadMedia()
     }
 
     return success;
-}
+}*/
 
 /*void destroy_everything(){
     SDL_DestroyWindow(window);

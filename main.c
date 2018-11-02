@@ -15,6 +15,8 @@ int main( int argc, char **argv ) {
     {
         SDL_RenderClear( renderer );
 
+        loadImage();
+
         doRender(renderer);
 
         SDL_RenderPresent( renderer );

@@ -2,17 +2,19 @@
 // Created by Tomi on 26/10/2018.
 //
 
+//Ebben a fileban lesz a játék logikája
+
 #include "farm.h"
 #include "global.h"
 
-typedef struct Termeny {
+/*typedef struct Termeny {
     int posx;  // x pozíció
     int posy; // y pozíció
     int dev; // fejlettség
     int age;
     bool isAlive; // életben van-e még, vagy már elrohadt
     int sorszam;
-}Termeny;
+}Termeny;*/
 
 void delay(int seconds)
 {
@@ -26,7 +28,7 @@ void delay(int seconds)
     while (clock() < start_time + ms);
 }
 
-int elultet(Termeny kukorica)
+/*int elultet(Termeny kukorica)
 {
     int passedTime = 0;
     kukorica.dev = 0;
@@ -34,9 +36,9 @@ int elultet(Termeny kukorica)
 
     delay(10);
 
-    /*if(SDL_TICKS_PASSED(first_tick, SDL_GetTicks()) >= 1)
+    if(SDL_TICKS_PASSED(first_tick, SDL_GetTicks()) >= 1)
         kukorica.dev++;
-*/
+
     if(kukorica.dev >= 4)
         kukorica.isAlive = false;
 
@@ -53,4 +55,4 @@ int farm(){
     kukorica.sorszam = 0;
 
     return 0;
-}
+}*/
