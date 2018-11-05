@@ -9,7 +9,6 @@
 
 int init();
 void doRender(SDL_Renderer *renderer);
-int processEvents(SDL_Window *window);
 SDL_Texture *loadTexture(char *path);
 
 #endif //FARMVILLE2_GAME_H

@@ -16,31 +16,29 @@ SDL_Texture *loadTexture(char *path) {
 
     if( NULL == image )
     {
-        printf( "Error: %s\n", SDL_GetError( ) );
+        printf( "Error1: %s\n", SDL_GetError( ) );
     } else {
 
         texture = SDL_CreateTextureFromSurface(renderer, image);
 
         if( NULL == texture )
         {
-            printf( "Error: %s\n", SDL_GetError( ) );
+            printf( "Error2: %s\n", SDL_GetError( ) );
         }
         SDL_FreeSurface(image);
     }
-
     return texture;
 }
 
 void loadImage()
 {
     SDL_Texture *textures[NUMBER_OF_IMAGES];
-    textures[0] = loadTexture("Textures/Krumpli_mag_300x300.png");
-    textures[1] = loadTexture("Textures/Krumpli_kicsi_300x300.png");
-    textures[2] = loadTexture("Textures/Krumpli_nagy_300x300.png");
-
+    textures[0] = loadTexture("Textures/krumpli_mag_300x300.png");
+    textures[1] = loadTexture("Textures/krumpli_kicsi_300x300.png");
+    textures[2] = loadTexture("Textures/krumpli_nagy_300x300.png");
 }
 
-bool loadMedia()
+/*bool loadMedia()
 {
 
 
@@ -56,7 +54,7 @@ bool loadMedia()
     }
 
     return success;
-}
+}*/
 
 /*void destroy_everything(){
     SDL_DestroyWindow(window);
