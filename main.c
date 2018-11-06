@@ -14,11 +14,7 @@ int main( int argc, char **argv ) {
 
     while( running )
     {
-        SDL_RenderClear( renderer );
-
-        doRender(renderer);
-
-        SDL_RenderPresent( renderer );
+        doRender();
 
         SDL_Delay(10);
 
