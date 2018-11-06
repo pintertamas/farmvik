@@ -19,8 +19,8 @@ SDL_Event windowEvent;
 SDL_Window *window;
 SDL_Renderer *renderer;
 //SDL_Surface *imageSurface;
-extern const int NUMBER_OF_IMAGES;
-SDL_Texture *textures;
+//extern const int NUMBER_OF_IMAGES;
+//SDL_Texture *textures;
 
 
 #endif //FARMVILLE2_GLOBAL_H

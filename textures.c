@@ -34,7 +34,7 @@ SDL_Texture *loadTexture(char *path) {
 
 void loadImage()
 {
-    SDL_Texture *textures[NUMBER_OF_IMAGES];
+    SDL_Texture *textures[3];
     textures[0] = loadTexture("Textures/krumpli_mag_300x300.png");
     textures[1] = loadTexture("Textures/logo_300x300.png");
     textures[2] = loadTexture("Textures/krumpli_nagy_300x300.png");
@@ -63,7 +63,7 @@ void loadImage()
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
 
-    for(int i=0; i<NUMBER_OF_IMAGES; i++)
+    for(int i=0; i<3; i++)
     {
         SDL_DestroyTexture(textures[i]);
         textures[i] = NULL;

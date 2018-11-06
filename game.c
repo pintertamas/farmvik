@@ -64,7 +64,7 @@ void doRender()
 
     for(int i=0;i<3;i++)
     {
-        SDL_Texture *textures[NUMBER_OF_IMAGES];
+        SDL_Texture *textures[3];
 
         SDL_Rect rect = { 10*negyzet[i] + SCREEN_WIDTH/2 / 10, 10 + SCREEN_HEIGHT / 10, SCREEN_WIDTH / 20, SCREEN_WIDTH / 20 };
         SDL_RenderCopy(renderer, textures[i], NULL, &rect);
