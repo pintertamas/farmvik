@@ -30,13 +30,16 @@ SDL_Texture *loadTexture(char *path) {
     return texture;
 }
 
+//SDL_Texture *textures;
+
 void loadImage()
 {
     SDL_Texture *textures[NUMBER_OF_IMAGES];
     textures[0] = loadTexture("Textures/krumpli_mag_300x300.png");
-    textures[1] = loadTexture("Textures/krumpli_kicsi_300x300.png");
+    textures[1] = loadTexture("Textures/logo_300x300.png");
     textures[2] = loadTexture("Textures/krumpli_nagy_300x300.png");
 }
+
 
 /*bool loadMedia()
 {

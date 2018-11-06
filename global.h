@@ -9,7 +9,6 @@
 #include <stdlib.h>
 #include <SDL.h>
 #include <SDL_image.h>
-#include <SDL_mixer.h>
 #include <stdbool.h>
 #include <math.h>
 #include <time.h>
@@ -21,7 +20,7 @@ SDL_Window *window;
 SDL_Renderer *renderer;
 //SDL_Surface *imageSurface;
 extern const int NUMBER_OF_IMAGES;
-//SDL_Texture *textures;
+SDL_Texture *textures;
 
 
 #endif //FARMVILLE2_GLOBAL_H

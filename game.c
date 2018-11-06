@@ -49,7 +49,7 @@ int init() {
     return success;
 }
 
-void doRender(SDL_Renderer *renderer)
+void doRender()
 {
     //set the drawing color to blue
     SDL_SetRenderDrawColor(renderer, 76, 175, 80, 255);
@@ -68,7 +68,7 @@ void doRender(SDL_Renderer *renderer)
 
         SDL_Rect rect = { 10*negyzet[i] + SCREEN_WIDTH/2 / 10, 10 + SCREEN_HEIGHT / 10, SCREEN_WIDTH / 20, SCREEN_WIDTH / 20 };
         SDL_RenderCopy(renderer, textures[i], NULL, &rect);
-        SDL_RenderFillRect(renderer, &rect);
+        //SDL_RenderFillRect(renderer, &rect);
     }
 
     //We are done drawing, "present" or show to the screen what we've drawn

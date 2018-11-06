@@ -8,7 +8,7 @@
 #include "global.h"
 
 int init();
-void doRender(SDL_Renderer *renderer);
+void doRender();
 SDL_Texture *loadTexture(char *path);
 
 #endif //FARMVILLE2_GAME_H
