@@ -4,7 +4,6 @@
 
 #include "global.h"
 
-int const SCREEN_WIDTH = 640;
-int const SCREEN_HEIGHT = 480;
-//SDL_Surface* imageSurface = NULL;
-//const int NUMBER_OF_IMAGES = 3;
+int const SCREEN_WIDTH = 1440;
+int const SCREEN_HEIGHT = 900;
+SDL_Texture *textures[5];

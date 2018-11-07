@@ -16,7 +16,7 @@ int main( int argc, char **argv ) {
     {
         doRender();
 
-        SDL_Delay(10);
+        SDL_Delay(20);
 
         while( SDL_PollEvent( &windowEvent ) != 0 )
         {
