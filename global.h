@@ -18,6 +18,6 @@ extern int const SCREEN_HEIGHT;
 SDL_Event windowEvent;
 SDL_Window *window;
 SDL_Renderer *renderer;
-SDL_Texture *textures[5];
+SDL_Texture *textures[6];
 
 #endif //FARMVILLE2_GLOBAL_H
