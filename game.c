@@ -48,3 +48,25 @@ int init() {
 
     return success;
 }
+
+int buttons()
+{
+    // ezeket majd megpróbálom globálisan eltárolni
+    int applebuyx = 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 100;
+    int applebuyy =  SCREEN_WIDTH / 10 + 2*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 120;
+    int applesellx = 3*SCREEN_WIDTH / 4 + 4*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 20 + SCREEN_WIDTH / 100;
+    int appleselly = SCREEN_WIDTH / 10 + 2*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 120;
+
+    int potatobuyx = 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 100;
+    int potatobuyy = SCREEN_WIDTH / 10 + 4*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 120;
+    int potatosellx = 3*SCREEN_WIDTH / 4 + 4*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 20 + SCREEN_WIDTH / 100;
+    int potatoselly = SCREEN_WIDTH / 10 + 4*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 120;
+
+    int tomatobuyx = 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 100;
+    int tomatobuyy = SCREEN_WIDTH / 10 + 6*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 120;
+    int tomatosellx = 3*SCREEN_WIDTH / 4 + 4*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 20 + SCREEN_WIDTH / 100;
+    int tomatoselly = SCREEN_WIDTH / 10 + 6*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 120;
+    //
+
+
+}

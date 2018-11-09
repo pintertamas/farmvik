@@ -5,6 +5,7 @@
 #include "textures.h"
 #include "global.h"
 #include "farm.h"
+#include "game.h"
 
 // initializing pictures
 
@@ -38,31 +39,30 @@ void loadImage() // ÚJABB KÉP FELTÖLTÉSE UTÁN A TÖMB MÉRETÉT IS NÖVELNI
     textures[3] = loadTexture("Textures/coin.png");
     textures[4] = loadTexture("Textures/apple.png");
     textures[5] = loadTexture("Textures/potato.png");
-    textures[6] = loadTexture("Textures/tomato_temp.png");
-    textures[7] = loadTexture("Textures/tomato_temp.png");
-    textures[8] = loadTexture("Textures/tomato_temp.png");
-    textures[9] = loadTexture("Textures/tomato_temp.png");
+    textures[6] = loadTexture("Textures/tomato.png");
+    textures[7] = loadTexture("Textures/buy.png");
+    textures[8] = loadTexture("Textures/sell.png");
+    //textures[9] = loadTexture("Textures/valami.png");
 
 }
 
 void doRender()
 {
+    int NUMBER_OF_IMAGES = 3;
     //set the drawing color to green
     SDL_SetRenderDrawColor(renderer, 76, 175, 80, 255);
 
-    //Clear the screen to the selected color
+    //clear the screen to the selected color
     SDL_RenderClear(renderer);
 
     //set the drawing color to black
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
-    /* Ctrl + C; Ctrl + V;
-    SDL_Rect valami = { SCREEN_WIDTH, SCREEN_HEIGHT, 100, 100 };
-    SDL_RenderCopy(renderer, textures[X], NULL, &valami);
-     */
-
     // setting up the design
-    // azért nem egyszerűsítek, mert így jobban átlátható, hogy hogyan vannak az arányok.
+    int margo = (int)round((double)SCREEN_WIDTH / 50);
+    int fejlec = (int)round((double)SCREEN_WIDTH / 10);
+    int buttonh = margo;
+    int buttonw = (int)round((double)SCREEN_WIDTH / 20);
 
     // logo
     SDL_Rect logo = { SCREEN_WIDTH / 2 - SCREEN_WIDTH / 20, 0, SCREEN_WIDTH / 10, SCREEN_WIDTH / 10 };
@@ -74,39 +74,26 @@ void doRender()
     SDL_Rect logojobb = { SCREEN_WIDTH / 2 + SCREEN_WIDTH / 20, 0, SCREEN_WIDTH / 10, SCREEN_WIDTH / 10 };
     SDL_RenderCopy(renderer, textures[2], NULL, &logojobb);
 
-    // the small icons on the right
-    SDL_Rect coin = { SCREEN_WIDTH / 50, SCREEN_WIDTH / 50 , SCREEN_WIDTH / 100, SCREEN_WIDTH / 100 };
+    // bal oldali kis ikonok és a pénz jobb oldalon
+    for(int i=0;i<NUMBER_OF_IMAGES;i++)
+    {
+        SDL_Rect icon = { SCREEN_WIDTH / 50, (i+1)*SCREEN_WIDTH / 50 , SCREEN_WIDTH / 50, SCREEN_WIDTH / 50 };
+        SDL_RenderCopy(renderer, textures[i+4], NULL, &icon);
+    }
+    // jobb oldalon a pénz ikon
+    SDL_Rect coin = { 3*SCREEN_WIDTH / 4, SCREEN_WIDTH / 50 , SCREEN_WIDTH / 50, SCREEN_WIDTH / 50 };
     SDL_RenderCopy(renderer, textures[3], NULL, &coin);
 
-    SDL_Rect apple = { SCREEN_WIDTH / 50, 2*SCREEN_WIDTH / 50 , SCREEN_WIDTH / 100, SCREEN_WIDTH / 100 };
-    SDL_RenderCopy(renderer, textures[4], NULL, &apple);
+    // ikonok a boltban
+    for(int i=0; i<NUMBER_OF_IMAGES; i++)
+    {
+        SDL_Rect shop = { 3*SCREEN_WIDTH / 4 + SCREEN_WIDTH / 50, 2*(i+1)*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 10 , SCREEN_WIDTH / 30, SCREEN_WIDTH / 30 };
+        SDL_RenderCopy(renderer, textures[i+4], NULL, &shop);
 
-    SDL_Rect potato = { SCREEN_WIDTH / 50, 3*SCREEN_WIDTH / 50 , SCREEN_WIDTH / 100, SCREEN_WIDTH / 100 };
-    SDL_RenderCopy(renderer, textures[5], NULL, &potato);
-
-    // the icons in the shop
-    SDL_SetRenderDrawColor(renderer, 34,56,23, 255);
-
-    SDL_Rect appleshop = { 3*SCREEN_WIDTH / 4 + SCREEN_WIDTH / 50, 2*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 10 , SCREEN_WIDTH / 30, SCREEN_WIDTH / 30 };
-    SDL_RenderCopy(renderer, textures[4], NULL, &appleshop);
-
-    SDL_Rect applerect = { 3*SCREEN_WIDTH / 4 + SCREEN_WIDTH / 50, 2*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 10 , SCREEN_WIDTH / 30, SCREEN_WIDTH / 30 };
-    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-    SDL_RenderDrawRect(renderer, &applerect);
-    //-------------------------------------------
-    SDL_Rect potatoshop = { 3*SCREEN_WIDTH / 4 + SCREEN_WIDTH / 50, 4*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 10 , SCREEN_WIDTH / 30, SCREEN_WIDTH / 30 };
-    SDL_RenderCopy(renderer, textures[5], NULL, &potatoshop);
-
-    SDL_Rect potatorect = { 3*SCREEN_WIDTH / 4 + SCREEN_WIDTH / 50, 4*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 10 , SCREEN_WIDTH / 30, SCREEN_WIDTH / 30 };
-    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-    SDL_RenderDrawRect(renderer, &potatorect);
-    //-------------------------------------------
-    SDL_Rect tomatoshop = { 3*SCREEN_WIDTH / 4 + SCREEN_WIDTH / 50, 6*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 10 , SCREEN_WIDTH / 30, SCREEN_WIDTH / 30 };
-    SDL_RenderCopy(renderer, textures[6], NULL, &tomatoshop);
-
-    SDL_Rect tomatorect = { 3*SCREEN_WIDTH / 4 + SCREEN_WIDTH / 50, 6*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 10 , SCREEN_WIDTH / 30, SCREEN_WIDTH / 30 };
-    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-    SDL_RenderDrawRect(renderer, &tomatorect);
+        SDL_Rect shoprect = { 3*SCREEN_WIDTH / 4 + SCREEN_WIDTH / 50, 2*(i+1)*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 10 , SCREEN_WIDTH / 30, SCREEN_WIDTH / 30 };
+        SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+        SDL_RenderDrawRect(renderer, &shoprect);
+    }
 
     // a nagy negyzet az egesz cucc kozepen meg a jobb oldali
     SDL_Rect bigrect = { SCREEN_WIDTH / 50, SCREEN_WIDTH / 50 + SCREEN_WIDTH / 10, 3*SCREEN_WIDTH / 4 - 2*SCREEN_WIDTH / 50, SCREEN_HEIGHT - 2*SCREEN_WIDTH / 50 - SCREEN_WIDTH / 10 };
@@ -118,9 +105,34 @@ void doRender()
     SDL_RenderDrawRect(renderer, &smallrect);
 
     // gombok grafikus megjelenitese
-    SDL_Rect applebuy = { 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 100, SCREEN_WIDTH / 10 + 2*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 120, SCREEN_WIDTH / 20, SCREEN_WIDTH / 50 };
-    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-    SDL_RenderDrawRect(renderer, &applebuy);
+
+    for(int i=0; i<NUMBER_OF_IMAGES;i++)
+    {
+        SDL_Rect rectbuy = { 3*SCREEN_WIDTH / 4 + 3*margo + margo / 2, fejlec + 2*(i+1)*margo + SCREEN_WIDTH / 120, buttonw, buttonh };
+        SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+        SDL_RenderCopy(renderer, textures[7], NULL, &rectbuy);
+
+        SDL_Rect rectsell = { 3*SCREEN_WIDTH / 4 + 4*margo + SCREEN_WIDTH / 20 + SCREEN_WIDTH / 100, SCREEN_WIDTH / 10 + 2*(i+1)*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 120, buttonw, buttonh };
+        SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+        SDL_RenderCopy(renderer, textures[8], NULL, &rectsell);
+    }
+//-----------------------------------------
+    SDL_Surface * balance = NULL;
+    SDL_Rect posText;
+    char buffer[50];
+
+    TTF_Font *font = TTF_OpenFont("arial.ttf", 25);
+    SDL_Color textColor = { 255, 255, 255 };
+
+    sprintf(buffer, "%d arany", money);
+
+    balance = TTF_RenderText_Solid(font, buffer, textColor);
+
+    posText.x = 100;
+    posText.y = 100;
+    SDL_BlitSurface(balance, NULL, window, &posText);
+
+//-----------------------------------------
 
     //We are done drawing, "present" or show to the screen what we've drawn
     SDL_RenderPresent(renderer);
