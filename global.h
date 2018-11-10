@@ -21,6 +21,9 @@ SDL_Event windowEvent;
 SDL_Window *window;
 SDL_Renderer *renderer;
 SDL_Texture *textures[10];
+SDL_Surface * balance;
+SDL_Texture *txt;
+TTF_Font *font;
 
 /*int applebuyx;
 int applebuyy;

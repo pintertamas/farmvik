@@ -117,22 +117,20 @@ void doRender()
         SDL_RenderCopy(renderer, textures[8], NULL, &rectsell);
     }
 //-----------------------------------------
-    SDL_Surface * balance = NULL;
-    SDL_Rect posText;
+    font = TTF_OpenFont("arial.ttf", 25);
+    SDL_Color black = { 255, 255, 255 };
     char buffer[50];
-
-    TTF_Font *font = TTF_OpenFont("arial.ttf", 25);
-    SDL_Color textColor = { 255, 255, 255 };
 
     sprintf(buffer, "%d arany", money);
 
-    balance = TTF_RenderText_Solid(font, buffer, textColor);
-
-    posText.x = 100;
-    posText.y = 100;
-    SDL_BlitSurface(balance, NULL, window, &posText);
+    balance = TTF_RenderText_Solid(font, buffer, black);
+    txt = SDL_CreateTextureFromSurface(renderer, balance);
+    SDL_Rect box = {0, 0, 100, 100};
+    SDL_RenderCopy(renderer, txt, NULL, &box);
+    SDL_FreeSurface(balance);
 
 //-----------------------------------------
+
 
     //We are done drawing, "present" or show to the screen what we've drawn
     SDL_RenderPresent(renderer);
