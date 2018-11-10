@@ -16,14 +16,19 @@ int main( int argc, char **argv ) {
     {
         doRender();
         score();
+        goods();
 
         for(int i=0;i<3;i++)
         {
-            bed(2*SCREEN_WIDTH / 50, SCREEN_WIDTH / 10 + 2*SCREEN_WIDTH / 50 + (int)(i*agyas*SCREEN_WIDTH), 9+i);
+            bed(2*SCREEN_WIDTH / 50, SCREEN_WIDTH / 10 + 2*SCREEN_WIDTH / 50 + (int)(i*agyas*SCREEN_WIDTH), 10+i);
+        }
+        for(int i=0;i<3;i++)
+        {
+            bed(2*SCREEN_WIDTH / 50 + (int)(agyas*SCREEN_WIDTH), SCREEN_WIDTH / 10 + 2*SCREEN_WIDTH / 50 + (int)(i*agyas*SCREEN_WIDTH), 15+i);
         }
 
         SDL_RenderPresent(renderer);
-        SDL_Delay(100);
+        SDL_Delay(10);
 
         while( SDL_PollEvent( &windowEvent ) != 0 )
         {
@@ -36,8 +41,7 @@ int main( int argc, char **argv ) {
 
     }
 
-    // Close and destroy the window
-
+    // Close and destroy the window and the renderer
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
 

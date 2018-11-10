@@ -50,24 +50,92 @@ int init() {
     return success;
 }
 
-int buttons()
+int goods()
 {
-    // ezeket majd megpróbálom globálisan eltárolni
-    /*int applebuyx = 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 100;
-    int applebuyy =  SCREEN_WIDTH / 10 + 2*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 120;
-    int applesellx = 3*SCREEN_WIDTH / 4 + 4*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 20 + SCREEN_WIDTH / 100;
-    int appleselly = SCREEN_WIDTH / 10 + 2*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 120;
+    bool click = false;
+    int d = (int)(agyas*SCREEN_WIDTH);
+    SDL_WaitEvent(&clickplant);
 
-    int potatobuyx = 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 100;
-    int potatobuyy = SCREEN_WIDTH / 10 + 4*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 120;
-    int potatosellx = 3*SCREEN_WIDTH / 4 + 4*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 20 + SCREEN_WIDTH / 100;
-    int potatoselly = SCREEN_WIDTH / 10 + 4*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 120;
+    switch(clickplant.type)
+    {
+        case SDL_MOUSEBUTTONDOWN:
+            if (clickplant.button.button == SDL_BUTTON_LEFT) {
+                click = true;
 
-    int tomatobuyx = 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 100;
-    int tomatobuyy = SCREEN_WIDTH / 10 + 6*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 120;
-    int tomatosellx = 3*SCREEN_WIDTH / 4 + 4*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 20 + SCREEN_WIDTH / 100;
-    int tomatoselly = SCREEN_WIDTH / 10 + 6*SCREEN_WIDTH / 50 + SCREEN_WIDTH / 120;*/
-    //
+                if(clickplant.button.x != -1 && clickplant.button.y != -1)
+                {
+                    buttonx = clickplant.button.x - 2*SCREEN_WIDTH / 50; // A cella fölött lévő rész mérete. Gyakorlatilag megkapom a koordinátáját a kattintásnak a cella koordinátarendszerében
+                    buttony = clickplant.button.y - 7*SCREEN_WIDTH / 50; // Szintén.
+                }
+            }
+            break;
+        case SDL_MOUSEBUTTONUP:
+            if (clickplant.button.button == SDL_BUTTON_LEFT) {
+                click = false;
+            }
+            break;
+        default:
+            break;
+    }
+    if(click == true)
+        printf("%d %d\n", buttonx, buttony);
 
+    if(click == true)
+    {
+        if(buttonx > 0 && buttonx < d && buttony > 0 && buttony < 3*d)
+        {
+            printf("%d\n", (buttony / d) + 1);
+            return (buttony / d) + 1;
+        }
+        else if(buttonx > d && buttonx < 2*d && buttony > 0 && buttony < 3*d)
+        {
+            printf("%d\n", (buttony / d) + 4);
+            return (buttony / d) + 4;
+        }
+    }
+}
 
+int buttonbuy()
+{
+    bool click = false;
+    int d = (int)(agyas*SCREEN_WIDTH);
+    SDL_WaitEvent(&clickplant);
+
+    switch(clickplant.type)
+    {
+        case SDL_MOUSEBUTTONDOWN:
+            if (clickplant.button.button == SDL_BUTTON_LEFT) {
+                click = true;
+
+                if(clickplant.button.x != -1 && clickplant.button.y != -1)
+                {
+                    buttonx = clickplant.button.x - 2*SCREEN_WIDTH / 50; // A cella fölött lévő rész mérete. Gyakorlatilag megkapom a koordinátáját a kattintásnak a cella koordinátarendszerében
+                    buttony = clickplant.button.y - 7*SCREEN_WIDTH / 50; // Szintén.
+                }
+            }
+            break;
+        case SDL_MOUSEBUTTONUP:
+            if (clickplant.button.button == SDL_BUTTON_LEFT) {
+                click = false;
+            }
+            break;
+        default:
+            break;
+    }
+    if(click == true)
+        printf("%d %d\n", buttonx, buttony);
+
+    if(click == true)
+    {
+        if(buttonx > 0 && buttonx < d && buttony > 0 && buttony < 3*d)
+        {
+            printf("%d\n", (buttony / d) + 1);
+            return (buttony / d) + 1;
+        }
+        else if(buttonx > d && buttonx < 2*d && buttony > 0 && buttony < 3*d)
+        {
+            printf("%d\n", (buttony / d) + 4);
+            return (buttony / d) + 4;
+        }
+    }
 }

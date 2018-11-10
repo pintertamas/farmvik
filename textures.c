@@ -49,7 +49,7 @@ void loadImage() // ÚJABB KÉP FELTÖLTÉSE UTÁN A TÖMB MÉRETÉT IS NÖVELNI
     textures[14] = loadTexture("Textures/krumpli_csira.png");
     textures[15] = loadTexture("Textures/krumpli_nagy.png");
     textures[16] = loadTexture("Textures/paradicsom_mag.png");
-    textures[17] = loadTexture("Textures/paradicsom_csira.png");
+    textures[17] = loadTexture("Textures/paradicsom_csira.png"); // kellene valami rendes grafika ehhez is, mert ez így tré
     textures[18] = loadTexture("Textures/paradicsom_nagy.png");
 
 
@@ -57,14 +57,10 @@ void loadImage() // ÚJABB KÉP FELTÖLTÉSE UTÁN A TÖMB MÉRETÉT IS NÖVELNI
 
 void doRender()
 {
-    int NUMBER_OF_IMAGES = 3;
-    //set the drawing color to green
+    int NUMBER_OF_IMAGES = 3; // ennyi féle terményt lehet gondozni / növelni
+
     SDL_SetRenderDrawColor(renderer, 76, 175, 80, 255);
-
-    //clear the screen to the selected color
     SDL_RenderClear(renderer);
-
-    //set the drawing color to black
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
     // setting up the design
@@ -137,22 +133,20 @@ void score()
 
     SDL_Color black = { 255, 255, 255 };
     char buffer[50];
-    sprintf(buffer, "%d arany", money);
+    sprintf(buffer, "%d gold", money);
 
     balance = TTF_RenderText_Solid(font, buffer, black);
     txt = SDL_CreateTextureFromSurface(renderer, balance);
     SDL_Rect box = { 3*SCREEN_WIDTH / 4 + 2*SCREEN_WIDTH / 50, SCREEN_WIDTH / 50 , 3*SCREEN_WIDTH / 50, SCREEN_WIDTH / 50 };
     SDL_RenderCopy(renderer, txt, NULL, &box);
     SDL_FreeSurface(balance);
-    SDL_RenderPresent(renderer);
 }
 
 void bed(int x, int y, int i)
 {
-    //(int)round((double)agyas) * SCREEN_WIDTH
-    SDL_Rect rect = { x, y, (int)(agyas*SCREEN_WIDTH), (int)(agyas*SCREEN_WIDTH) };
+    int d = (int)(agyas*SCREEN_WIDTH);
+    SDL_Rect rect = { x, y, d, d };
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
     SDL_RenderCopy(renderer, textures[i], NULL, &rect);
-    //SDL_RenderPresent(renderer);
 
 }
