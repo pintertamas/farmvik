@@ -2,6 +2,7 @@
 // Created by Tomi on 26/10/2018.
 //
 
+#include <string.h>
 #include "game.h"
 #include "global.h"
 #include "textures.h"
@@ -54,23 +55,23 @@ int goods()
 {
     bool click = false;
     int d = (int)(agyas*SCREEN_WIDTH);
-    SDL_WaitEvent(&clickplant);
+    SDL_WaitEvent(&clickevent);
 
-    switch(clickplant.type)
+    switch(clickevent.type)
     {
         case SDL_MOUSEBUTTONDOWN:
-            if (clickplant.button.button == SDL_BUTTON_LEFT) {
+            if (clickevent.button.button == SDL_BUTTON_LEFT) {
                 click = true;
 
-                if(clickplant.button.x != -1 && clickplant.button.y != -1)
+                if(clickevent.button.x != -1 && clickevent.button.y != -1)
                 {
-                    buttonx = clickplant.button.x - 2*SCREEN_WIDTH / 50; // A cella fölött lévő rész mérete. Gyakorlatilag megkapom a koordinátáját a kattintásnak a cella koordinátarendszerében
-                    buttony = clickplant.button.y - 7*SCREEN_WIDTH / 50; // Szintén.
+                    buttonx = clickevent.button.x - 2*SCREEN_WIDTH / 50; // A cella fölött lévő rész mérete. Gyakorlatilag megkapom a koordinátáját a kattintásnak a cella koordinátarendszerében
+                    buttony = clickevent.button.y - 7*SCREEN_WIDTH / 50; // Szintén.
                 }
             }
             break;
         case SDL_MOUSEBUTTONUP:
-            if (clickplant.button.button == SDL_BUTTON_LEFT) {
+            if (clickevent.button.button == SDL_BUTTON_LEFT) {
                 click = false;
             }
             break;
@@ -93,29 +94,34 @@ int goods()
             return (buttony / d) + 4;
         }
     }
+    return -1;
 }
 
-int buttonbuy()
-{
-    bool click = false;
-    int d = (int)(agyas*SCREEN_WIDTH);
-    SDL_WaitEvent(&clickplant);
+typedef enum Hasznalat{BUY,SELL}Hasznalat;
 
-    switch(clickplant.type)
+int buttonbuy(Hasznalat transaction)
+{
+    int BUTTON_HEIGHT = SCREEN_WIDTH / 50; // a gombok mérete, létrehozáskor buttonw és buttonh volt a nevük, csak név ütközés miatt most máshogy nevezem el.
+    int BUTTON_WIDTH = (int)round((double)SCREEN_WIDTH / 20);
+    int d = BUTTON_HEIGHT;
+    bool click = false;
+    SDL_WaitEvent(&clickevent);
+
+    switch(clickevent.type)
     {
         case SDL_MOUSEBUTTONDOWN:
-            if (clickplant.button.button == SDL_BUTTON_LEFT) {
+            if (clickevent.button.button == SDL_BUTTON_LEFT) {
                 click = true;
 
-                if(clickplant.button.x != -1 && clickplant.button.y != -1)
+                if(clickevent.button.x != -1 && clickevent.button.y != -1)
                 {
-                    buttonx = clickplant.button.x - 2*SCREEN_WIDTH / 50; // A cella fölött lévő rész mérete. Gyakorlatilag megkapom a koordinátáját a kattintásnak a cella koordinátarendszerében
-                    buttony = clickplant.button.y - 7*SCREEN_WIDTH / 50; // Szintén.
+                    buttonx = clickevent.button.x - 41*SCREEN_WIDTH / 50;
+                    buttony = clickevent.button.y - 7*SCREEN_WIDTH / 50 - SCREEN_WIDTH / 120;
                 }
             }
             break;
         case SDL_MOUSEBUTTONUP:
-            if (clickplant.button.button == SDL_BUTTON_LEFT) {
+            if (clickevent.button.button == SDL_BUTTON_LEFT) {
                 click = false;
             }
             break;
@@ -127,15 +133,54 @@ int buttonbuy()
 
     if(click == true)
     {
-        if(buttonx > 0 && buttonx < d && buttony > 0 && buttony < 3*d)
+        if(buttonx > 0 && buttonx < 2*BUTTON_WIDTH + SCREEN_WIDTH / 50 && buttony > 0 && buttony < SCREEN_WIDTH / 10)
         {
-            printf("%d\n", (buttony / d) + 1);
-            return (buttony / d) + 1;
-        }
-        else if(buttonx > d && buttonx < 2*d && buttony > 0 && buttony < 3*d)
-        {
-            printf("%d\n", (buttony / d) + 4);
-            return (buttony / d) + 4;
+            for(int i=0; i<3;i++)
+            {
+                if(transaction == BUY) // tehát venni szeretnénk
+                {
+                    if (0 <= buttonx && buttonx <= BUTTON_WIDTH && (i * 2 * d) <= buttony && buttony <= d + (i * 2 * d))
+                    {
+                        printf("%d\n", (buttony / (2 * d)) + 1);
+                        return (buttony / (2 * d)) + 1;
+                    }
+                }
+
+                else if(transaction == SELL) // vagy eladni
+                {
+                    if ((BUTTON_WIDTH + d) <= buttonx && buttonx <= (BUTTON_WIDTH + d) + BUTTON_WIDTH && (i * 2 * d) <= buttony && buttony <= d + (i * 2 * d))
+                    {
+                            printf("%d\n", (buttony / (2 * d)) + 1);
+                            return (buttony / (2 * d)) + 1;
+                    }
+                }
+            }
         }
     }
+    return -1;
+}
+
+void planting()
+{
+    int i = buttonbuy(BUY);
+    if(i == -1)
+    {
+        return;
+    }
+    int sorszam = goods();
+    if(sorszam == -1)
+    {
+        return;
+    }
+    int x = 100;
+    int y = 100;
+
+    if(sorszam <= 3)
+        x = 2*SCREEN_WIDTH / 50;
+
+    bed(x, y, i+10);
+
+    SDL_Rect plant = { SCREEN_WIDTH / 2 - SCREEN_WIDTH / 20, 0, SCREEN_WIDTH / 10, SCREEN_WIDTH / 10 };
+    SDL_RenderCopy(renderer, textures[0], NULL, &plant);
+
 }

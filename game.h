@@ -11,5 +11,8 @@ int init();
 void doRender();
 SDL_Texture *loadTexture(char *path);
 int goods();
+enum Hasznalat;
+int buttonbuy(enum Hasznalat transaction);
+void planting();
 
 #endif //FARMVILLE2_GAME_H

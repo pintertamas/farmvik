@@ -30,9 +30,7 @@ SDL_Texture *textures[20];
 SDL_Surface *balance;
 SDL_Texture *txt;
 TTF_Font *font;
-SDL_Event clickbuy;
-SDL_Event clicksell;
-SDL_Event clickplant;
+SDL_Event clickevent;
 
 /*int applebuyx;
 int applebuyy;
