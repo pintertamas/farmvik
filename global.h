@@ -17,11 +17,12 @@
 extern int const SCREEN_WIDTH;
 extern int const SCREEN_HEIGHT;
 extern int money;
+extern double agyas;
 SDL_Event windowEvent;
 SDL_Window *window;
 SDL_Renderer *renderer;
-SDL_Texture *textures[10];
-SDL_Surface * balance;
+SDL_Texture *textures[20];
+SDL_Surface *balance;
 SDL_Texture *txt;
 TTF_Font *font;
 

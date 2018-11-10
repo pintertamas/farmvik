@@ -13,12 +13,11 @@ int init() {
     // Initializing everything, setting up the playground
 
     SDL_Init( SDL_INIT_EVERYTHING );
-    //TTF_Init();
-
+    TTF_Init();
 
     if ( SDL_Init( SDL_INIT_EVERYTHING ) < 0 )
     {
-        printf( "Error: %s\n", SDL_GetError( ) );
+        printf( "Error: %s\n", SDL_GetError() );
         return EXIT_FAILURE;
     }
 
@@ -28,7 +27,7 @@ int init() {
 
     if( NULL == window )
     {
-        printf( "Error: %s\n", SDL_GetError( ) );
+        printf( "Error: %s\n", SDL_GetError() );
         success = false;
         return success;
     }
@@ -39,7 +38,7 @@ int init() {
 
     if( NULL == renderer )
     {
-        printf( "Error: %s\n", SDL_GetError( ) );
+        printf( "Error: %s\n", SDL_GetError() );
         success = false;
         return success;
     }

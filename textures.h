@@ -9,6 +9,8 @@
 
 SDL_Texture *loadTexture(char *path);
 void loadImage();
+void score();
+void bed(int x, int y, int i);
 //void destroy_everything();
 
 #endif //FARMVILLE2_TEXTURES_H

@@ -8,7 +8,6 @@
 #include "game.h"
 
 // initializing pictures
-
 SDL_Texture *loadTexture(char *path) {
 
     SDL_Texture *texture = NULL;
@@ -42,7 +41,17 @@ void loadImage() // ÚJABB KÉP FELTÖLTÉSE UTÁN A TÖMB MÉRETÉT IS NÖVELNI
     textures[6] = loadTexture("Textures/tomato.png");
     textures[7] = loadTexture("Textures/buy.png");
     textures[8] = loadTexture("Textures/sell.png");
-    //textures[9] = loadTexture("Textures/valami.png");
+    textures[9] = loadTexture("Textures/blank.png");
+    textures[10] = loadTexture("Textures/alma_mag.png");
+    textures[11] = loadTexture("Textures/alma_csira.png");
+    textures[12] = loadTexture("Textures/alma_nagy.png");
+    textures[13] = loadTexture("Textures/krumpli_mag.png");
+    textures[14] = loadTexture("Textures/krumpli_csira.png");
+    textures[15] = loadTexture("Textures/krumpli_nagy.png");
+    textures[16] = loadTexture("Textures/paradicsom_mag.png");
+    textures[17] = loadTexture("Textures/paradicsom_csira.png");
+    textures[18] = loadTexture("Textures/paradicsom_nagy.png");
+
 
 }
 
@@ -116,22 +125,34 @@ void doRender()
         SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
         SDL_RenderCopy(renderer, textures[8], NULL, &rectsell);
     }
-//-----------------------------------------
-    font = TTF_OpenFont("arial.ttf", 25);
+}
+
+void score()
+{
+    font = TTF_OpenFont("Prototype.ttf", 25);
+
+    if(!font) {
+        printf("TTF_OpenFont: %s\n", TTF_GetError());
+    }
+
     SDL_Color black = { 255, 255, 255 };
     char buffer[50];
-
     sprintf(buffer, "%d arany", money);
 
     balance = TTF_RenderText_Solid(font, buffer, black);
     txt = SDL_CreateTextureFromSurface(renderer, balance);
-    SDL_Rect box = {0, 0, 100, 100};
+    SDL_Rect box = { 3*SCREEN_WIDTH / 4 + 2*SCREEN_WIDTH / 50, SCREEN_WIDTH / 50 , 3*SCREEN_WIDTH / 50, SCREEN_WIDTH / 50 };
     SDL_RenderCopy(renderer, txt, NULL, &box);
     SDL_FreeSurface(balance);
-
-//-----------------------------------------
-
-
-    //We are done drawing, "present" or show to the screen what we've drawn
     SDL_RenderPresent(renderer);
+}
+
+void bed(int x, int y, int i)
+{
+    //(int)round((double)agyas) * SCREEN_WIDTH
+    SDL_Rect rect = { x, y, (int)(agyas*SCREEN_WIDTH), (int)(agyas*SCREEN_WIDTH) };
+    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+    SDL_RenderCopy(renderer, textures[i], NULL, &rect);
+    //SDL_RenderPresent(renderer);
+
 }

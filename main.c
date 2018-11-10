@@ -15,8 +15,15 @@ int main( int argc, char **argv ) {
     while( running )
     {
         doRender();
+        score();
 
-        SDL_Delay(20);
+        for(int i=0;i<3;i++)
+        {
+            bed(2*SCREEN_WIDTH / 50, SCREEN_WIDTH / 10 + 2*SCREEN_WIDTH / 50 + (int)(i*agyas*SCREEN_WIDTH), 9+i);
+        }
+
+        SDL_RenderPresent(renderer);
+        SDL_Delay(100);
 
         while( SDL_PollEvent( &windowEvent ) != 0 )
         {
