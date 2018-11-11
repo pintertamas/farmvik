@@ -156,6 +156,15 @@ int buttonbuy(Hasznalat transaction)
     return -1;
 }
 
+void bed(int x, int y, int i)
+{
+    int d = (int)(agyas*SCREEN_WIDTH);
+    SDL_Rect rect = { x, y, d, d };
+    //printf("\n %d %d \n", x, y);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+    SDL_RenderCopy(renderer, textures[i], NULL, &rect);
+}
+
 void planting()
 {
     int i = buttonbuy(BUY);
@@ -167,27 +176,25 @@ void planting()
 
     printf("---\ni: %d sorszam: %d\n---\n", i, sorszam);
 
-    int x = 0;
-    int y = 0;
+    int x;
+    int y;
     int d = (int)(agyas*SCREEN_WIDTH);
 
     if(sorszam <= 3)
     {
         x = 2*SCREEN_WIDTH / 50;
         y = 7*SCREEN_WIDTH / 50 + (sorszam - 1)*d;
-    }
 
-    if(sorszam > 3)
+    } else
     {
         x = 2*SCREEN_WIDTH / 50 + d;
-        y = 7*SCREEN_WIDTH / 50 + (sorszam - 1)*d;
+        y = 7*SCREEN_WIDTH / 50 + (sorszam - 4)*d;
     }
 
     printf("%d %d\n", x, y); // a két koordinátája annak a pontnak, ahova ültetni kell a növényeket
 
-    bed(x, y, 10 + 3*i);
+    bed(x, y, 10 + 3*(i-1));
 
     /*SDL_Rect plant = { x, y, SCREEN_WIDTH / 10, SCREEN_WIDTH / 10 };
     SDL_RenderCopy(renderer, textures[i], NULL, &plant);*/
-
 }

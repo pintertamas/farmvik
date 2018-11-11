@@ -18,14 +18,14 @@ int main( int argc, char **argv ) {
         score();
         planting(); // mit es hova akarok ultetni?
 
-        for(int i=0;i<3;i++)
+        /*for(int i=0;i<3;i++)
         {
-            bed(2*SCREEN_WIDTH / 50, SCREEN_WIDTH / 10 + 2*SCREEN_WIDTH / 50 + (int)(i*agyas*SCREEN_WIDTH), 10+i);
+            //bed(2*SCREEN_WIDTH / 50, SCREEN_WIDTH / 10 + 2*SCREEN_WIDTH / 50 + (int)(i*agyas*SCREEN_WIDTH), 10+i);
         }
         for(int i=0;i<3;i++)
         {
-            bed(2*SCREEN_WIDTH / 50 + (int)(agyas*SCREEN_WIDTH), SCREEN_WIDTH / 10 + 2*SCREEN_WIDTH / 50 + (int)(i*agyas*SCREEN_WIDTH), 15+i);
-        }
+            //bed(2*SCREEN_WIDTH / 50 + (int)(agyas*SCREEN_WIDTH), SCREEN_WIDTH / 10 + 2*SCREEN_WIDTH / 50 + (int)(i*agyas*SCREEN_WIDTH), 15+i);
+        }*/
 
         SDL_RenderPresent(renderer);
         SDL_Delay(10);

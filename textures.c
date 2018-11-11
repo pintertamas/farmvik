@@ -41,7 +41,7 @@ void loadImage() // ÚJABB KÉP FELTÖLTÉSE UTÁN A TÖMB MÉRETÉT IS NÖVELNI
     textures[6] = loadTexture("Textures/tomato.png");
     textures[7] = loadTexture("Textures/buy.png");
     textures[8] = loadTexture("Textures/sell.png");
-    textures[9] = loadTexture("Textures/blank.png");
+    textures[9] = loadTexture("Textures/dirt.png");
     textures[10] = loadTexture("Textures/alma_mag.png");
     textures[11] = loadTexture("Textures/alma_csira.png");
     textures[12] = loadTexture("Textures/alma_nagy.png");
@@ -51,6 +51,7 @@ void loadImage() // ÚJABB KÉP FELTÖLTÉSE UTÁN A TÖMB MÉRETÉT IS NÖVELNI
     textures[16] = loadTexture("Textures/paradicsom_mag.png");
     textures[17] = loadTexture("Textures/paradicsom_csira.png"); // kellene valami rendes grafika ehhez is, mert ez így tré
     textures[18] = loadTexture("Textures/paradicsom_nagy.png");
+    textures[19] = loadTexture("Textures/tombstone.png");
 
 
 }
@@ -142,11 +143,3 @@ void score()
     SDL_FreeSurface(balance);
 }
 
-void bed(int x, int y, int i)
-{
-    int d = (int)(agyas*SCREEN_WIDTH);
-    SDL_Rect rect = { x, y, d, d };
-    //printf("\n %d %d \n", x, y);
-    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-    SDL_RenderCopy(renderer, textures[i], NULL, &rect);
-}

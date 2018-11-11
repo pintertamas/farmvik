@@ -14,5 +14,6 @@ int goods();
 enum Hasznalat;
 int buttonbuy(enum Hasznalat transaction);
 void planting();
+void bed(int x, int y, int i);
 
 #endif //FARMVILLE2_GAME_H
