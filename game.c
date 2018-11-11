@@ -183,7 +183,9 @@ void planting()
         y = 7*SCREEN_WIDTH / 50 + (sorszam - 1)*d;
     }
 
-    bed(x, y, i);
+    printf("%d %d\n", x, y); // a két koordinátája annak a pontnak, ahova ültetni kell a növényeket
+
+    bed(x, y, 10 + 3*i);
 
     /*SDL_Rect plant = { x, y, SCREEN_WIDTH / 10, SCREEN_WIDTH / 10 };
     SDL_RenderCopy(renderer, textures[i], NULL, &plant);*/

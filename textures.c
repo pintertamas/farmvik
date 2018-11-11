@@ -146,6 +146,7 @@ void bed(int x, int y, int i)
 {
     int d = (int)(agyas*SCREEN_WIDTH);
     SDL_Rect rect = { x, y, d, d };
+    //printf("\n %d %d \n", x, y);
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
     SDL_RenderCopy(renderer, textures[i], NULL, &rect);
 }
