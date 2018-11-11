@@ -17,6 +17,7 @@
 extern int const SCREEN_WIDTH;
 extern int const SCREEN_HEIGHT;
 extern int places[2][3];
+int a,am,b,bm,c,cm,d,dm,e,em,f,fm;
 extern int money;
 extern int apple;
 extern int potato;

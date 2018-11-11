@@ -55,23 +55,26 @@ void scan()
 {
     FILE* data;
     data = fopen("gameData.txt", "r");
-    int a,b,c,d,e,f;
-    fscanf(data, "%d %d %d %d %d %d %d %d %d %d", &a, &b, &c, &d, &e, &f, &money, &apple, &potato, &tomato);
-    a = places[0][0];
-    b = places[0][1];
-    c = places[0][2];
-    d = places[1][0];
-    e = places[1][1];
-    f = places[1][2];
+    fscanf(data, "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", &a, &am, &b, &bm, &c, &cm, &d, &dm, &e, &em, &f, &fm, &money, &apple, &potato, &tomato);
+    // a,b,c,d,e,f: egyes cellák típusai (pl alma)
+    // am, bm, ... fm: azt jelzik, hogy az ott lévő termények mekkorák
+    am = places[0][0];
+    bm = places[0][1];
+    cm = places[0][2];
+    dm = places[1][0];
+    em = places[1][1];
+    fm = places[1][2];
+    fclose(data);
 }
 
 void send()
 {
     FILE* data;
     data = fopen("gameData.txt", "w");
-    fprintf(data, "%d %d %d %d %d %d %d %d %d %d",
-            places[0][0], places[0][1], places[0][2],
-            places[1][0], places[1][1], places[1][2], money, apple, potato, tomato);
+    fprintf(data, "%d  %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",
+            am, places[0][0], bm, places[0][1], cm, places[0][2],
+            dm, places[1][0], em, places[1][1], fm, places[1][2], money, apple, potato, tomato);
+    fclose(data);
 }
 
 int goods()
@@ -107,11 +110,13 @@ int goods()
         if(buttonx > 0 && buttonx < d && buttony > 0 && buttony < 3*d)
         {
             //printf("%d\n", (buttony / d) + 1);
+            places[0][buttony / d + 1]++;
             return (buttony / d) + 1;
         }
         else if(buttonx > d && buttonx < 2*d && buttony > 0 && buttony < 3*d)
         {
             //printf("%d\n", (buttony / d) + 4);
+            places[1][buttony / d]++;
             return (buttony / d) + 4;
         }
     }
