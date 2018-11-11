@@ -94,7 +94,7 @@ int goods()
             return (buttony / d) + 4;
         }
     }
-    return -1;
+    goods();
 }
 
 typedef enum Hasznalat{BUY,SELL}Hasznalat;
