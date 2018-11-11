@@ -78,19 +78,17 @@ int goods()
         default:
             break;
     }
-    if(click == true)
-        printf("%d %d\n", buttonx, buttony);
 
     if(click == true)
     {
         if(buttonx > 0 && buttonx < d && buttony > 0 && buttony < 3*d)
         {
-            printf("%d\n", (buttony / d) + 1);
+            //printf("%d\n", (buttony / d) + 1);
             return (buttony / d) + 1;
         }
         else if(buttonx > d && buttonx < 2*d && buttony > 0 && buttony < 3*d)
         {
-            printf("%d\n", (buttony / d) + 4);
+            //printf("%d\n", (buttony / d) + 4);
             return (buttony / d) + 4;
         }
     }
@@ -128,8 +126,6 @@ int buttonbuy(Hasznalat transaction)
         default:
             break;
     }
-    if(click == true)
-        printf("%d %d\n", buttonx, buttony);
 
     if(click == true)
     {
@@ -141,7 +137,7 @@ int buttonbuy(Hasznalat transaction)
                 {
                     if (0 <= buttonx && buttonx <= BUTTON_WIDTH && (i * 2 * d) <= buttony && buttony <= d + (i * 2 * d))
                     {
-                        printf("%d\n", (buttony / (2 * d)) + 1);
+                        //printf("%d\n", (buttony / (2 * d)) + 1);
                         return (buttony / (2 * d)) + 1;
                     }
                 }
@@ -150,7 +146,7 @@ int buttonbuy(Hasznalat transaction)
                 {
                     if ((BUTTON_WIDTH + d) <= buttonx && buttonx <= (BUTTON_WIDTH + d) + BUTTON_WIDTH && (i * 2 * d) <= buttony && buttony <= d + (i * 2 * d))
                     {
-                        printf("%d\n", (buttony / (2 * d)) + 1);
+                        //printf("%d\n", (buttony / (2 * d)) + 1);
                         return (buttony / (2 * d)) + 1;
                     }
                 }
