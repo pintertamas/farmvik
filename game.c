@@ -51,7 +51,7 @@ int init() {
     return success;
 }
 
-int goods()
+int goods() // hova akarok ultetni?
 {
     bool click = false;
     int d = (int)(agyas*SCREEN_WIDTH);

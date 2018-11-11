@@ -32,19 +32,4 @@ SDL_Texture *txt;
 TTF_Font *font;
 SDL_Event clickevent;
 
-/*int applebuyx;
-int applebuyy;
-int applesellx;
-int appleselly;
-
-int potatobuyx;
-int potatobuyy;
-int potatosellx;
-int potatoselly;
-
-int tomatobuyx;
-int tomatobuyy;
-int tomatosellx;
-int tomatoselly;*/
-
 #endif //FARMVILLE2_GLOBAL_H

@@ -16,7 +16,7 @@ int main( int argc, char **argv ) {
     {
         doRender();
         score();
-        planting();
+        planting(); // mit es hova akarok ultetni?
 
         for(int i=0;i<3;i++)
         {
