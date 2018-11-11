@@ -51,7 +51,7 @@ int init() {
     return success;
 }
 
-int goods() // hova akarok ultetni?
+int goods()
 {
     bool click = false;
     int d = (int)(agyas*SCREEN_WIDTH);
@@ -65,7 +65,7 @@ int goods() // hova akarok ultetni?
 
                 if(clickevent.button.x != -1 && clickevent.button.y != -1)
                 {
-                    buttonx = clickevent.button.x - 2*SCREEN_WIDTH / 50; // A cella fölött lévő rész mérete. Gyakorlatilag megkapom a koordinátáját a kattintásnak a cella koordinátarendszerében
+                    buttonx = clickevent.button.x - 2*SCREEN_WIDTH / 50; // A cella fölött lévo rész mérete. Gyakorlatilag megkapom a koordinátáját a kattintásnak a cella koordinátarendszerében
                     buttony = clickevent.button.y - 7*SCREEN_WIDTH / 50; // Szintén.
                 }
             }
@@ -150,8 +150,8 @@ int buttonbuy(Hasznalat transaction)
                 {
                     if ((BUTTON_WIDTH + d) <= buttonx && buttonx <= (BUTTON_WIDTH + d) + BUTTON_WIDTH && (i * 2 * d) <= buttony && buttony <= d + (i * 2 * d))
                     {
-                            printf("%d\n", (buttony / (2 * d)) + 1);
-                            return (buttony / (2 * d)) + 1;
+                        printf("%d\n", (buttony / (2 * d)) + 1);
+                        return (buttony / (2 * d)) + 1;
                     }
                 }
             }
