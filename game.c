@@ -12,7 +12,6 @@ int init() {
     bool success = true;
 
     // Initializing everything, setting up the playground
-
     SDL_Init( SDL_INIT_EVERYTHING );
     TTF_Init();
 
@@ -21,10 +20,8 @@ int init() {
         printf( "Error: %s\n", SDL_GetError() );
         return EXIT_FAILURE;
     }
-
     // creating the window
-
-    window = SDL_CreateWindow( "Farmville", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+    window = SDL_CreateWindow( "FarmVik", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
 
     if( NULL == window )
     {
@@ -32,9 +29,7 @@ int init() {
         success = false;
         return success;
     }
-
     // creating the renderer
-
     renderer = SDL_CreateRenderer( window, -1, 0 );
 
     if( NULL == renderer )
@@ -71,7 +66,7 @@ void send()
 {
     FILE* data;
     data = fopen("gameData.txt", "w");
-    fprintf(data, "%d  %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",
+    fprintf(data, "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",
             am, places[0][0], bm, places[0][1], cm, places[0][2],
             dm, places[1][0], em, places[1][1], fm, places[1][2], money, apple, potato, tomato);
     fclose(data);
@@ -110,13 +105,13 @@ int goods()
         if(buttonx > 0 && buttonx < d && buttony > 0 && buttony < 3*d)
         {
             //printf("%d\n", (buttony / d) + 1);
-            places[0][buttony / d + 1]++;
+            places[0][buttony / d] = 1;
             return (buttony / d) + 1;
         }
         else if(buttonx > d && buttonx < 2*d && buttony > 0 && buttony < 3*d)
         {
             //printf("%d\n", (buttony / d) + 4);
-            places[1][buttony / d]++;
+            places[1][buttony / d] = 1;
             return (buttony / d) + 4;
         }
     }
@@ -236,8 +231,5 @@ void sell()
 
     printf("---\ni: %d\n---", i);
 
-    int x;
-    int y;
-    int d = (int)(agyas*SCREEN_WIDTH);
 
 }

@@ -1,6 +1,5 @@
 #include "global.h"
 #include "game.h"
-#include "farm.h"
 #include "textures.h"
 
 int main( int argc, char **argv ) {
@@ -8,20 +7,18 @@ int main( int argc, char **argv ) {
     init(); // inicializalas
     loadImage(); // kepek betoltese memoriaba
 
-    // Exiting the window
-
     bool running = true;
 
     while( running )
     {
-        scan();
+        scan(); // adatok beolvasása
         doRender(); // renderelek mindent
-        score(); // a penz es a takarmanyok kiirasa
+        score(); // a pénz és a takarmányok kiírasa
         planting(); // mit es hova akarok ultetni?
-        send();
+        send(); // adatok kiírása .txt-be
 
         SDL_RenderPresent(renderer);
-        //SDL_Delay(10); // fps problemak miatt
+        //SDL_Delay(10); // fps problémák miatt
 
         while( SDL_PollEvent( &windowEvent ) != 0 )
         {
@@ -31,7 +28,6 @@ int main( int argc, char **argv ) {
                 break;
             }
         }
-
     }
 
     // Close and destroy the window and the renderer
