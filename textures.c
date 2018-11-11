@@ -148,5 +148,4 @@ void bed(int x, int y, int i)
     SDL_Rect rect = { x, y, d, d };
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
     SDL_RenderCopy(renderer, textures[i], NULL, &rect);
-
 }

@@ -168,19 +168,28 @@ void planting()
         return;
     }
     int sorszam = goods();
-    if(sorszam == -1)
-    {
-        return;
-    }
-    int x = 100;
-    int y = 100;
+
+    printf("---\ni: %d sorszam: %d\n---\n", i, sorszam);
+
+    int x = 0;
+    int y = 0;
+    int d = (int)(agyas*SCREEN_WIDTH);
 
     if(sorszam <= 3)
+    {
         x = 2*SCREEN_WIDTH / 50;
+        y = 7*SCREEN_WIDTH / 50 + (sorszam - 1)*d;
+    }
 
-    bed(x, y, i+10);
+    if(sorszam > 3)
+    {
+        x = 2*SCREEN_WIDTH / 50 + d;
+        y = 7*SCREEN_WIDTH / 50 + (sorszam - 1)*d;
+    }
 
-    SDL_Rect plant = { SCREEN_WIDTH / 2 - SCREEN_WIDTH / 20, 0, SCREEN_WIDTH / 10, SCREEN_WIDTH / 10 };
-    SDL_RenderCopy(renderer, textures[0], NULL, &plant);
+    bed(x, y, i);
+
+    /*SDL_Rect plant = { x, y, SCREEN_WIDTH / 10, SCREEN_WIDTH / 10 };
+    SDL_RenderCopy(renderer, textures[i], NULL, &plant);*/
 
 }
