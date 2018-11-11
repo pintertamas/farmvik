@@ -5,8 +5,8 @@
 
 int main( int argc, char **argv ) {
 
-    init();
-    loadImage();
+    init(); // inicializalas
+    loadImage(); // kepek betoltese memoriaba
 
     // Exiting the window
 
@@ -14,21 +14,14 @@ int main( int argc, char **argv ) {
 
     while( running )
     {
-        doRender();
-        score();
+        scan();
+        doRender(); // renderelek mindent
+        score(); // a penz es a takarmanyok kiirasa
         planting(); // mit es hova akarok ultetni?
-
-        /*for(int i=0;i<3;i++)
-        {
-            //bed(2*SCREEN_WIDTH / 50, SCREEN_WIDTH / 10 + 2*SCREEN_WIDTH / 50 + (int)(i*agyas*SCREEN_WIDTH), 10+i);
-        }
-        for(int i=0;i<3;i++)
-        {
-            //bed(2*SCREEN_WIDTH / 50 + (int)(agyas*SCREEN_WIDTH), SCREEN_WIDTH / 10 + 2*SCREEN_WIDTH / 50 + (int)(i*agyas*SCREEN_WIDTH), 15+i);
-        }*/
+        send();
 
         SDL_RenderPresent(renderer);
-        SDL_Delay(10);
+        //SDL_Delay(10); // fps problemak miatt
 
         while( SDL_PollEvent( &windowEvent ) != 0 )
         {

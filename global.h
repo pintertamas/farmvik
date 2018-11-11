@@ -16,10 +16,13 @@
 
 extern int const SCREEN_WIDTH;
 extern int const SCREEN_HEIGHT;
+extern int places[2][3];
 extern int money;
 extern int apple;
 extern int potato;
 extern int tomato;
+int buy_price[3];
+int sell_price[3];
 int buttonx;
 int buttony;
 extern double agyas;
@@ -28,7 +31,6 @@ SDL_Window *window;
 SDL_Renderer *renderer;
 SDL_Texture *textures[20];
 SDL_Surface *balance;
-SDL_Texture *txt;
 TTF_Font *font;
 SDL_Event clickevent;
 

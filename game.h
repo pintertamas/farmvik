@@ -7,6 +7,8 @@
 
 #include "global.h"
 
+void scan();
+void send();
 int init();
 void doRender();
 SDL_Texture *loadTexture(char *path);

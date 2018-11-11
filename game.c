@@ -51,6 +51,29 @@ int init() {
     return success;
 }
 
+void scan()
+{
+    FILE* data;
+    data = fopen("gameData.txt", "r");
+    int a,b,c,d,e,f;
+    fscanf(data, "%d %d %d %d %d %d %d %d %d %d", &a, &b, &c, &d, &e, &f, &money, &apple, &potato, &tomato);
+    a = places[0][0];
+    b = places[0][1];
+    c = places[0][2];
+    d = places[1][0];
+    e = places[1][1];
+    f = places[1][2];
+}
+
+void send()
+{
+    FILE* data;
+    data = fopen("gameData.txt", "w");
+    fprintf(data, "%d %d %d %d %d %d %d %d %d %d",
+            places[0][0], places[0][1], places[0][2],
+            places[1][0], places[1][1], places[1][2], money, apple, potato, tomato);
+}
+
 int goods()
 {
     bool click = false;
@@ -173,6 +196,7 @@ void planting()
         return;
     }
     int sorszam = goods();
+    money -= buy_price[i-1];
 
     printf("---\ni: %d sorszam: %d\n---\n", i, sorszam);
 
@@ -194,7 +218,21 @@ void planting()
     printf("%d %d\n", x, y); // a két koordinátája annak a pontnak, ahova ültetni kell a növényeket
 
     bed(x, y, 10 + 3*(i-1));
+}
 
-    /*SDL_Rect plant = { x, y, SCREEN_WIDTH / 10, SCREEN_WIDTH / 10 };
-    SDL_RenderCopy(renderer, textures[i], NULL, &plant);*/
+void sell()
+{
+    int i = buttonbuy(SELL);
+    if(i == -1)
+    {
+        return;
+    }
+    money += sell_price[i-1];
+
+    printf("---\ni: %d\n---", i);
+
+    int x;
+    int y;
+    int d = (int)(agyas*SCREEN_WIDTH);
+
 }

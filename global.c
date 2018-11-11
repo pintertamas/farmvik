@@ -6,14 +6,16 @@
 
 int const SCREEN_WIDTH = 1440;
 int const SCREEN_HEIGHT = 900;
-int money = 1000;
-int apple = 0;
-int potato = 0;
-int tomato = 0;
+int places[2][3];
+int money;
+int apple;
+int potato;
+int tomato;
 int buttonx = -1;
 int buttony = -1;
+int buy_price[3] = {20, 15, 40};
+int sell_price[3] = {250, 100, 330};
 double agyas = 0.15; // az ágyások szélessége es magassága SCREEN_WIDTH-tel osztva
 //SDL_Texture *textures[20];
 
 // globalis ertekeket allitok be a bolt gombjainak a koordinataihoz, hogy a game.c-bol elerjem, es konnyen tudjak gombokat adni a bolthoz.
-

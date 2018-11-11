@@ -124,6 +124,17 @@ void doRender()
     }
 }
 
+int digit(int num)
+{
+    int counter = 0;
+    while(num != 0)
+    {
+        num /= 10;
+        ++counter;
+    }
+    return counter;
+}
+
 void score()
 {
     font = TTF_OpenFont("Prototype.ttf", 25);
@@ -133,13 +144,42 @@ void score()
     }
 
     SDL_Color black = { 255, 255, 255 };
-    char buffer[50];
-    sprintf(buffer, "%d gold", money);
+    char moneybuffer[50];
+    char applebuffer[50];
+    char potatobuffer[50];
+    char tomatobuffer[50];
 
-    balance = TTF_RenderText_Solid(font, buffer, black);
-    txt = SDL_CreateTextureFromSurface(renderer, balance);
-    SDL_Rect box = { 3*SCREEN_WIDTH / 4 + 2*SCREEN_WIDTH / 50, SCREEN_WIDTH / 50 , 3*SCREEN_WIDTH / 50, SCREEN_WIDTH / 50 };
-    SDL_RenderCopy(renderer, txt, NULL, &box);
+    sprintf(moneybuffer, "%d gold", money);
+    sprintf(applebuffer, "%d", apple);
+    sprintf(potatobuffer, "%d", potato);
+    sprintf(tomatobuffer, "%d", tomato);
+
+    SDL_Texture *moneytxt;
+    balance = TTF_RenderText_Solid(font, moneybuffer, black);
+    moneytxt = SDL_CreateTextureFromSurface(renderer, balance);
+    SDL_Rect moneybox = { 3*SCREEN_WIDTH / 4 + 2*SCREEN_WIDTH / 50, SCREEN_WIDTH / 50 , digit(money)*SCREEN_WIDTH / 50, SCREEN_WIDTH / 50 };
+    SDL_RenderCopy(renderer, moneytxt, NULL, &moneybox);
+    SDL_FreeSurface(balance);
+
+    SDL_Texture *appletxt;
+    balance = TTF_RenderText_Solid(font, applebuffer, black);
+    appletxt = SDL_CreateTextureFromSurface(renderer, balance);
+    SDL_Rect applebox = { 2*SCREEN_WIDTH / 50, SCREEN_WIDTH / 50 , digit(apple)*SCREEN_WIDTH / 50, SCREEN_WIDTH / 50 };
+    SDL_RenderCopy(renderer, appletxt, NULL, &applebox);
+    SDL_FreeSurface(balance);
+
+    SDL_Texture *potatotxt;
+    balance = TTF_RenderText_Solid(font, potatobuffer, black);
+    potatotxt = SDL_CreateTextureFromSurface(renderer, balance);
+    SDL_Rect potatobox = { 2*SCREEN_WIDTH / 50, 2*SCREEN_WIDTH / 50 , digit(potato)*SCREEN_WIDTH / 50, SCREEN_WIDTH / 50 };
+    SDL_RenderCopy(renderer, potatotxt, NULL, &potatobox);
+    SDL_FreeSurface(balance);
+
+    SDL_Texture *tomatotxt;
+    balance = TTF_RenderText_Solid(font, tomatobuffer, black);
+    tomatotxt = SDL_CreateTextureFromSurface(renderer, balance);
+    SDL_Rect tomatobox = { 2*SCREEN_WIDTH / 50, 3*SCREEN_WIDTH / 50 , digit(tomato)*SCREEN_WIDTH / 50, SCREEN_WIDTH / 50 };
+    SDL_RenderCopy(renderer, tomatotxt, NULL, &tomatobox);
     SDL_FreeSurface(balance);
 }
 
