@@ -33,25 +33,27 @@ void loadImage() // ÚJABB KÉP FELTÖLTÉSE UTÁN A TÖMB MÉRETÉT IS NÖVELNI
     textures[0] = loadTexture("Textures/logo_300x300.png");
     textures[1] = loadTexture("Textures/logo_bal.png");
     textures[2] = loadTexture("Textures/logo_jobb.png");
-    textures[3] = loadTexture("Textures/coin.png");
-    textures[4] = loadTexture("Textures/apple.png");
-    textures[5] = loadTexture("Textures/potato.png");
-    textures[6] = loadTexture("Textures/tomato.png");
-    textures[7] = loadTexture("Textures/buy.png");
-    textures[8] = loadTexture("Textures/sell.png");
-    textures[9] = loadTexture("Textures/dirt.png");
-    textures[10] = loadTexture("Textures/alma_mag.png");
-    textures[11] = loadTexture("Textures/alma_csira.png");
-    textures[12] = loadTexture("Textures/alma_nagy.png");
-    textures[13] = loadTexture("Textures/krumpli_mag.png");
-    textures[14] = loadTexture("Textures/krumpli_csira.png");
-    textures[15] = loadTexture("Textures/krumpli_nagy.png");
-    textures[16] = loadTexture("Textures/paradicsom_mag.png");
-    textures[17] = loadTexture("Textures/paradicsom_csira.png"); // kellene valami rendes grafika ehhez is, mert ez így tré
-    textures[18] = loadTexture("Textures/paradicsom_nagy.png");
-    textures[19] = loadTexture("Textures/tombstone.png");
+    textures[4] = loadTexture("Textures/buy.png");
+    textures[5] = loadTexture("Textures/sell.png");
+    textures[6] = loadTexture("Textures/dirt.png");
+    textures[7] = loadTexture("Textures/tombstone.png");
 
+    icon_textures[0] = loadTexture("Textures/coin.png");
+    icon_textures[1] = loadTexture("Textures/apple.png");
+    icon_textures[2] = loadTexture("Textures/potato.png");
+    icon_textures[3] = loadTexture("Textures/tomato.png");
 
+    mag_textures[0] = loadTexture("Textures/alma_mag.png");
+    mag_textures[1] = loadTexture("Textures/krumpli_mag.png");
+    mag_textures[2] = loadTexture("Textures/paradicsom_mag.png");
+
+    csira_textures[0] = loadTexture("Textures/alma_csira.png");
+    csira_textures[1] = loadTexture("Textures/krumpli_csira.png");
+    csira_textures[2] = loadTexture("Textures/paradicsom_csira.png"); // kellene valami rendes grafika ehhez is, mert ez így tré
+
+    nagy_textures[0] = loadTexture("Textures/alma_nagy.png");
+    nagy_textures[1] = loadTexture("Textures/krumpli_nagy.png");
+    nagy_textures[2] = loadTexture("Textures/paradicsom_nagy.png");
 }
 
 void doRender()
@@ -82,17 +84,17 @@ void doRender()
     for(int i=0;i<NUMBER_OF_IMAGES;i++)
     {
         SDL_Rect icon = { margo, (i+1)*margo , margo, margo };
-        SDL_RenderCopy(renderer, textures[i+4], NULL, &icon);
+        SDL_RenderCopy(renderer, icon_textures[i+1], NULL, &icon);
     }
     // jobb oldalon a pénz ikon
     SDL_Rect coin = { 3*SCREEN_WIDTH / 4, margo , margo, margo };
-    SDL_RenderCopy(renderer, textures[3], NULL, &coin);
+    SDL_RenderCopy(renderer, icon_textures[0], NULL, &coin);
 
     // ikonok a boltban
     for(int i=0; i<NUMBER_OF_IMAGES; i++)
     {
         SDL_Rect shop = { 3*SCREEN_WIDTH / 4 + margo, 2*(i+1)*margo + fejlec , SCREEN_WIDTH / 30, SCREEN_WIDTH / 30 };
-        SDL_RenderCopy(renderer, textures[i+4], NULL, &shop);
+        SDL_RenderCopy(renderer, icon_textures[i+1], NULL, &shop);
 
         SDL_Rect shoprect = { 3*SCREEN_WIDTH / 4 + margo, 2*(i+1)*margo + fejlec , SCREEN_WIDTH / 30, SCREEN_WIDTH / 30 };
         SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
@@ -114,11 +116,11 @@ void doRender()
     {
         SDL_Rect rectbuy = { 3*SCREEN_WIDTH / 4 + 3*margo + margo / 2, fejlec + 2*(i+1)*margo + SCREEN_WIDTH / 120, buttonw, buttonh };
         SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-        SDL_RenderCopy(renderer, textures[7], NULL, &rectbuy);
+        SDL_RenderCopy(renderer, textures[4], NULL, &rectbuy);
 
         SDL_Rect rectsell = { 3*SCREEN_WIDTH / 4 + 4*margo + SCREEN_WIDTH / 20 + SCREEN_WIDTH / 100, fejlec + 2*(i+1)*margo + SCREEN_WIDTH / 120, buttonw, buttonh };
         SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-        SDL_RenderCopy(renderer, textures[8], NULL, &rectsell);
+        SDL_RenderCopy(renderer, textures[5], NULL, &rectsell);
     }
 }
 

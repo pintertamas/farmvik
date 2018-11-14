@@ -23,7 +23,7 @@ int init() {
     // creating the window
     window = SDL_CreateWindow( "FarmVik", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
 
-    if( NULL == window )
+    if( window == NULL )
     {
         printf( "Error: %s\n", SDL_GetError() );
         success = false;
@@ -32,7 +32,7 @@ int init() {
     // creating the renderer
     renderer = SDL_CreateRenderer( window, -1, 0 );
 
-    if( NULL == renderer )
+    if( renderer == NULL )
     {
         printf( "Error: %s\n", SDL_GetError() );
         success = false;
@@ -50,16 +50,16 @@ void scan()
 {
     FILE* data;
     data = fopen("gameData.txt", "r");
-    fscanf(data, "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", &a, &am, &b, &bm, &c, &cm, &d, &dm, &e, &em, &f, &fm, &money, &apple, &potato, &tomato);
-    // a,b,c,d,e,f: egyes cellák típusai (pl alma)
-    // am, bm, ... fm: azt jelzik, hogy az ott lévő termények mekkorák
-    am = places[0][0];
-    bm = places[0][1];
-    cm = places[0][2];
-    dm = places[1][0];
-    em = places[1][1];
-    fm = places[1][2];
-    fclose(data);
+    fscanf(data, "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", &a, &a_magassag, &b, &b_magassag, &c, &c_magassag, &d, &d_magassag, &e, &e_magassag, &f, &f_magassag, &money, &apple, &potato, &tomato);
+    if (data != NULL) {
+        // a,b,c,d,e,f: egyes cellák típusai (pl ha 1, akkor alma)
+        // a_magassag, b_magassag, ... f_magassag: azt jelzik, hogy az ott lévő termények mekkorák (0-4 kozott)
+        // ures - mag - csira - nagy - rohadt
+
+        fclose(data);
+    } else{
+        printf("Error: Could not open the file");
+    }
 }
 
 void send()
@@ -67,8 +67,8 @@ void send()
     FILE* data;
     data = fopen("gameData.txt", "w");
     fprintf(data, "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",
-            am, places[0][0], bm, places[0][1], cm, places[0][2],
-            dm, places[1][0], em, places[1][1], fm, places[1][2], money, apple, potato, tomato);
+            a_magassag, places[0][0], b_magassag, places[0][1], c_magassag, places[0][2],
+            d_magassag, places[1][0], e_magassag, places[1][1], f_magassag, places[1][2], money, apple, potato, tomato);
     fclose(data);
 }
 
@@ -118,9 +118,9 @@ int goods()
     goods();
 }
 
-typedef enum Hasznalat{BUY,SELL}Hasznalat;
+//typedef enum Hasznalat{BUY,SELL}Hasznalat;
 
-int buttonbuy(Hasznalat transaction)
+int buttonbuy(enum Hasznalat transaction)
 {
     int BUTTON_HEIGHT = SCREEN_WIDTH / 50; // a gombok mérete, létrehozáskor buttonw és buttonh volt a nevük, csak név ütközés miatt most máshogy nevezem el.
     int BUTTON_WIDTH = (int)round((double)SCREEN_WIDTH / 20);
@@ -185,7 +185,7 @@ void bed(int x, int y, int i)
     SDL_Rect rect = { x, y, d, d };
     //printf("\n %d %d \n", x, y);
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-    SDL_RenderCopy(renderer, textures[i], NULL, &rect);
+    SDL_RenderCopy(renderer, mag_textures[i], NULL, &rect);
 }
 
 void planting()
@@ -217,7 +217,7 @@ void planting()
 
     printf("%d %d\n", x, y); // a két koordinátája annak a pontnak, ahova ültetni kell a növényeket
 
-    bed(x, y, 10 + 3*(i-1));
+    bed(x, y, i-1);
 }
 
 void sell()
