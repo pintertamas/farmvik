@@ -72,6 +72,22 @@ void send()
     fclose(data);
 }
 
+void reset()
+{
+    FILE* data;
+    data = fopen("gameResetData.txt", "r");
+    fscanf(data, "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", &a, &a_magassag, &b, &b_magassag, &c, &c_magassag, &d, &d_magassag, &e, &e_magassag, &f, &f_magassag, &money, &apple, &potato, &tomato);
+    if (data != NULL) {
+        // a,b,c,d,e,f: egyes cellák típusai (pl ha 1, akkor alma)
+        // a_magassag, b_magassag, ... f_magassag: azt jelzik, hogy az ott lévő termények mekkorák (0-4 kozott)
+        // ures - mag - csira - nagy - rohadt
+
+        fclose(data);
+    } else{
+        printf("Error: Could not open the file");
+    }
+}
+
 int goods()
 {
     bool click = false;
@@ -117,8 +133,6 @@ int goods()
     }
     goods();
 }
-
-//typedef enum Hasznalat{BUY,SELL}Hasznalat;
 
 int buttonbuy(enum Hasznalat transaction)
 {

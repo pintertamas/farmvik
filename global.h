@@ -17,6 +17,7 @@
 extern int const SCREEN_WIDTH;
 extern int const SCREEN_HEIGHT;
 extern int places[2][3];
+extern bool start;
 int a,a_magassag,b,b_magassag,c,c_magassag,d,d_magassag,e,e_magassag,f,f_magassag;
 int allapot[6][2][3];
 extern int money;
@@ -32,7 +33,9 @@ enum Hasznalat{BUY,SELL};
 SDL_Event windowEvent;
 SDL_Window *window;
 SDL_Renderer *renderer;
+SDL_Window *menuwindow;
 SDL_Texture *textures[8];
+SDL_Texture *menuTextures[3];
 SDL_Texture *icon_textures[4];
 SDL_Texture *mag_textures[3];
 SDL_Texture *csira_textures[3];

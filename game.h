@@ -10,6 +10,7 @@
 int menu();
 void scan();
 void send();
+void reset();
 int init();
 void doRender();
 SDL_Texture *loadTexture(char *path);

@@ -6,6 +6,7 @@
 
 int const SCREEN_WIDTH = 1440;
 int const SCREEN_HEIGHT = 900;
+bool start = true;
 int places[2][3];
 int money;
 int apple;

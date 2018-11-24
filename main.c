@@ -5,6 +5,11 @@
 int main( int argc, char **argv ) {
 
     menu();
+    if(start == false) // true = load game, false = new game
+    {
+        reset();
+        send();
+    }
     init(); // inicializalas
     loadImage(); // kepek betoltese memoriaba
 

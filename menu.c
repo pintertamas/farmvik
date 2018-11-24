@@ -73,7 +73,7 @@ int menu() {
         SDL_RenderClear(menurenderer);
 
         menuclick(running);
-        SDL_Delay(10);
+        SDL_Delay(100);
         SDL_RenderPresent(menurenderer);
 
         while( SDL_PollEvent( &windowEvent ) != 0 )
