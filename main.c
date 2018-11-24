@@ -16,6 +16,7 @@ int main( int argc, char **argv ) {
         doRender(); // renderelek mindent
         score(); // a pénz és a takarmányok kiírasa
         planting(); // mit es hova akarok ultetni?
+        //sell();
         send(); // adatok kiírása .txt-be
 
         SDL_RenderPresent(renderer);

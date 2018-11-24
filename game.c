@@ -161,7 +161,10 @@ int buttonbuy(enum Hasznalat transaction)
                     if (0 <= buttonx && buttonx <= BUTTON_WIDTH && (i * 2 * d) <= buttony && buttony <= d + (i * 2 * d))
                     {
                         //printf("%d\n", (buttony / (2 * d)) + 1);
-                        return (buttony / (2 * d)) + 1;
+                        return (buttony / (2 * d)) + 1; // visszaadja a vásárolni kívánt termény sorszámát
+                    }
+                    else{
+                        return -1;
                     }
                 }
 
@@ -170,7 +173,10 @@ int buttonbuy(enum Hasznalat transaction)
                     if ((BUTTON_WIDTH + d) <= buttonx && buttonx <= (BUTTON_WIDTH + d) + BUTTON_WIDTH && (i * 2 * d) <= buttony && buttony <= d + (i * 2 * d))
                     {
                         //printf("%d\n", (buttony / (2 * d)) + 1);
-                        return (buttony / (2 * d)) + 1;
+                        return (buttony / (2 * d)) + 1; // visszaadja a vásárolni kívánt termény sorszámát
+                    }
+                    else{
+                        return -1;
                     }
                 }
             }
