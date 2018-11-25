@@ -7,13 +7,12 @@
 
 #include "global.h"
 
-int menu();
-void scan();
-void send();
-void sendPlayer2();
+void scan(Players players);
+void send(Players players);
 void reset();
 int init();
 void doRender();
+void timePassed();
 SDL_Texture *loadTexture(char *path);
 int goods();
 int buttonEventHandler();

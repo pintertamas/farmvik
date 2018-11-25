@@ -40,6 +40,7 @@ void loadImage() // ÚJABB KÉP FELTÖLTÉSE UTÁN A TÖMB MÉRETÉT IS NÖVELNI
     textures[8] = loadTexture("Textures/harvest.png");
     textures[9] = loadTexture("Textures/reset.png");
     textures[10] = loadTexture("Textures/gpsw.png");
+    textures[11] = loadTexture("Textures/destroy.png");
 
     icon_textures[0] = loadTexture("Textures/coin.png");
     icon_textures[1] = loadTexture("Textures/apple.png");
@@ -57,10 +58,6 @@ void loadImage() // ÚJABB KÉP FELTÖLTÉSE UTÁN A TÖMB MÉRETÉT IS NÖVELNI
     nagy_textures[0] = loadTexture("Textures/alma_nagy.png");
     nagy_textures[1] = loadTexture("Textures/krumpli_nagy.png");
     nagy_textures[2] = loadTexture("Textures/paradicsom_nagy.png");
-
-    menuTextures[0] = loadTexture("Textures/buy.png");
-    menuTextures[1] = loadTexture("Textures/buy.png");
-    menuTextures[2] = loadTexture("Textures/buy.png");
 }
 
 void background()
@@ -134,19 +131,21 @@ void doRender() {
         SDL_RenderCopy(renderer, textures[5], NULL, &rectsell);
     }
 
-    SDL_Rect harvest = { 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50, SCREEN_WIDTH / 10 + 9*SCREEN_WIDTH / 50, 2*buttonw, buttonh };
+    SDL_Rect harvest = { 3*SCREEN_WIDTH / 4 + 3*margo, fejlec + 9*margo, 2*buttonw, buttonh };
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
     SDL_RenderCopy(renderer, textures[8], NULL, &harvest);
 
-    SDL_Rect reset = { 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50, SCREEN_WIDTH / 10 + 11*SCREEN_WIDTH / 50, 2*margo, 2*margo };
+    SDL_Rect reset = { 3*SCREEN_WIDTH / 4 + 3*margo, fejlec + 11*margo, 2*margo, 2*margo };
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
     SDL_RenderCopy(renderer, textures[9], NULL, &reset);
 
-    SDL_Rect change = { 3*SCREEN_WIDTH / 4 + 6*SCREEN_WIDTH / 50, SCREEN_WIDTH / 10 + 11*SCREEN_WIDTH / 50, 2*margo, 2*margo };
+    SDL_Rect change = { 3*SCREEN_WIDTH / 4 + 6*margo, fejlec + 11*margo, 2*margo, 2*margo };
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
     SDL_RenderCopy(renderer, textures[10], NULL, &change);
 
-
+    SDL_Rect destroy = { 3*SCREEN_WIDTH / 4 + 3*margo, fejlec + 14*margo, 5*margo, 2*margo };
+    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+    SDL_RenderCopy(renderer, textures[11], NULL, &destroy);
 }
 
 int digit(int num)
@@ -216,7 +215,6 @@ void bed(int x, int y, int i, int t)
 {
     int d = (int)(agyas*SCREEN_WIDTH);
     SDL_Rect rect = { x, y, d, d };
-    //printf("\n %d %d \n", x, y);
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
 
     switch(t)
@@ -237,7 +235,7 @@ void bed(int x, int y, int i, int t)
             SDL_RenderCopy(renderer, textures[7], NULL, &rect);
             break;
         default:
-            SDL_RenderCopy(renderer, textures[6], NULL, &rect);
+            SDL_RenderCopy(renderer, textures[7], NULL, &rect);
             break;
     }
 }

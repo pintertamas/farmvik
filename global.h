@@ -16,9 +16,10 @@
 
 extern int const SCREEN_WIDTH;
 extern int const SCREEN_HEIGHT;
+extern int times[6];
 extern bool start;
 bool player;
-//typedef enum pos {x, y}pos;
+typedef enum Players {ONE,TWO}Players;
 
 typedef struct Mezo{
     int type;
@@ -38,9 +39,7 @@ extern double agyas;
 SDL_Event windowEvent;
 SDL_Window *window;
 SDL_Renderer *renderer;
-SDL_Window *menuwindow;
-SDL_Texture *textures[11];
-SDL_Texture *menuTextures[3];
+SDL_Texture *textures[12];
 SDL_Texture *icon_textures[4];
 SDL_Texture *mag_textures[3];
 SDL_Texture *csira_textures[3];

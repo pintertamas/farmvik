@@ -7,7 +7,7 @@ int main( int argc, char **argv ) {
 
     init(); // inicializalas
     loadImage(); // kepek betoltese memoriaba
-    scan(); // adatok beolvasása
+    scan(ONE); // adatok beolvasása
 
     bool running = true;
 
@@ -20,6 +20,7 @@ int main( int argc, char **argv ) {
         doRender(); // renderelek mindent
         score(); // a pénz és a takarmányok kiírasa
         planting(); // mit es hova akarok ultetni?
+        timePassed();
 
 
         SDL_RenderPresent(renderer);
@@ -30,9 +31,9 @@ int main( int argc, char **argv ) {
             if( windowEvent.type == SDL_QUIT )
             {
                 if(player == true)
-                    send(); // adatok kiírása .txt-be
+                    send(ONE); // adatok kiírása .txt-be
                 else
-                    sendPlayer2();
+                    send(TWO);
                 running = false;
                 break;
             }

@@ -47,19 +47,30 @@ int init() {
     return success;
 }
 
-void scan()
+void scan(Players players)
 {
     FILE* data;
-    data = fopen("gameData.txt", "r");
+
+    if(players == ONE)
+    {
+        data = fopen("gameData.txt", "r");
+    }
+    else if(players == TWO)
+    {
+        data = fopen("gameDataPlayer2.txt", "r");
+    }
 
     for(int i=0;i<6;i++)
         fscanf(data, "%d %d\n", &hely[i].type, &hely[i].size);
+
+    for(int i=0;i<6;i++)
+        fscanf(data, "%d ",  &times[i]);
 
     fscanf(data, "%d\n%d %d %d", &money, &apple, &potato, &tomato);
 
     for(int i=0;i<6;i++)
     {
-        printf("%d %d\n", hely[i].type, hely[i].size);
+        //printf("%d %d\n", hely[i].type, hely[i].size);
     }
 
     if (data != NULL) {
@@ -73,58 +84,33 @@ void scan()
     }
 }
 
-void scanPlayer2()
+void send(Players players)
 {
     FILE* data;
-    data = fopen("gameDataPlayer2.txt", "r");
 
-    for(int i=0;i<6;i++)
+    if(players == ONE)
     {
-        fscanf(data, "%d %d\n",  &hely[i].type,  &hely[i].size);
+        data = fopen("gameData.txt", "w");
     }
-    fscanf(data, "%d\n%d %d %d", &money, &apple, &potato, &tomato);
-
-    if (data != NULL)
+    else if(players == TWO)
     {
-        fclose(data);
-    } else{
-        printf("Error: Could not open the file");
+        data = fopen("gameDataPlayer2.txt", "w");
     }
-}
-
-void send()
-{
-    FILE* data;
-    data = fopen("gameData.txt", "w");
 
     for(int i=0;i<6;i++)
     {
         fprintf(data, "%d %d\n", hely[i].type, hely[i].size);
     }
-    fprintf(data, "%d\n%d %d %d", money, apple, potato, tomato);
+    for(int i=0;i<6;i++)
+    {
+        fprintf(data, "%d ",  times[i]);
+    }
+    fprintf(data, "\n%d\n%d %d %d", money, apple, potato, tomato);
     fclose(data);
 
     for(int i=0;i<6;i++)
     {
-        printf("%d %d\n", hely[i].type, hely[i].size);
-    }
-}
-
-void sendPlayer2()
-{
-    FILE* data;
-    data = fopen("gameDataPlayer2.txt", "w");
-
-    for(int i=0;i<6;i++)
-    {
-        fprintf(data, "%d %d\n", hely[i].type, hely[i].size);
-    }
-    fprintf(data, "%d\n%d %d %d", money, apple, potato, tomato);
-    fclose(data);
-
-    for(int i=0;i<6;i++)
-    {
-        printf("%d %d\n", hely[i].type, hely[i].size);
+        //printf("%d %d\n", hely[i].type, hely[i].size);
     }
 }
 
@@ -137,7 +123,11 @@ void reset()
     {
         fscanf(data, "%d %d\n",  &hely[i].type,  &hely[i].size);
     }
-    fscanf(data, "%d\n%d %d %d", &money, &apple, &potato, &tomato);
+    for(int i=0;i<6;i++)
+    {
+        fscanf(data, "%d ",  &times[i]);
+    }
+    fscanf(data, "\n%d\n%d %d %d", &money, &apple, &potato, &tomato);
 
     if (data != NULL)
     {
@@ -179,20 +169,10 @@ int goods()
     {
         if(buttonx > 0 && buttonx < d && buttony > 0 && buttony < 3*d)
         {
-            //printf("%d\n", (buttony / d) + 1);
-            /*if(hely[buttony / d].size == 0)
-            {
-                hely[buttony / d].size++;
-            }*/
             return (buttony / d) + 1;
         }
         else if(buttonx > d && buttonx < 2*d && buttony > 0 && buttony < 3*d)
         {
-            //printf("%d\n", (buttony / d) + 4);
-            /*if(hely[buttony / d + 3].size == 0)
-            {
-                hely[buttony / d + 3].size++;
-            }*/
             return (buttony / d) + 4;
         }
     }
@@ -236,13 +216,11 @@ int buttonEventHandler()
             for(int i=0; i<3;i++)
             {
                 if (0 <= buttonx && buttonx <= BUTTON_WIDTH && (i * 2 * d) <= buttony && buttony <= d + (i * 2 * d)) {
-                        //printf("%d\n", (buttony / (2 * d)) + 1);
                         return (buttony / (2 * d)) + 1; // visszaadja a vásárolni kívánt termény sorszámát
                     }
 
                 else if ((BUTTON_WIDTH + d) <= buttonx && buttonx <= (BUTTON_WIDTH + d) + BUTTON_WIDTH && (i * 2 * d) <= buttony && buttony <= d + (i * 2 * d))
                     {
-                        //printf("%d\n", (buttony / (2 * d)) + 1);
 
                         int selltype = ((buttony / (2 * d)) + 1);
 
@@ -277,16 +255,14 @@ int buttonEventHandler()
         {
             if(player == true)
             {
-                printf("%d", 1);
-                scanPlayer2();
-                sendPlayer2();
+                scan(TWO);
+                send(TWO);
                 player = false;
             }
             else
             {
-                printf("%d", 0);
-                scan();
-                send();
+                scan(ONE);
+                send(ONE);
                 player = true;
             }
         }
@@ -294,6 +270,10 @@ int buttonEventHandler()
         else if(buttonx > 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 && buttonx < SCREEN_WIDTH - 2*SCREEN_WIDTH / 50 && buttony > SCREEN_WIDTH / 10 + 9*SCREEN_WIDTH / 50 && buttony < SCREEN_WIDTH / 10 + 9*SCREEN_WIDTH / 50 + BUTTON_HEIGHT)
         {
             return 13; // ez azt jelenti, hogy a játékos aratni szeretne
+        }
+        else if( buttonx > 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 && buttonx < 3*SCREEN_WIDTH / 4 + 8*SCREEN_WIDTH / 50 && buttony > SCREEN_WIDTH / 10 + 14*SCREEN_WIDTH / 50 && buttony < SCREEN_WIDTH / 10 + 16*SCREEN_WIDTH / 50)
+        {
+            return 14;
         }
     }
     return -1;
@@ -318,7 +298,6 @@ void planting()
 
         int sorszam = goods();
 
-        printf("---\ni: %d sorszam: %d\n---\n", i, sorszam);
 
         int x;
         int y;
@@ -340,19 +319,64 @@ void planting()
             hely[sorszam-1].type = i;
             hely[sorszam-1].size = 1;
             money -= buy_price[i-1];
+            times[sorszam-1] = time(0);
         }
 
-        printf("%d %d\n", x, y); // a két koordinátája annak a pontnak, ahova ültetni kell a növényeket
     }
     else if( i == 13 )
     {
         int sorszam = goods();
         if(hely[sorszam-1].size == 3)
         {
-            money += sell_price[hely[sorszam-1].type-1];
+            //money += sell_price[hely[sorszam-1].type-1];
+
+            switch(hely[sorszam-1].type)
+            {
+                case 1:
+                    apple += hely[sorszam-1].type;
+                    break;
+                case 2:
+                    potato += hely[sorszam-1].type;
+                    break;
+                case 3:
+                    tomato += hely[sorszam-1].type;
+                    break;
+                default:
+                    break;
+            }
+
             hely[sorszam-1].size = 0;
             hely[sorszam-1].type = 0;
+            times[sorszam-1] = 0;
         }
     }
+    else if( i == 14)
+    {
+        int sorszam = goods();
+        hely[sorszam-1].size = 0;
+        hely[sorszam-1].type = 0;
+        times[sorszam-1] = 0;
+    }
+}
 
+void timePassed()
+{
+    for(int i=0;i<6;i++)
+    {
+        if(times[i] != 0)
+        {
+            if(time(0) - times[i] == 4 && hely[i].size == 1)
+            {
+                hely[i].size++;
+            }
+            else if(time(0) - times[i] == 8 && hely[i].size == 2)
+            {
+                hely[i].size++;
+            }
+            else if(time(0) - times[i] >= 25 && hely[i].size == 3)
+            {
+                hely[i].size = 4;
+            }
+        }
+    }
 }
