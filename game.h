@@ -10,6 +10,7 @@
 int menu();
 void scan();
 void send();
+void sendPlayer2();
 void reset();
 int init();
 void doRender();

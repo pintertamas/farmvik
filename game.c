@@ -73,26 +73,19 @@ void scan()
     }
 }
 
-void player2()
+void scanPlayer2()
 {
     FILE* data;
     data = fopen("gameDataPlayer2.txt", "r");
 
     for(int i=0;i<6;i++)
-        fscanf(data, "%d %d\n", &hely[i].type, &hely[i].size);
-
+    {
+        fscanf(data, "%d %d\n",  &hely[i].type,  &hely[i].size);
+    }
     fscanf(data, "%d\n%d %d %d", &money, &apple, &potato, &tomato);
 
-    for(int i=0;i<6;i++)
+    if (data != NULL)
     {
-        printf("%d %d\n", hely[i].type, hely[i].size);
-    }
-
-    if (data != NULL) {
-        // type (pl ha 1, akkor alma)
-        // size: azt jelzi, hogy az ott lévő termény mekkora (0-4 kozott)
-        // ures - mag - csira - nagy - rohadt
-
         fclose(data);
     } else{
         printf("Error: Could not open the file");
@@ -103,6 +96,24 @@ void send()
 {
     FILE* data;
     data = fopen("gameData.txt", "w");
+
+    for(int i=0;i<6;i++)
+    {
+        fprintf(data, "%d %d\n", hely[i].type, hely[i].size);
+    }
+    fprintf(data, "%d\n%d %d %d", money, apple, potato, tomato);
+    fclose(data);
+
+    for(int i=0;i<6;i++)
+    {
+        printf("%d %d\n", hely[i].type, hely[i].size);
+    }
+}
+
+void sendPlayer2()
+{
+    FILE* data;
+    data = fopen("gameDataPlayer2.txt", "w");
 
     for(int i=0;i<6;i++)
     {
@@ -262,16 +273,18 @@ int buttonEventHandler()
         if(buttonx > 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 && buttonx < 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 + 2*SCREEN_WIDTH / 50 && buttony > SCREEN_WIDTH / 10 + 11*SCREEN_WIDTH / 50 && buttony < SCREEN_WIDTH / 10 + 11*SCREEN_WIDTH / 50 + 2*SCREEN_WIDTH / 50)
         {
             reset();
-        } else if(buttonx > 3*SCREEN_WIDTH / 4 + 6*SCREEN_WIDTH / 50 && buttonx < 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 + 2*SCREEN_WIDTH / 50 && buttony > SCREEN_WIDTH / 10 + 11*SCREEN_WIDTH / 50 && buttony < SCREEN_WIDTH / 10 + 11*SCREEN_WIDTH / 50 + 2*SCREEN_WIDTH / 50)
+        } else if(buttonx > 3*SCREEN_WIDTH / 4 + 6*SCREEN_WIDTH / 50 && buttonx > 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 + 2*SCREEN_WIDTH / 50 && buttony > SCREEN_WIDTH / 10 + 11*SCREEN_WIDTH / 50 && buttony < SCREEN_WIDTH / 10 + 11*SCREEN_WIDTH / 50 + 2*SCREEN_WIDTH / 50)
         {
             if(player == true)
             {
-                player2();
-                send();
+                printf("%d", 1);
+                scanPlayer2();
+                sendPlayer2();
                 player = false;
             }
             else
             {
+                printf("%d", 0);
                 scan();
                 send();
                 player = true;

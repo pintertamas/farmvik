@@ -29,7 +29,10 @@ int main( int argc, char **argv ) {
         {
             if( windowEvent.type == SDL_QUIT )
             {
-                send(); // adatok kiírása .txt-be
+                if(player == true)
+                    send(); // adatok kiírása .txt-be
+                else
+                    sendPlayer2();
                 running = false;
                 break;
             }

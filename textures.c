@@ -37,7 +37,7 @@ void loadImage() // ÚJABB KÉP FELTÖLTÉSE UTÁN A TÖMB MÉRETÉT IS NÖVELNI
     textures[5] = loadTexture("Textures/sell.png");
     textures[6] = loadTexture("Textures/dirt.png");
     textures[7] = loadTexture("Textures/tombstone.png");
-    textures[8] = loadTexture("Textures/cunning.png");
+    textures[8] = loadTexture("Textures/harvest.png");
     textures[9] = loadTexture("Textures/reset.png");
     textures[10] = loadTexture("Textures/gpsw.png");
 
@@ -134,9 +134,9 @@ void doRender() {
         SDL_RenderCopy(renderer, textures[5], NULL, &rectsell);
     }
 
-    SDL_Rect cunning = { 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50, SCREEN_WIDTH / 10 + 9*SCREEN_WIDTH / 50, 2*buttonw, buttonh };
+    SDL_Rect harvest = { 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50, SCREEN_WIDTH / 10 + 9*SCREEN_WIDTH / 50, 2*buttonw, buttonh };
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-    SDL_RenderCopy(renderer, textures[8], NULL, &cunning);
+    SDL_RenderCopy(renderer, textures[8], NULL, &harvest);
 
     SDL_Rect reset = { 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50, SCREEN_WIDTH / 10 + 11*SCREEN_WIDTH / 50, 2*margo, 2*margo };
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
