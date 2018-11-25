@@ -17,6 +17,5 @@ SDL_Texture *loadTexture(char *path);
 int goods();
 int buttonEventHandler();
 void planting();
-void bed(int x, int y, int i);
 
 #endif //FARMVILLE2_GAME_H

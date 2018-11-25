@@ -37,6 +37,9 @@ void loadImage() // ÚJABB KÉP FELTÖLTÉSE UTÁN A TÖMB MÉRETÉT IS NÖVELNI
     textures[5] = loadTexture("Textures/sell.png");
     textures[6] = loadTexture("Textures/dirt.png");
     textures[7] = loadTexture("Textures/tombstone.png");
+    textures[8] = loadTexture("Textures/cunning.png");
+    textures[9] = loadTexture("Textures/reset.png");
+    textures[10] = loadTexture("Textures/gpsw.png");
 
     icon_textures[0] = loadTexture("Textures/coin.png");
     icon_textures[1] = loadTexture("Textures/apple.png");
@@ -130,6 +133,20 @@ void doRender() {
         SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
         SDL_RenderCopy(renderer, textures[5], NULL, &rectsell);
     }
+
+    SDL_Rect cunning = { 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50, SCREEN_WIDTH / 10 + 9*SCREEN_WIDTH / 50, 2*buttonw, buttonh };
+    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+    SDL_RenderCopy(renderer, textures[8], NULL, &cunning);
+
+    SDL_Rect reset = { 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50, SCREEN_WIDTH / 10 + 11*SCREEN_WIDTH / 50, 2*margo, 2*margo };
+    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+    SDL_RenderCopy(renderer, textures[9], NULL, &reset);
+
+    SDL_Rect change = { 3*SCREEN_WIDTH / 4 + 6*SCREEN_WIDTH / 50, SCREEN_WIDTH / 10 + 11*SCREEN_WIDTH / 50, 2*margo, 2*margo };
+    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+    SDL_RenderCopy(renderer, textures[10], NULL, &change);
+
+
 }
 
 int digit(int num)
@@ -195,13 +212,34 @@ void score()
     SDL_FreeSurface(balance);
 }
 
-void bed(int x, int y, int i)
+void bed(int x, int y, int i, int t)
 {
     int d = (int)(agyas*SCREEN_WIDTH);
     SDL_Rect rect = { x, y, d, d };
     //printf("\n %d %d \n", x, y);
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-    SDL_RenderCopy(renderer, mag_textures[i], NULL, &rect);
+
+    switch(t)
+    {
+        case 0:
+            SDL_RenderCopy(renderer, textures[6], NULL, &rect);
+            break;
+        case 1:
+            SDL_RenderCopy(renderer, mag_textures[i], NULL, &rect);
+            break;
+        case 2:
+            SDL_RenderCopy(renderer, csira_textures[i], NULL, &rect);
+            break;
+        case 3:
+            SDL_RenderCopy(renderer, nagy_textures[i], NULL, &rect);
+            break;
+        case 4:
+            SDL_RenderCopy(renderer, textures[7], NULL, &rect);
+            break;
+        default:
+            SDL_RenderCopy(renderer, textures[6], NULL, &rect);
+            break;
+    }
 }
 
 void renderState()
@@ -210,16 +248,18 @@ void renderState()
 
     for(int i=0;i<6;i++)
     {
-        if(i <= 3)
+        if(i < 3)
         {
-            int x = 2*SCREEN_WIDTH / 50;
-            int y = 7*SCREEN_WIDTH / 50 + (i - 1)*d;
-            bed(x, y, i-1);
+            int x;
+            int y;
+            x = 2 * SCREEN_WIDTH / 50;
+            y = 7 * SCREEN_WIDTH / 50 + i * d;
+            bed(x, y, hely[i].type - 1, hely[i].size);
         } else
         {
             int x = 2*SCREEN_WIDTH / 50 + d;
-            int y = 7*SCREEN_WIDTH / 50 + (i - 4)*d;
-            bed(x, y, i-1);
+            int y = 7*SCREEN_WIDTH / 50 + (i - 3)*d;
+            bed(x, y, hely[i].type - 1, hely[i].size);
         }
     }
 }

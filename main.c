@@ -5,12 +5,6 @@
 
 int main( int argc, char **argv ) {
 
-    //menu();
-    if(start == false) // true = load game, false = new game
-    {
-        reset();
-        send();
-    }
     init(); // inicializalas
     loadImage(); // kepek betoltese memoriaba
     scan(); // adatok beolvasása
@@ -22,7 +16,7 @@ int main( int argc, char **argv ) {
         SDL_RenderClear(renderer);
 
         background();
-        //renderState();
+        renderState();
         doRender(); // renderelek mindent
         score(); // a pénz és a takarmányok kiírasa
         planting(); // mit es hova akarok ultetni?

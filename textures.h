@@ -12,7 +12,6 @@ void loadImage();
 void background();
 void score();
 void renderState();
-void bed(int x, int y, int i);
-//void destroy_everything();
+void bed(int x, int y, int i, int t);
 
 #endif //FARMVILLE2_TEXTURES_H

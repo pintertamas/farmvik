@@ -73,6 +73,32 @@ void scan()
     }
 }
 
+void player2()
+{
+    FILE* data;
+    data = fopen("gameDataPlayer2.txt", "r");
+
+    for(int i=0;i<6;i++)
+        fscanf(data, "%d %d\n", &hely[i].type, &hely[i].size);
+
+    fscanf(data, "%d\n%d %d %d", &money, &apple, &potato, &tomato);
+
+    for(int i=0;i<6;i++)
+    {
+        printf("%d %d\n", hely[i].type, hely[i].size);
+    }
+
+    if (data != NULL) {
+        // type (pl ha 1, akkor alma)
+        // size: azt jelzi, hogy az ott lévő termény mekkora (0-4 kozott)
+        // ures - mag - csira - nagy - rohadt
+
+        fclose(data);
+    } else{
+        printf("Error: Could not open the file");
+    }
+}
+
 void send()
 {
     FILE* data;
@@ -233,7 +259,26 @@ int buttonEventHandler()
         buttonx = clickevent.button.x;
         buttony = clickevent.button.y;
 
-        if(buttonx > 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 && buttonx < SCREEN_WIDTH - 2*SCREEN_WIDTH / 50 && buttony > SCREEN_WIDTH / 10 + 9*SCREEN_WIDTH / 50 && buttony < SCREEN_WIDTH / 10 + 9*SCREEN_WIDTH / 50 + BUTTON_HEIGHT)
+        if(buttonx > 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 && buttonx < 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 + 2*SCREEN_WIDTH / 50 && buttony > SCREEN_WIDTH / 10 + 11*SCREEN_WIDTH / 50 && buttony < SCREEN_WIDTH / 10 + 11*SCREEN_WIDTH / 50 + 2*SCREEN_WIDTH / 50)
+        {
+            reset();
+        } else if(buttonx > 3*SCREEN_WIDTH / 4 + 6*SCREEN_WIDTH / 50 && buttonx < 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 + 2*SCREEN_WIDTH / 50 && buttony > SCREEN_WIDTH / 10 + 11*SCREEN_WIDTH / 50 && buttony < SCREEN_WIDTH / 10 + 11*SCREEN_WIDTH / 50 + 2*SCREEN_WIDTH / 50)
+        {
+            if(player == true)
+            {
+                player2();
+                send();
+                player = false;
+            }
+            else
+            {
+                scan();
+                send();
+                player = true;
+            }
+        }
+
+        else if(buttonx > 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 && buttonx < SCREEN_WIDTH - 2*SCREEN_WIDTH / 50 && buttony > SCREEN_WIDTH / 10 + 9*SCREEN_WIDTH / 50 && buttony < SCREEN_WIDTH / 10 + 9*SCREEN_WIDTH / 50 + BUTTON_HEIGHT)
         {
             return 13; // ez azt jelenti, hogy a játékos aratni szeretne
         }
@@ -289,6 +334,12 @@ void planting()
     else if( i == 13 )
     {
         int sorszam = goods();
+        if(hely[sorszam-1].size == 3)
+        {
+            money += sell_price[hely[sorszam-1].type-1];
+            hely[sorszam-1].size = 0;
+            hely[sorszam-1].type = 0;
+        }
     }
 
 }
