@@ -11,6 +11,7 @@ void scan(Players players);
 void send(Players players);
 void reset();
 int init();
+
 void timePassed();
 int goods();
 int buttonEventHandler();

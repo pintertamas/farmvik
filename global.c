@@ -3,8 +3,6 @@
 //
 
 #include "global.h"
-#include "debugmalloc.h"
-
 
 int const SCREEN_WIDTH = 1440;
 int const SCREEN_HEIGHT = 900;

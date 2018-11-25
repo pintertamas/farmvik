@@ -10,6 +10,7 @@
 SDL_Texture *loadTexture(char *path);
 void loadImage();
 void background();
+void doRender();
 void score();
 void renderState();
 void bed(int x, int y, int i, int t);

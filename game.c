@@ -6,8 +6,6 @@
 #include "game.h"
 #include "global.h"
 #include "textures.h"
-#include "debugmalloc.h"
-
 
 int init() {
 
@@ -299,22 +297,6 @@ void planting()
 
         int sorszam = goods();
 
-
-        int x;
-        int y;
-        int d = (int)(agyas*SCREEN_WIDTH);
-
-        if(sorszam <= 3)
-        {
-            x = 2*SCREEN_WIDTH / 50;
-            y = 7*SCREEN_WIDTH / 50 + (sorszam - 1)*d;
-
-        } else
-        {
-            x = 2*SCREEN_WIDTH / 50 + d;
-            y = 7*SCREEN_WIDTH / 50 + (sorszam - 4)*d;
-        }
-
         if(hely[sorszam-1].size == 0)
         {
             hely[sorszam-1].type = i;
@@ -353,6 +335,11 @@ void planting()
     }
     else if( i == 14)
     {
+        if(money < 5000)
+        {
+            return;
+        }
+        money -= 5000;
         int sorszam = goods();
         hely[sorszam-1].size = 0;
         hely[sorszam-1].type = 0;

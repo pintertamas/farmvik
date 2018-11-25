@@ -5,7 +5,6 @@
 #include "textures.h"
 #include "global.h"
 #include "game.h"
-#include "debugmalloc.h"
 
 // initializing pictures
 SDL_Texture *loadTexture(char *path)
