@@ -7,6 +7,8 @@
 #include "global.h"
 #include "textures.h"
 #include "farm.h"
+#include "debugmalloc.h"
+
 
 int init() {
 

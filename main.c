@@ -2,6 +2,7 @@
 #include "game.h"
 #include "textures.h"
 #include "farm.h"
+#include "debugmalloc.h"
 
 int main( int argc, char **argv ) {
 
