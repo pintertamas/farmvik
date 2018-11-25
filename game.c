@@ -6,6 +6,7 @@
 #include "game.h"
 #include "global.h"
 #include "textures.h"
+#include "farm.h"
 
 int init() {
 
@@ -50,10 +51,20 @@ void scan()
 {
     FILE* data;
     data = fopen("gameData.txt", "r");
-    fscanf(data, "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", &a, &a_magassag, &b, &b_magassag, &c, &c_magassag, &d, &d_magassag, &e, &e_magassag, &f, &f_magassag, &money, &apple, &potato, &tomato);
+
+    for(int i=0;i<6;i++)
+        fscanf(data, "%d %d\n", &hely[i].type, &hely[i].size);
+
+    fscanf(data, "%d\n%d %d %d", &money, &apple, &potato, &tomato);
+
+    for(int i=0;i<6;i++)
+    {
+        printf("%d %d\n", hely[i].type, hely[i].size);
+    }
+
     if (data != NULL) {
-        // a,b,c,d,e,f: egyes cellák típusai (pl ha 1, akkor alma)
-        // a_magassag, b_magassag, ... f_magassag: azt jelzik, hogy az ott lévő termények mekkorák (0-4 kozott)
+        // type (pl ha 1, akkor alma)
+        // size: azt jelzi, hogy az ott lévő termény mekkora (0-4 kozott)
         // ures - mag - csira - nagy - rohadt
 
         fclose(data);
@@ -66,22 +77,33 @@ void send()
 {
     FILE* data;
     data = fopen("gameData.txt", "w");
-    fprintf(data, "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",
-            a_magassag, places[0][0], b_magassag, places[0][1], c_magassag, places[0][2],
-            d_magassag, places[1][0], e_magassag, places[1][1], f_magassag, places[1][2], money, apple, potato, tomato);
+
+    for(int i=0;i<6;i++)
+    {
+        fprintf(data, "%d %d\n", hely[i].type, hely[i].size);
+    }
+    fprintf(data, "%d\n%d %d %d", money, apple, potato, tomato);
     fclose(data);
+
+    for(int i=0;i<6;i++)
+    {
+        printf("%d %d\n", hely[i].type, hely[i].size);
+    }
 }
 
 void reset()
 {
     FILE* data;
-    data = fopen("gameResetData.txt", "r");
-    fscanf(data, "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", &a, &a_magassag, &b, &b_magassag, &c, &c_magassag, &d, &d_magassag, &e, &e_magassag, &f, &f_magassag, &money, &apple, &potato, &tomato);
-    if (data != NULL) {
-        // a,b,c,d,e,f: egyes cellák típusai (pl ha 1, akkor alma)
-        // a_magassag, b_magassag, ... f_magassag: azt jelzik, hogy az ott lévő termények mekkorák (0-4 kozott)
-        // ures - mag - csira - nagy - rohadt
+    data = fopen("gameDataNull.txt", "r");
 
+    for(int i=0;i<6;i++)
+    {
+        fscanf(data, "%d %d\n",  &hely[i].type,  &hely[i].size);
+    }
+    fscanf(data, "%d\n%d %d %d", &money, &apple, &potato, &tomato);
+
+    if (data != NULL)
+    {
         fclose(data);
     } else{
         printf("Error: Could not open the file");
@@ -121,20 +143,26 @@ int goods()
         if(buttonx > 0 && buttonx < d && buttony > 0 && buttony < 3*d)
         {
             //printf("%d\n", (buttony / d) + 1);
-            places[0][buttony / d] = 1;
+            /*if(hely[buttony / d].size == 0)
+            {
+                hely[buttony / d].size++;
+            }*/
             return (buttony / d) + 1;
         }
         else if(buttonx > d && buttonx < 2*d && buttony > 0 && buttony < 3*d)
         {
             //printf("%d\n", (buttony / d) + 4);
-            places[1][buttony / d] = 1;
+            /*if(hely[buttony / d + 3].size == 0)
+            {
+                hely[buttony / d + 3].size++;
+            }*/
             return (buttony / d) + 4;
         }
     }
     goods();
 }
 
-int buttonbuy(enum Hasznalat transaction)
+int buttonEventHandler()
 {
     int BUTTON_HEIGHT = SCREEN_WIDTH / 50; // a gombok mérete, létrehozáskor buttonw és buttonh volt a nevük, csak név ütközés miatt most máshogy nevezem el.
     int BUTTON_WIDTH = (int)round((double)SCREEN_WIDTH / 20);
@@ -170,86 +198,97 @@ int buttonbuy(enum Hasznalat transaction)
         {
             for(int i=0; i<3;i++)
             {
-                if(transaction == BUY) // tehát venni szeretnénk
-                {
-                    if (0 <= buttonx && buttonx <= BUTTON_WIDTH && (i * 2 * d) <= buttony && buttony <= d + (i * 2 * d))
-                    {
+                if (0 <= buttonx && buttonx <= BUTTON_WIDTH && (i * 2 * d) <= buttony && buttony <= d + (i * 2 * d)) {
                         //printf("%d\n", (buttony / (2 * d)) + 1);
                         return (buttony / (2 * d)) + 1; // visszaadja a vásárolni kívánt termény sorszámát
                     }
-                    else{
-                        return -1;
-                    }
-                }
 
-                else if(transaction == SELL) // vagy eladni
-                {
-                    if ((BUTTON_WIDTH + d) <= buttonx && buttonx <= (BUTTON_WIDTH + d) + BUTTON_WIDTH && (i * 2 * d) <= buttony && buttony <= d + (i * 2 * d))
+                else if ((BUTTON_WIDTH + d) <= buttonx && buttonx <= (BUTTON_WIDTH + d) + BUTTON_WIDTH && (i * 2 * d) <= buttony && buttony <= d + (i * 2 * d))
                     {
                         //printf("%d\n", (buttony / (2 * d)) + 1);
-                        return (buttony / (2 * d)) + 1; // visszaadja a vásárolni kívánt termény sorszámát
+
+                        int selltype = ((buttony / (2 * d)) + 1);
+
+                        if(selltype == 1 && apple > 0)
+                        {
+                            money += apple * sell_price[selltype - 1];
+                            apple = 0;
+                        }
+                        else if(selltype == 2 && potato > 0)
+                        {
+                            money += potato * sell_price[selltype - 1];
+                            potato = 0;
+                        }
+                        else if(selltype == 3 && tomato > 0)
+                        {
+                            money += tomato * sell_price[selltype - 1];
+                            tomato = 0;
+                        }
+
+                        return (buttony / (2 * d)) + 4; // visszaadja a vásárolni kívánt termény sorszámát
                     }
-                    else{
-                        return -1;
-                    }
-                }
             }
+        }
+
+        buttonx = clickevent.button.x;
+        buttony = clickevent.button.y;
+
+        if(buttonx > 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 && buttonx < SCREEN_WIDTH - 2*SCREEN_WIDTH / 50 && buttony > SCREEN_WIDTH / 10 + 9*SCREEN_WIDTH / 50 && buttony < SCREEN_WIDTH / 10 + 9*SCREEN_WIDTH / 50 + BUTTON_HEIGHT)
+        {
+            return 13; // ez azt jelenti, hogy a játékos aratni szeretne
         }
     }
     return -1;
 }
 
-void bed(int x, int y, int i)
-{
-    int d = (int)(agyas*SCREEN_WIDTH);
-    SDL_Rect rect = { x, y, d, d };
-    //printf("\n %d %d \n", x, y);
-    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-    SDL_RenderCopy(renderer, mag_textures[i], NULL, &rect);
-}
-
 void planting()
 {
-    int i = buttonbuy(BUY);
+    int i = buttonEventHandler();
     if(i == -1)
     {
-        return;
-    }
-    int sorszam = goods();
-    money -= buy_price[i-1];
-
-    printf("---\ni: %d sorszam: %d\n---\n", i, sorszam);
-
-    int x;
-    int y;
-    int d = (int)(agyas*SCREEN_WIDTH);
-
-    if(sorszam <= 3)
-    {
-        x = 2*SCREEN_WIDTH / 50;
-        y = 7*SCREEN_WIDTH / 50 + (sorszam - 1)*d;
-
-    } else
-    {
-        x = 2*SCREEN_WIDTH / 50 + d;
-        y = 7*SCREEN_WIDTH / 50 + (sorszam - 4)*d;
+        return; // ha se nem vesz, elad vagy arat a játékos
     }
 
-    printf("%d %d\n", x, y); // a két koordinátája annak a pontnak, ahova ültetni kell a növényeket
+    // az eladás már kezelve van közvetlenül a buttonEventHandler() függvényben
 
-    bed(x, y, i-1);
-}
-
-void sell()
-{
-    int i = buttonbuy(SELL);
-    if(i == -1)
+    if( i >= 0 && i < 4 ) // ha vesz
     {
-        return;
+        if(money - buy_price[i-1] < 0)
+        {
+            return;
+        }
+
+        int sorszam = goods();
+
+        printf("---\ni: %d sorszam: %d\n---\n", i, sorszam);
+
+        int x;
+        int y;
+        int d = (int)(agyas*SCREEN_WIDTH);
+
+        if(sorszam <= 3)
+        {
+            x = 2*SCREEN_WIDTH / 50;
+            y = 7*SCREEN_WIDTH / 50 + (sorszam - 1)*d;
+
+        } else
+        {
+            x = 2*SCREEN_WIDTH / 50 + d;
+            y = 7*SCREEN_WIDTH / 50 + (sorszam - 4)*d;
+        }
+
+        if(hely[sorszam-1].size == 0)
+        {
+            hely[sorszam-1].type = i;
+            hely[sorszam-1].size = 1;
+            money -= buy_price[i-1];
+        }
+
+        printf("%d %d\n", x, y); // a két koordinátája annak a pontnak, ahova ültetni kell a növényeket
     }
-    money += sell_price[i-1];
-
-    printf("---\ni: %d\n---", i);
-
+    else if( i == 13 )
+    {
+        int sorszam = goods();
+    }
 
 }

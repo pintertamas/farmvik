@@ -16,10 +16,15 @@
 
 extern int const SCREEN_WIDTH;
 extern int const SCREEN_HEIGHT;
-extern int places[2][3];
 extern bool start;
-int a,a_magassag,b,b_magassag,c,c_magassag,d,d_magassag,e,e_magassag,f,f_magassag;
-int allapot[6][2][3];
+//typedef enum pos {x, y}pos;
+
+typedef struct Mezo{
+    int type;
+    int size;
+}Mezo;
+
+Mezo hely[6];
 extern int money;
 extern int apple;
 extern int potato;
@@ -29,7 +34,6 @@ int sell_price[3];
 int buttonx;
 int buttony;
 extern double agyas;
-enum Hasznalat{BUY,SELL};
 SDL_Event windowEvent;
 SDL_Window *window;
 SDL_Renderer *renderer;
@@ -43,5 +47,6 @@ SDL_Texture *nagy_textures[3];
 SDL_Surface *balance;
 TTF_Font *font;
 SDL_Event clickevent;
+SDL_Color bggreen;
 
 #endif //FARMVILLE2_GLOBAL_H

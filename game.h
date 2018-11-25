@@ -15,8 +15,7 @@ int init();
 void doRender();
 SDL_Texture *loadTexture(char *path);
 int goods();
-void sell();
-int buttonbuy(enum Hasznalat transaction);
+int buttonEventHandler();
 void planting();
 void bed(int x, int y, int i);
 

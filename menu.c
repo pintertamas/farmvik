@@ -39,15 +39,24 @@ int menuclick(bool running)
 
     if(click == true)
     {
-        if(menubuttonx <= 640 / 2 + menud && menubuttonx >= 640 / 2 - menud && menubuttony >= SCREEN_WIDTH / 50 && menubuttony <= SCREEN_WIDTH / 50 + d)
+        if(menubuttonx <= 640 / 2 + menud && menubuttonx >= 640 / 2 - menud && menubuttony >= SCREEN_WIDTH / 50 && menubuttony <= SCREEN_WIDTH / 50 + menud)
         {
             printf("%d %d\n", menubuttonx, menubuttony);
+            running = false;
             return 1;
         }
         else {
         }
 
     }
+}
+
+void menuTexture()
+{
+    int menud = 640 / 6; // 106, csak így jobban látszik az arány
+
+    SDL_Rect logo = {640 / 2 - menud, SCREEN_WIDTH / 50, menud, menud};
+    SDL_RenderCopy(renderer, menuTextures[0], NULL, &logo);
 }
 
 int menu() {
@@ -72,8 +81,9 @@ int menu() {
         SDL_SetRenderDrawColor(menurenderer, 76, 175, 80, 255);
         SDL_RenderClear(menurenderer);
 
+        menuTexture();
         menuclick(running);
-        SDL_Delay(100);
+        SDL_Delay(10);
         SDL_RenderPresent(menurenderer);
 
         while( SDL_PollEvent( &windowEvent ) != 0 )

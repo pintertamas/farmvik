@@ -1,10 +1,11 @@
 #include "global.h"
 #include "game.h"
 #include "textures.h"
+#include "farm.h"
 
 int main( int argc, char **argv ) {
 
-    menu();
+    //menu();
     if(start == false) // true = load game, false = new game
     {
         reset();
@@ -12,17 +13,20 @@ int main( int argc, char **argv ) {
     }
     init(); // inicializalas
     loadImage(); // kepek betoltese memoriaba
+    scan(); // adatok beolvasása
 
     bool running = true;
 
     while( running )
     {
-        scan(); // adatok beolvasása
+        SDL_RenderClear(renderer);
+
+        background();
+        //renderState();
         doRender(); // renderelek mindent
         score(); // a pénz és a takarmányok kiírasa
         planting(); // mit es hova akarok ultetni?
-        //sell();
-        send(); // adatok kiírása .txt-be
+
 
         SDL_RenderPresent(renderer);
         //SDL_Delay(10); // fps problémák miatt
@@ -31,6 +35,7 @@ int main( int argc, char **argv ) {
         {
             if( windowEvent.type == SDL_QUIT )
             {
+                send(); // adatok kiírása .txt-be
                 running = false;
                 break;
             }

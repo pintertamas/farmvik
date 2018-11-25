@@ -5,6 +5,7 @@
 #ifndef FARMVILLE2_FARM_H
 #define FARMVILLE2_FARM_H
 
-void delay(int seconds);
+
+void farm();
 
 #endif //FARMVILLE2_FARM_H
