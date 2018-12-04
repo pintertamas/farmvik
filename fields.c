@@ -5,9 +5,6 @@
 #include "global.h"
 #include "fields.h"
 
-Field **fields = NULL;
-int rows, columns;
-
 void setupFields(int row, int column)
 {
     fields = (Field**)malloc(row*sizeof(Field*));
