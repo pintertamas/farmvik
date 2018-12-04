@@ -18,7 +18,6 @@ extern int const SCREEN_WIDTH;
 extern int const SCREEN_HEIGHT;
 int d;
 extern int times[6];
-extern bool start;
 bool player;
 typedef enum Players {ONE,TWO}Players;
 

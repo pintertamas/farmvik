@@ -197,10 +197,13 @@ int buttonEventHandler()
         {
             if (isOver(buy[i]))
             {
+                printf("zzz");
                 return (buttony / (2 * d)) + 1; // visszaadja a vásárolni kívánt termény sorszámát
             }
             else if (isOver(sell[i]))
             {
+                printf("zzz");
+
                 int selltype = ((buttony / (2 * d)) + 1);
 
                 if(selltype == 1 && apple > 0)

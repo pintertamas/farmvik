@@ -12,7 +12,7 @@ void setMousePos(int x, int y)
     my = y;
 }
 
-bool inOver(Element actual){
+bool isOver(Element actual){
     if(mx > actual.x && mx < actual.x + actual.w && my > actual.y && my < actual.y + actual.h)
         return true;
     else
@@ -20,10 +20,15 @@ bool inOver(Element actual){
 }
 
 void setupElements()
-{    
+{
+    printf("%d %d\n", 41 * d, 7 * d - SCREEN_WIDTH / 120);
+    printf("%d %d\n", 3*SCREEN_WIDTH / 4 + 3*d + d / 2, d/5 + SCREEN_WIDTH / 120);
+
+
+
     for(int i=0;i<3;i++) {
         buy[i].x = 41 * d;
-        buy[i].y = 7 * d - SCREEN_WIDTH / 120 + 2 * i * d;
+        buy[i].y = 7 * d - SCREEN_WIDTH / 120;
         buy[i].w = 2 * d;
         buy[i].h = d;
         buy[i].texture = textures[4];
