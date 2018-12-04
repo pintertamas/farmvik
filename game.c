@@ -73,8 +73,6 @@ void scan(Players players)
             {
                 fscanf(data, "%d %d %d %d\n", &fields[i][j].timePlanted, &fields[i][j].age, &fields[i][j].type, &fields[i][j].index);
             }
-
-
         fclose(data);
     } else {
         printf("Error: Could not open the file");
@@ -182,7 +180,7 @@ void handleFields()
                     case et_BUY1:
                     case et_BUY2:
                     case et_BUY3:
-                        bed(&fields[i][j],(PlantType)currentAction);
+                        bed(&fields[i][j],(PlantType)currentAction); // nem változtat semmit az értékén, csak PlantType típusú enumot vár a függvény, ezért átkonvertálom
                         break;
                     case et_HARVEST:
                         break;
