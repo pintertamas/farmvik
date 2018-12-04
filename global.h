@@ -16,6 +16,7 @@
 
 extern int const SCREEN_WIDTH;
 extern int const SCREEN_HEIGHT;
+int d;
 extern int times[6];
 extern bool start;
 bool player;
@@ -33,8 +34,6 @@ extern int potato;
 extern int tomato;
 int buy_price[3];
 int sell_price[3];
-int buttonx;
-int buttony;
 extern double agyas;
 SDL_Event windowEvent;
 SDL_Window *window;

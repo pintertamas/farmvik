@@ -1,11 +1,15 @@
 #include "global.h"
 #include "game.h"
 #include "textures.h"
+#include "elements.h"
 
 int main( int argc, char **argv ) {
 
+    d = SCREEN_WIDTH/50;
+
     init(); // inicializalas
     loadImage(); // kepek betoltese memoriaba
+    setupElements();
     scan(ONE); // adatok beolvasása
 
     bool running = true;

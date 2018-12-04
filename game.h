@@ -13,7 +13,7 @@ void reset();
 int init();
 
 void timePassed();
-int goods();
+int plantnumber();
 int buttonEventHandler();
 void planting();
 

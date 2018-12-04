@@ -72,9 +72,8 @@ void doRender() {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
     // setting up the design
-    int margo = (int) round((double) SCREEN_WIDTH / 50);
     int fejlec = (int) round((double) SCREEN_WIDTH / 10);
-    int buttonh = margo;
+    int buttonh = d;
     int buttonw = (int) round((double) SCREEN_WIDTH / 20);
 
     // logo
@@ -90,30 +89,30 @@ void doRender() {
     // bal oldali kis ikonok és a pénz jobb oldalon
     for(int i=0;i<NUMBER_OF_IMAGES;i++)
     {
-        SDL_Rect icon = { margo, (i+1)*margo , margo, margo };
+        SDL_Rect icon = { d, (i+1)*d , d, d };
         SDL_RenderCopy(renderer, icon_textures[i+1], NULL, &icon);
     }
     // jobb oldalon a pénz ikon
-    SDL_Rect coin = { 3*SCREEN_WIDTH / 4, margo , margo, margo };
+    SDL_Rect coin = { 3*SCREEN_WIDTH / 4, d , d, d };
     SDL_RenderCopy(renderer, icon_textures[0], NULL, &coin);
 
     // ikonok a boltban
     for(int i=0; i<NUMBER_OF_IMAGES; i++)
     {
-        SDL_Rect shop = { 3*SCREEN_WIDTH / 4 + margo, 2*(i+1)*margo + fejlec , SCREEN_WIDTH / 30, SCREEN_WIDTH / 30 };
+        SDL_Rect shop = { 3*SCREEN_WIDTH / 4 + d, 2*(i+1)*d + fejlec , SCREEN_WIDTH / 30, SCREEN_WIDTH / 30 };
         SDL_RenderCopy(renderer, icon_textures[i+1], NULL, &shop);
 
-        SDL_Rect shoprect = { 3*SCREEN_WIDTH / 4 + margo, 2*(i+1)*margo + fejlec , SCREEN_WIDTH / 30, SCREEN_WIDTH / 30 };
+        SDL_Rect shoprect = { 3*SCREEN_WIDTH / 4 + d, 2*(i+1)*d + fejlec , SCREEN_WIDTH / 30, SCREEN_WIDTH / 30 };
         SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
         SDL_RenderDrawRect(renderer, &shoprect);
     }
 
     // a nagy negyzet az egesz cucc kozepen meg a jobb oldali
-    SDL_Rect bigrect = { margo, margo + fejlec, 3*SCREEN_WIDTH / 4 - 2*margo, SCREEN_HEIGHT - 2*margo - fejlec };
+    SDL_Rect bigrect = { d, d + fejlec, 3*SCREEN_WIDTH / 4 - 2*d, SCREEN_HEIGHT - 2*d - fejlec };
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
     SDL_RenderDrawRect(renderer, &bigrect);
 
-    SDL_Rect smallrect = { 3*SCREEN_WIDTH / 4, fejlec + margo, SCREEN_WIDTH / 4 - margo, SCREEN_HEIGHT - fejlec - 2*margo };
+    SDL_Rect smallrect = { 3*SCREEN_WIDTH / 4, fejlec + d, SCREEN_WIDTH / 4 - d, SCREEN_HEIGHT - fejlec - 2*d };
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
     SDL_RenderDrawRect(renderer, &smallrect);
 
@@ -121,28 +120,28 @@ void doRender() {
 
     for(int i=0; i<NUMBER_OF_IMAGES;i++)
     {
-        SDL_Rect rectbuy = { 3*SCREEN_WIDTH / 4 + 3*margo + margo / 2, fejlec + 2*(i+1)*margo + SCREEN_WIDTH / 120, buttonw, buttonh };
+        SDL_Rect rectbuy = { 3*SCREEN_WIDTH / 4 + 3*d + d / 2, fejlec + 2*(i+1)*d + SCREEN_WIDTH / 120, buttonw, buttonh };
         SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
         SDL_RenderCopy(renderer, textures[4], NULL, &rectbuy);
 
-        SDL_Rect rectsell = { 3*SCREEN_WIDTH / 4 + 4*margo + SCREEN_WIDTH / 20 + SCREEN_WIDTH / 100, fejlec + 2*(i+1)*margo + SCREEN_WIDTH / 120, buttonw, buttonh };
+        SDL_Rect rectsell = { 3*SCREEN_WIDTH / 4 + 4*d + SCREEN_WIDTH / 20 + SCREEN_WIDTH / 100, fejlec + 2*(i+1)*d + SCREEN_WIDTH / 120, buttonw, buttonh };
         SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
         SDL_RenderCopy(renderer, textures[5], NULL, &rectsell);
     }
 
-    SDL_Rect harvest = { 3*SCREEN_WIDTH / 4 + 3*margo, fejlec + 9*margo, 2*buttonw, buttonh };
+    SDL_Rect harvest = { 3*SCREEN_WIDTH / 4 + 3*d, fejlec + 9*d, 2*buttonw, buttonh };
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
     SDL_RenderCopy(renderer, textures[8], NULL, &harvest);
 
-    SDL_Rect reset = { 3*SCREEN_WIDTH / 4 + 3*margo, fejlec + 11*margo, 2*margo, 2*margo };
+    SDL_Rect reset = { 3*SCREEN_WIDTH / 4 + 3*d, fejlec + 11*d, 2*d, 2*d };
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
     SDL_RenderCopy(renderer, textures[9], NULL, &reset);
 
-    SDL_Rect change = { 3*SCREEN_WIDTH / 4 + 6*margo, fejlec + 11*margo, 2*margo, 2*margo };
+    SDL_Rect change = { 3*SCREEN_WIDTH / 4 + 6*d, fejlec + 11*d, 2*d, 2*d };
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
     SDL_RenderCopy(renderer, textures[10], NULL, &change);
 
-    SDL_Rect destroy = { 3*SCREEN_WIDTH / 4 + 3*margo, fejlec + 14*margo, 5*margo, 2*margo };
+    SDL_Rect destroy = { 3*SCREEN_WIDTH / 4 + 3*d, fejlec + 14*d, 5*d, 2*d };
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
     SDL_RenderCopy(renderer, textures[11], NULL, &destroy);
 }
@@ -184,36 +183,36 @@ void score()
     SDL_Texture *moneytxt;
     balance = TTF_RenderText_Solid(font, moneybuffer, black);
     moneytxt = SDL_CreateTextureFromSurface(renderer, balance);
-    SDL_Rect moneybox = { 3*SCREEN_WIDTH / 4 + 2*SCREEN_WIDTH / 50, SCREEN_WIDTH / 50 , digit(money)*charwidth + 5*charwidth, SCREEN_WIDTH / 50 };
+    SDL_Rect moneybox = { 3*SCREEN_WIDTH / 4 + 2*d, d , digit(money)*charwidth + 5*charwidth, d };
     SDL_RenderCopy(renderer, moneytxt, NULL, &moneybox);
     SDL_FreeSurface(balance);
 
     SDL_Texture *appletxt;
     balance = TTF_RenderText_Solid(font, applebuffer, black);
     appletxt = SDL_CreateTextureFromSurface(renderer, balance);
-    SDL_Rect applebox = { 2*SCREEN_WIDTH / 50, SCREEN_WIDTH / 50 , digit(apple)*charwidth, SCREEN_WIDTH / 50 };
+    SDL_Rect applebox = { 2*d, d , digit(apple)*charwidth, d };
     SDL_RenderCopy(renderer, appletxt, NULL, &applebox);
     SDL_FreeSurface(balance);
 
     SDL_Texture *potatotxt;
     balance = TTF_RenderText_Solid(font, potatobuffer, black);
     potatotxt = SDL_CreateTextureFromSurface(renderer, balance);
-    SDL_Rect potatobox = { 2*SCREEN_WIDTH / 50, 2*SCREEN_WIDTH / 50 , digit(potato)*charwidth, SCREEN_WIDTH / 50 };
+    SDL_Rect potatobox = { 2*d, 2*d , digit(potato)*charwidth, d };
     SDL_RenderCopy(renderer, potatotxt, NULL, &potatobox);
     SDL_FreeSurface(balance);
 
     SDL_Texture *tomatotxt;
     balance = TTF_RenderText_Solid(font, tomatobuffer, black);
     tomatotxt = SDL_CreateTextureFromSurface(renderer, balance);
-    SDL_Rect tomatobox = { 2*SCREEN_WIDTH / 50, 3*SCREEN_WIDTH / 50 , digit(tomato)*charwidth, SCREEN_WIDTH / 50 };
+    SDL_Rect tomatobox = { 2*d, 3*d , digit(tomato)*charwidth, d };
     SDL_RenderCopy(renderer, tomatotxt, NULL, &tomatobox);
     SDL_FreeSurface(balance);
 }
 
 void bed(int x, int y, int i, int t)
 {
-    int d = (int)(agyas*SCREEN_WIDTH);
-    SDL_Rect rect = { x, y, d, d };
+    int n = (int)(agyas*SCREEN_WIDTH);
+    SDL_Rect rect = { x, y, n, n };
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
 
     switch(t)
@@ -241,7 +240,7 @@ void bed(int x, int y, int i, int t)
 
 void renderState()
 {
-    int d = (int)(agyas*SCREEN_WIDTH);
+    int n = (int)(agyas*SCREEN_WIDTH);
 
     for(int i=0;i<6;i++)
     {
@@ -249,13 +248,13 @@ void renderState()
         {
             int x;
             int y;
-            x = 2 * SCREEN_WIDTH / 50;
-            y = 7 * SCREEN_WIDTH / 50 + i * d;
+            x = 2 * d;
+            y = 7 * d + i * n;
             bed(x, y, hely[i].type - 1, hely[i].size);
         } else
         {
-            int x = 2*SCREEN_WIDTH / 50 + d;
-            int y = 7*SCREEN_WIDTH / 50 + (i - 3)*d;
+            int x = 2*d + n;
+            int y = 7*d + (i - 3)*n;
             bed(x, y, hely[i].type - 1, hely[i].size);
         }
     }

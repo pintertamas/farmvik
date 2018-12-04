@@ -6,6 +6,7 @@
 #include "game.h"
 #include "global.h"
 #include "textures.h"
+#include "elements.h"
 
 int init() {
 
@@ -48,68 +49,46 @@ int init() {
 
 void scan(Players players)
 {
-    FILE* data;
+    FILE* data = NULL;
 
-    if(players == ONE)
-    {
+    if(players == ONE) {
         data = fopen("gameData.txt", "r");
-    }
-    else if(players == TWO)
-    {
+    } else if(players == TWO) {
         data = fopen("gameDataPlayer2.txt", "r");
     }
 
-    for(int i=0;i<6;i++)
-        fscanf(data, "%d %d\n", &hely[i].type, &hely[i].size);
-
-    for(int i=0;i<6;i++)
-        fscanf(data, "%d ",  &times[i]);
-
-    fscanf(data, "%d\n%d %d %d", &money, &apple, &potato, &tomato);
-
-    for(int i=0;i<6;i++)
-    {
-        //printf("%d %d\n", hely[i].type, hely[i].size);
-    }
-
     if (data != NULL) {
-        // type (pl ha 1, akkor alma)
-        // size: azt jelzi, hogy az ott lévő termény mekkora (0-4 kozott)
-        // ures - mag - csira - nagy - rohadt
+        for(int i=0;i<6;i++)
+            fscanf(data, "%d %d\n", &hely[i].type, &hely[i].size);
 
+        for(int i=0;i<6;i++)
+            fscanf(data, "%d ", &times[i]);
+
+        fscanf(data, "%d\n%d %d %d", &money, &apple, &potato, &tomato);
         fclose(data);
-    } else{
+    } else {
         printf("Error: Could not open the file");
     }
 }
 
 void send(Players players)
 {
-    FILE* data;
+    FILE* data = NULL;
 
     if(players == ONE)
-    {
         data = fopen("gameData.txt", "w");
-    }
     else if(players == TWO)
-    {
         data = fopen("gameDataPlayer2.txt", "w");
-    }
 
-    for(int i=0;i<6;i++)
-    {
-        fprintf(data, "%d %d\n", hely[i].type, hely[i].size);
-    }
-    for(int i=0;i<6;i++)
-    {
-        fprintf(data, "%d ",  times[i]);
-    }
-    fprintf(data, "\n%d\n%d %d %d", money, apple, potato, tomato);
-    fclose(data);
-
-    for(int i=0;i<6;i++)
-    {
-        //printf("%d %d\n", hely[i].type, hely[i].size);
+    if(data != NULL) {
+        for(int i=0;i<6;i++)
+            fprintf(data, "%d %d\n", hely[i].type, hely[i].size);
+        for(int i=0;i<6;i++)
+            fprintf(data, "%d ",  times[i]);
+        fprintf(data, "\n%d\n%d %d %d", money, apple, potato, tomato);
+        fclose(data);
+    } else {
+        printf("Error: Could not open the file");
     }
 }
 
@@ -136,10 +115,12 @@ void reset()
     }
 }
 
-int goods()
+int plantnumber()
 {
     bool click = false;
-    int d = (int)(agyas*SCREEN_WIDTH);
+    int n = (int)(agyas*SCREEN_WIDTH);
+    int buttonx = -1;
+    int buttony = -1;
     SDL_WaitEvent(&clickevent);
 
     switch(clickevent.type)
@@ -166,24 +147,25 @@ int goods()
 
     if(click == true)
     {
-        if(buttonx > 0 && buttonx < d && buttony > 0 && buttony < 3*d)
+        if(buttonx > 0 && buttonx < n && buttony > 0 && buttony < 3*n)
         {
-            return (buttony / d) + 1;
+            return (buttony / n) + 1;
         }
-        else if(buttonx > d && buttonx < 2*d && buttony > 0 && buttony < 3*d)
+        else if(buttonx > n && buttonx < 2*n && buttony > 0 && buttony < 3*n)
         {
-            return (buttony / d) + 4;
+            return (buttony / n) + 4;
         }
     }
-    goods();
+    plantnumber();
 }
 
 int buttonEventHandler()
 {
-    int BUTTON_HEIGHT = SCREEN_WIDTH / 50; // a gombok mérete, létrehozáskor buttonw és buttonh volt a nevük, csak név ütközés miatt most máshogy nevezem el.
+    int BUTTON_HEIGHT = d; // a gombok mérete, létrehozáskor buttonw és buttonh volt a nevük, csak név ütközés miatt most máshogy nevezem el.
     int BUTTON_WIDTH = (int)round((double)SCREEN_WIDTH / 20);
-    int d = BUTTON_HEIGHT;
     bool click = false;
+    int buttonx = -1;
+    int buttony = -1;
     SDL_WaitEvent(&clickevent);
 
     switch(clickevent.type)
@@ -194,8 +176,9 @@ int buttonEventHandler()
 
                 if(clickevent.button.x != -1 && clickevent.button.y != -1)
                 {
-                    buttonx = clickevent.button.x - 41*SCREEN_WIDTH / 50;
-                    buttony = clickevent.button.y - 7*SCREEN_WIDTH / 50 - SCREEN_WIDTH / 120;
+                    buttonx = clickevent.button.x;
+                    buttony = clickevent.button.y;
+                    setMousePos(clickevent.button.x, clickevent.button.y);
                 }
             }
             break;
@@ -210,47 +193,40 @@ int buttonEventHandler()
 
     if(click == true)
     {
-        if(buttonx > 0 && buttonx < 2*BUTTON_WIDTH + SCREEN_WIDTH / 50 && buttony > 0 && buttony < SCREEN_WIDTH / 10)
+        for(int i=0; i<3;i++)
         {
-            for(int i=0; i<3;i++)
+            if (isOver(buy[i]))
             {
-                if (0 <= buttonx && buttonx <= BUTTON_WIDTH && (i * 2 * d) <= buttony && buttony <= d + (i * 2 * d)) {
-                        return (buttony / (2 * d)) + 1; // visszaadja a vásárolni kívánt termény sorszámát
-                    }
+                return (buttony / (2 * d)) + 1; // visszaadja a vásárolni kívánt termény sorszámát
+            }
+            else if (isOver(sell[i]))
+            {
+                int selltype = ((buttony / (2 * d)) + 1);
 
-                else if ((BUTTON_WIDTH + d) <= buttonx && buttonx <= (BUTTON_WIDTH + d) + BUTTON_WIDTH && (i * 2 * d) <= buttony && buttony <= d + (i * 2 * d))
-                    {
+                if(selltype == 1 && apple > 0)
+                {
+                    money += apple * sell_price[selltype - 1];
+                    apple = 0;
+                }
+                else if(selltype == 2 && potato > 0)
+                {
+                    money += potato * sell_price[selltype - 1];
+                    potato = 0;
+                }
+                else if(selltype == 3 && tomato > 0)
+                {
+                    money += tomato * sell_price[selltype - 1];
+                    tomato = 0;
+                }
 
-                        int selltype = ((buttony / (2 * d)) + 1);
-
-                        if(selltype == 1 && apple > 0)
-                        {
-                            money += apple * sell_price[selltype - 1];
-                            apple = 0;
-                        }
-                        else if(selltype == 2 && potato > 0)
-                        {
-                            money += potato * sell_price[selltype - 1];
-                            potato = 0;
-                        }
-                        else if(selltype == 3 && tomato > 0)
-                        {
-                            money += tomato * sell_price[selltype - 1];
-                            tomato = 0;
-                        }
-
-                        return (buttony / (2 * d)) + 4; // visszaadja a vásárolni kívánt termény sorszámát
-                    }
+                return (buttony / (2 * d)) + 4; // visszaadja a vásárolni kívánt termény sorszámát
             }
         }
-
-        buttonx = clickevent.button.x;
-        buttony = clickevent.button.y;
-
-        if(buttonx > 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 && buttonx < 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 + 2*SCREEN_WIDTH / 50 && buttony > SCREEN_WIDTH / 10 + 11*SCREEN_WIDTH / 50 && buttony < SCREEN_WIDTH / 10 + 11*SCREEN_WIDTH / 50 + 2*SCREEN_WIDTH / 50)
+        if(isOver(resetButton))
         {
             reset();
-        } else if(buttonx > 3*SCREEN_WIDTH / 4 + 6*SCREEN_WIDTH / 50 && buttonx > 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 + 2*SCREEN_WIDTH / 50 && buttony > SCREEN_WIDTH / 10 + 11*SCREEN_WIDTH / 50 && buttony < SCREEN_WIDTH / 10 + 11*SCREEN_WIDTH / 50 + 2*SCREEN_WIDTH / 50)
+        }
+        else if(isOver(change))
         {
             if(player == true)
             {
@@ -266,13 +242,13 @@ int buttonEventHandler()
             }
         }
 
-        else if(buttonx > 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 && buttonx < SCREEN_WIDTH - 2*SCREEN_WIDTH / 50 && buttony > SCREEN_WIDTH / 10 + 9*SCREEN_WIDTH / 50 && buttony < SCREEN_WIDTH / 10 + 9*SCREEN_WIDTH / 50 + BUTTON_HEIGHT)
+        else if(isOver(harvest))
         {
-            return 13; // ez azt jelenti, hogy a játékos aratni szeretne
+            //return 13;
         }
-        else if( buttonx > 3*SCREEN_WIDTH / 4 + 3*SCREEN_WIDTH / 50 && buttonx < 3*SCREEN_WIDTH / 4 + 8*SCREEN_WIDTH / 50 && buttony > SCREEN_WIDTH / 10 + 14*SCREEN_WIDTH / 50 && buttony < SCREEN_WIDTH / 10 + 16*SCREEN_WIDTH / 50)
+        else if(isOver(destroy))
         {
-            return 14;
+            //return 14;
         }
     }
     return -1;
@@ -295,7 +271,7 @@ void planting()
             return;
         }
 
-        int sorszam = goods();
+        int sorszam = plantnumber();
 
         if(hely[sorszam-1].size == 0)
         {
@@ -308,7 +284,7 @@ void planting()
     }
     else if( i == 13 )
     {
-        int sorszam = goods();
+        int sorszam = plantnumber();
         if(hely[sorszam-1].size == 3)
         {
             //money += sell_price[hely[sorszam-1].type-1];
@@ -340,7 +316,7 @@ void planting()
             return;
         }
         money -= 5000;
-        int sorszam = goods();
+        int sorszam = plantnumber();
         hely[sorszam-1].size = 0;
         hely[sorszam-1].type = 0;
         times[sorszam-1] = 0;
