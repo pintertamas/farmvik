@@ -73,8 +73,6 @@ void scan(Players players)
             {
                 fscanf(data, "%d %d %d %d\n", &fields[i][j].timePlanted, &fields[i][j].age, &fields[i][j].type, &fields[i][j].index);
             }
-
-
         fclose(data);
     } else {
         printf("Error: Could not open the file");
