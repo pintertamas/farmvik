@@ -11,12 +11,14 @@
 typedef enum ElementType{
     SELL1, SELL2, SELL3,
     BUY1, BUY2, BUY3,
+    et_HARVEST, et_RESET, et_CHANGE, et_DESTROY, et_MOVE,
     STATIC
 }ElementType;
 
 typedef struct Element{
     int x, y;
     int w, h;
+    ElementType e_type;
     textureIndex index;
 }Element;
 

@@ -21,18 +21,21 @@ void setupElements()
         buy[i].y = fejlec + 2*(i+1)*d + SCREEN_WIDTH / 120;
         buy[i].w = 2*d;
         buy[i].h = d;
+        buy[i].e_type = BUY1 + i;
         buy[i].index = BUY;
 
         sell[i].x = 3*SCREEN_WIDTH / 4 + 4*d + SCREEN_WIDTH / 20 + SCREEN_WIDTH / 100;
         sell[i].y = fejlec + 2*(i+1)*d + SCREEN_WIDTH / 120;
         sell[i].w = 2*d;
         sell[i].h = d;
+        sell[i].e_type = SELL1 + i;
         sell[i].index = SELL;
 
         goods[i].x =  3*SCREEN_WIDTH / 4 + d;
         goods[i].y = 2*(i+1)*d + SCREEN_WIDTH / 10;
         goods[i].w = SCREEN_WIDTH / 30;
         goods[i].h = SCREEN_WIDTH / 30;
+        goods[i].e_type = STATIC;
         goods[i].index = APPLE+i;
     }
 
@@ -41,6 +44,7 @@ void setupElements()
     harvest.y = fejlec + 9*d;
     harvest.w = 5*d;
     harvest.h = 2*d;
+    harvest.e_type = et_HARVEST;
     harvest.index = HARVEST;
 
     //reset button
@@ -48,6 +52,7 @@ void setupElements()
     resetButton.y = fejlec + 12*d;
     resetButton.w = 2*d;
     resetButton.h = 2*d;
+    resetButton.e_type = et_RESET;
     resetButton.index = RESET;
 
     //change button
@@ -55,6 +60,7 @@ void setupElements()
     change.y = fejlec + 12*d;
     change.w = 2*d;
     change.h = 2*d;
+    change.e_type = et_CHANGE;
     change.index = CHANGE;
 
     //destroy button
@@ -62,6 +68,7 @@ void setupElements()
     destroy.y = fejlec + 15*d;
     destroy.w = 5*d;
     destroy.h = 2*d;
+    destroy.e_type = et_DESTROY;
     destroy.index = DESTROY;
 }
 

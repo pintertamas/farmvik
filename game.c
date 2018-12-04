@@ -7,6 +7,10 @@
 #include "global.h"
 #include "textures.h"
 #include "elements.h"
+#include "fields.h"
+
+ElementType currentAction = false;
+PlantType   currentPlant  = t_APPLE;
 
 int init() {
 
@@ -148,72 +152,66 @@ int plantnumber()
 
 int buttonEventHandler()
 {
-    int BUTTON_HEIGHT = d; // a gombok mérete, létrehozáskor buttonw és buttonh volt a nevük, csak név ütközés miatt most máshogy nevezem el.
-    int BUTTON_WIDTH = (int)round((double)SCREEN_WIDTH / 20);
-    bool click = false;
-    mouseY = -1;
     SDL_WaitEvent(&clickevent);
+    if(clickevent.type == SDL_MOUSEBUTTONDOWN) {
+        if (clickevent.button.button == SDL_BUTTON_LEFT) {
 
-    switch(clickevent.type)
-    {
-        case SDL_MOUSEBUTTONDOWN:
-            if (clickevent.button.button == SDL_BUTTON_LEFT) {
-                click = true;
+            if(clickevent.button.x != -1 && clickevent.button.y != -1) {
+                mouseX = clickevent.button.x;
+                mouseY = clickevent.button.y;
+            }
 
-                if(clickevent.button.x != -1 && clickevent.button.y != -1) {
-                    mouseX = clickevent.button.x;
-                    mouseY = clickevent.button.y;
+            for(int i=0; i<3;i++) {
+                if( isOverElement(buy[i])) {
+                    currentAction = BUY1 + i;
+                    currentPlant  = t_APPLE + i;
+                } else if( isOverElement(sell[i])) {
+                    switch(sell[i].e_type) {
+                        case SELL1:
+                            if(apple > 0) {
+                                money += apple * sell_price[sell[i].e_type - SELL1];
+                                apple = 0;
+                            }
+                            break;
+                        case SELL2:
+                            if(potato > 0) {
+                                money += potato * sell_price[sell[i].e_type - SELL1];
+                                potato = 0;
+                            }
+                            break;
+                        case SELL3:
+                            if(tomato > 0) {
+                                money += tomato * sell_price[sell[i].e_type - SELL1];
+                                tomato = 0;
+                            }
+                            break;
+                        default:
+                            printf("Error in isOver sell!");
+                            break;
+                    }
                 }
             }
-            break;
-        case SDL_MOUSEBUTTONUP:
-            if (clickevent.button.button == SDL_BUTTON_LEFT)
-                click = false;
-            break;
-        default:
-            break;
-    }
-
-    if(click == true)
-    {
-        for(int i=0; i<3;i++) {
-            if( isOverElement(buy[i])) {
-                return (mouseY / (2 * d)) + 1; // visszaadja a vásárolni kívánt termény sorszámát
-            } else if( isOverElement(sell[i])) {
-                int selltype = ((mouseY / (2 * d)) + 1);
-
-                if( selltype == 1 && apple > 0 ) {
-                    money += apple * sell_price[selltype - 1];
-                    apple = 0;
-                } else if( selltype == 2 && potato > 0 ) {
-                    money += potato * sell_price[selltype - 1];
-                    potato = 0;
-                } else if( selltype == 3 && tomato > 0 ) {
-                    money += tomato * sell_price[selltype - 1];
-                    tomato = 0;
+            if(isOverElement(resetButton)) {
+                currentAction = et_RESET;
+                reset();
+            } else if(isOverElement(change)) {
+                currentAction = et_CHANGE;
+                if(player == true) {
+                    scan(TWO);
+                    send(TWO);
+                    player = false;
+                } else {
+                    scan(ONE);
+                    send(ONE);
+                    player = true;
                 }
-                return (mouseY / (2 * d)) + 4; // visszaadja a vásárolni kívánt termény sorszámát
+            } else if(isOverElement(harvest)) {
+                currentAction = et_HARVEST;
+            } else if(isOverElement(destroy)) {
+                currentAction = et_DESTROY;
             }
-        }
-        if( isOverElement(resetButton)) {
-            reset();
-        } else if( isOverElement(change)) {
-            if(player == true) {
-                scan(TWO);
-                send(TWO);
-                player = false;
-            } else {
-                scan(ONE);
-                send(ONE);
-                player = true;
-            }
-        } else if( isOverElement(harvest)) {
-            //return 13;
-        } else if( isOverElement(destroy)) {
-            //return 14;
         }
     }
-    return -1;
 }
 
 void planting()

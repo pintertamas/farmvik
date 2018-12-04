@@ -3,14 +3,14 @@
 //
 
 #include "global.h"
-#include "Fields.h"
+#include "fields.h"
 
 Field **fields = NULL;
 int rows, columns;
 
 void setupFields(int row, int column)
 {
-    fields = (Field**)malloc(row*sizeof(Field));
+    fields = (Field**)malloc(row*sizeof(Field*));
     if(fields != NULL) {
         for(int i=0;i<row;i++)
             fields[i] = (Field*)malloc(column*sizeof(Field));

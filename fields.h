@@ -19,6 +19,11 @@ typedef struct Field{
     textureIndex index;
 }Field;
 
+void setupFields(int row, int column);
+bool isOverField(Field actual);
+void bed(Field *field, PlantType type);
+void growFields();
 void renderFields();
+void freeFields();
 
 #endif //FARMVILLE2_FIELDS_H
