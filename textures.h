@@ -16,7 +16,7 @@ typedef enum textureIndex{
     N_ALMA, N_KRUMPLI, N_PARADICSOM
 }textureIndex;
 
-SDL_Texture *textures[25];
+SDL_Texture *textures[26];
 SDL_Surface *balance;
 TTF_Font *font;
 

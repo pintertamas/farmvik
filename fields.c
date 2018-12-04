@@ -93,8 +93,8 @@ void growField(Field *field)
 
 void growFields()
 {
-    for(int i=0;i<rows;i++) {
-        for(int j=0;j<columns;j++) {
+    for(int i=0;i<columns;i++) {
+        for(int j=0;j<rows;j++) {
             growField(&fields[i][j]);
             switch(fields[i][j].age) {
                 case a_PLAIN:
@@ -129,14 +129,14 @@ void renderField(Field field)
 
 void renderFields()
 {
-    for(int i=0;i<rows;i++)
-        for(int j=0;j<columns;j++)
+    for(int i=0;i<columns;i++)
+        for(int j=0;j<rows;j++)
             renderField(fields[i][j]);
 }
 
 void freeFields()
 {
-    for(int i=0;i<rows;i++)
+    for(int i=0;i<columns;i++)
         free(fields[i]);
     free(fields);
 }

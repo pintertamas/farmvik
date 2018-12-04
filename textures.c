@@ -3,8 +3,6 @@
 //
 
 #include "textures.h"
-#include "global.h"
-#include "game.h"
 
 // initializing pictures
 SDL_Texture *loadTexture(char *path)
@@ -45,23 +43,24 @@ void loadImage() // ÚJABB KÉP FELTÖLTÉSE UTÁN A TÖMB MÉRETÉT IS NÖVELNI
     textures[8] = loadTexture("Textures/reset.png");
     textures[9] = loadTexture("Textures/gpsw.png");
     textures[10] = loadTexture("Textures/destroy.png");
+    textures[11] = loadTexture("Textures/move.png");
 
-    textures[11] = loadTexture("Textures/coin.png");
-    textures[12] = loadTexture("Textures/apple.png");
-    textures[13] = loadTexture("Textures/potato.png");
-    textures[14] = loadTexture("Textures/tomato.png");
+    textures[12] = loadTexture("Textures/coin.png");
+    textures[13] = loadTexture("Textures/apple.png");
+    textures[14] = loadTexture("Textures/potato.png");
+    textures[15] = loadTexture("Textures/tomato.png");
 
-    textures[15] = loadTexture("Textures/alma_mag.png");
-    textures[16] = loadTexture("Textures/krumpli_mag.png");
-    textures[17] = loadTexture("Textures/paradicsom_mag.png");
+    textures[16] = loadTexture("Textures/alma_mag.png");
+    textures[17] = loadTexture("Textures/krumpli_mag.png");
+    textures[18] = loadTexture("Textures/paradicsom_mag.png");
 
-    textures[18] = loadTexture("Textures/alma_csira.png");
-    textures[19] = loadTexture("Textures/krumpli_csira.png");
-    textures[20] = loadTexture("Textures/paradicsom_csira.png"); // kellene valami rendes grafika ehhez is, mert ez így tré
+    textures[19] = loadTexture("Textures/alma_csira.png");
+    textures[20] = loadTexture("Textures/krumpli_csira.png");
+    textures[21] = loadTexture("Textures/paradicsom_csira.png"); // kellene valami rendes grafika ehhez is, mert ez így tré
 
-    textures[21] = loadTexture("Textures/alma_nagy.png");
-    textures[22] = loadTexture("Textures/krumpli_nagy.png");
-    textures[23] = loadTexture("Textures/paradicsom_nagy.png");
+    textures[22] = loadTexture("Textures/alma_nagy.png");
+    textures[23] = loadTexture("Textures/krumpli_nagy.png");
+    textures[24] = loadTexture("Textures/paradicsom_nagy.png");
 }
 
 

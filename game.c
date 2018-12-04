@@ -64,12 +64,12 @@ void scan(Players players)
 
         fscanf(data, "%d %d %d %d", &money, &apple, &potato, &tomato);
 
-        int row, column;
-        fscanf(data, "%d %d\n", &row, &column);
-        setupFields(row, column);
+        int column, row;
+        fscanf(data, "%d %d\n", &column, &row);
+        setupFields(column, row);
 
-        for(int i=0;i<rows;i++)
-            for(int j=0;j<columns;j++)
+        for(int i=0;i<columns;i++)
+            for(int j=0;j<rows;j++)
             {
                 fscanf(data, "%d %d %d %d\n", &fields[i][j].timePlanted, &fields[i][j].age, &fields[i][j].type, &fields[i][j].index);
             }

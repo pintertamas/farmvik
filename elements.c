@@ -105,4 +105,5 @@ void renderElements()
     renderElement(resetButton);
     renderElement(change);
     renderElement(destroy);
+    renderElement(move);
 }

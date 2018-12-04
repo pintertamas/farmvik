@@ -17,20 +17,6 @@ int main( int argc, char **argv ) {
 
     while( running )
     {
-        eventHandler();
-        growFields();
-
-        SDL_RenderClear(renderer);
-
-        background();
-        doRender(); // renderelek mindent
-        renderElements();
-        renderFields();
-        score(); // a pénz és a takarmányok kiírasa
-        //timePassed();
-
-
-        SDL_RenderPresent(renderer);
         SDL_Event windowEvent;
         while( SDL_PollEvent( &windowEvent ) != 0 )
         {
@@ -44,6 +30,19 @@ int main( int argc, char **argv ) {
                 break;
             }
         }
+
+        eventHandler();
+        growFields();
+
+        SDL_RenderClear(renderer);
+
+        background();
+        doRender(); // renderelek mindent
+        renderElements();
+        renderFields();
+        score(); // a pénz és a takarmányok kiírasa
+
+        SDL_RenderPresent(renderer);
     }
 
     freeFields();
