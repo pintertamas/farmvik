@@ -3,6 +3,7 @@
 //
 
 #include "elements.h"
+#include "textures.h"
 
 int mx, my;
 

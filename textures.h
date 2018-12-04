@@ -7,6 +7,13 @@
 
 #include "global.h"
 
+SDL_Texture *textures[12];
+SDL_Texture *icon_textures[4];
+SDL_Texture *mag_textures[3];
+SDL_Texture *csira_textures[3];
+SDL_Texture *nagy_textures[3];
+SDL_Surface *balance;
+TTF_Font *font;
 SDL_Texture *loadTexture(char *path);
 void loadImage();
 void background();

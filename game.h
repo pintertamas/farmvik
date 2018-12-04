@@ -7,6 +7,7 @@
 
 #include "global.h"
 
+SDL_Window *window;
 void scan(Players players);
 void send(Players players);
 void reset();
