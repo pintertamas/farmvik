@@ -70,6 +70,13 @@ void setupElements()
     destroy.h = 2*d;
     destroy.e_type = et_DESTROY;
     destroy.index = DESTROY;
+
+    //move button
+    move.x = 3*SCREEN_WIDTH / 4 + 3*d;
+    move.y = fejlec + 18*d;
+    move.w = 5*d;
+    move.h = 5*d;
+    move.index = MOVE;
 }
 
 void renderElement(Element element)

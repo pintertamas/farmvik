@@ -12,8 +12,6 @@ int main( int argc, char **argv ) {
     loadImage(); // kepek betoltese memoriaba
     setupElements();
     scan(ONE); // adatok beolvasása
-    setupFields(1,3);
-
 
     bool running = true;
 
@@ -29,11 +27,10 @@ int main( int argc, char **argv ) {
         renderElements();
         renderFields();
         score(); // a pénz és a takarmányok kiírasa
-        timePassed();
+        //timePassed();
 
 
         SDL_RenderPresent(renderer);
-        //SDL_Delay(10); // fps problémák miatt
         SDL_Event windowEvent;
         while( SDL_PollEvent( &windowEvent ) != 0 )
         {
