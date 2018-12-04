@@ -6,6 +6,7 @@
 #define FARMVILLE2_ELEMENTS_H
 
 #include "global.h"
+#include "textures.h"
 
 typedef enum ElementType{
     SELL1, SELL2, SELL3,
@@ -16,7 +17,7 @@ typedef enum ElementType{
 typedef struct Element{
     int x, y;
     int w, h;
-    SDL_Texture *texture;
+    textureIndex index;
 }Element;
 
 Element buy[3];
@@ -32,5 +33,6 @@ Element **cells;
 void setMousePos(int x, int y);
 bool isOver(Element actual);
 void setupElements();
+void renderElements();
 
 #endif //FARMVILLE2_ELEMENTS_H

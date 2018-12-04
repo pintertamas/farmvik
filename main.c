@@ -21,6 +21,7 @@ int main( int argc, char **argv ) {
         background();
         renderState();
         doRender(); // renderelek mindent
+        renderElements();
         score(); // a pénz és a takarmányok kiírasa
         planting(); // mit es hova akarok ultetni?
         timePassed();

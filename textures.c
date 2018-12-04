@@ -27,37 +27,43 @@ SDL_Texture *loadTexture(char *path)
     return texture;
 }
 
+SDL_Texture* getElementTexture(textureIndex index)
+{
+    return textures[index];
+}
+
 void loadImage() // ÚJABB KÉP FELTÖLTÉSE UTÁN A TÖMB MÉRETÉT IS NÖVELNI KELL A global.h-BAN ÉS A global.c-BEN IS!
 {
     textures[0] = loadTexture("Textures/logo_300x300.png");
     textures[1] = loadTexture("Textures/logo_bal.png");
     textures[2] = loadTexture("Textures/logo_jobb.png");
-    textures[4] = loadTexture("Textures/buy.png");
-    textures[5] = loadTexture("Textures/sell.png");
-    textures[6] = loadTexture("Textures/dirt.png");
-    textures[7] = loadTexture("Textures/tombstone.png");
-    textures[8] = loadTexture("Textures/harvest.png");
-    textures[9] = loadTexture("Textures/reset.png");
-    textures[10] = loadTexture("Textures/gpsw.png");
-    textures[11] = loadTexture("Textures/destroy.png");
+    textures[3] = loadTexture("Textures/buy.png");
+    textures[4] = loadTexture("Textures/sell.png");
+    textures[5] = loadTexture("Textures/dirt.png");
+    textures[6] = loadTexture("Textures/tombstone.png");
+    textures[7] = loadTexture("Textures/harvest.png");
+    textures[8] = loadTexture("Textures/reset.png");
+    textures[9] = loadTexture("Textures/gpsw.png");
+    textures[10] = loadTexture("Textures/destroy.png");
 
-    icon_textures[0] = loadTexture("Textures/coin.png");
-    icon_textures[1] = loadTexture("Textures/apple.png");
-    icon_textures[2] = loadTexture("Textures/potato.png");
-    icon_textures[3] = loadTexture("Textures/tomato.png");
+    textures[11] = loadTexture("Textures/coin.png");
+    textures[12] = loadTexture("Textures/apple.png");
+    textures[13] = loadTexture("Textures/potato.png");
+    textures[14] = loadTexture("Textures/tomato.png");
 
-    mag_textures[0] = loadTexture("Textures/alma_mag.png");
-    mag_textures[1] = loadTexture("Textures/krumpli_mag.png");
-    mag_textures[2] = loadTexture("Textures/paradicsom_mag.png");
+    textures[15] = loadTexture("Textures/alma_mag.png");
+    textures[16] = loadTexture("Textures/krumpli_mag.png");
+    textures[17] = loadTexture("Textures/paradicsom_mag.png");
 
-    csira_textures[0] = loadTexture("Textures/alma_csira.png");
-    csira_textures[1] = loadTexture("Textures/krumpli_csira.png");
-    csira_textures[2] = loadTexture("Textures/paradicsom_csira.png"); // kellene valami rendes grafika ehhez is, mert ez így tré
+    textures[18] = loadTexture("Textures/alma_csira.png");
+    textures[19] = loadTexture("Textures/krumpli_csira.png");
+    textures[20] = loadTexture("Textures/paradicsom_csira.png"); // kellene valami rendes grafika ehhez is, mert ez így tré
 
-    nagy_textures[0] = loadTexture("Textures/alma_nagy.png");
-    nagy_textures[1] = loadTexture("Textures/krumpli_nagy.png");
-    nagy_textures[2] = loadTexture("Textures/paradicsom_nagy.png");
+    textures[21] = loadTexture("Textures/alma_nagy.png");
+    textures[22] = loadTexture("Textures/krumpli_nagy.png");
+    textures[23] = loadTexture("Textures/paradicsom_nagy.png");
 }
+
 
 void background()
 {
@@ -73,8 +79,6 @@ void doRender() {
 
     // setting up the design
     int fejlec = (int) round((double) SCREEN_WIDTH / 10);
-    int buttonh = d;
-    int buttonw = 2*d;
 
     // logo
     SDL_Rect logo = {SCREEN_WIDTH / 2 - SCREEN_WIDTH / 20, 0, fejlec, fejlec};
@@ -115,34 +119,6 @@ void doRender() {
     SDL_Rect smallrect = { 3*SCREEN_WIDTH / 4, fejlec + d, SCREEN_WIDTH / 4 - d, SCREEN_HEIGHT - fejlec - 2*d };
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
     SDL_RenderDrawRect(renderer, &smallrect);
-
-    // gombok grafikus megjelenitese
-    for(int i=0; i<NUMBER_OF_IMAGES;i++)
-    {
-        SDL_Rect rectbuy = { 3*SCREEN_WIDTH / 4 + 3*d + d / 2, fejlec + 2*(i+1)*d + SCREEN_WIDTH / 120, buttonw, buttonh };
-        SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-        SDL_RenderCopy(renderer, textures[4], NULL, &rectbuy);
-
-        SDL_Rect rectsell = { 3*SCREEN_WIDTH / 4 + 4*d + SCREEN_WIDTH / 20 + SCREEN_WIDTH / 100, fejlec + 2*(i+1)*d + SCREEN_WIDTH / 120, buttonw, buttonh };
-        SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-        SDL_RenderCopy(renderer, textures[5], NULL, &rectsell);
-    }
-
-    SDL_Rect harvest = { 3*SCREEN_WIDTH / 4 + 3*d, fejlec + 9*d, 2*buttonw, buttonh };
-    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-    SDL_RenderCopy(renderer, textures[8], NULL, &harvest);
-
-    SDL_Rect reset = { 3*SCREEN_WIDTH / 4 + 3*d, fejlec + 11*d, 2*d, 2*d };
-    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-    SDL_RenderCopy(renderer, textures[9], NULL, &reset);
-
-    SDL_Rect change = { 3*SCREEN_WIDTH / 4 + 6*d, fejlec + 11*d, 2*d, 2*d };
-    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-    SDL_RenderCopy(renderer, textures[10], NULL, &change);
-
-    SDL_Rect destroy = { 3*SCREEN_WIDTH / 4 + 3*d, fejlec + 14*d, 5*d, 2*d };
-    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-    SDL_RenderCopy(renderer, textures[11], NULL, &destroy);
 }
 
 int digit(int num)
@@ -217,22 +193,22 @@ void bed(int x, int y, int i, int t)
     switch(t)
     {
         case 0:
-            SDL_RenderCopy(renderer, textures[6], NULL, &rect);
+            SDL_RenderCopy(renderer, textures[DIRT], NULL, &rect);
             break;
         case 1:
-            SDL_RenderCopy(renderer, mag_textures[i], NULL, &rect);
+            SDL_RenderCopy(renderer, textures[M_ALMA + i], NULL, &rect);
             break;
         case 2:
-            SDL_RenderCopy(renderer, csira_textures[i], NULL, &rect);
+            SDL_RenderCopy(renderer, textures[CS_ALMA + i], NULL, &rect);
             break;
         case 3:
-            SDL_RenderCopy(renderer, nagy_textures[i], NULL, &rect);
+            SDL_RenderCopy(renderer, textures[N_ALMA + i], NULL, &rect);
             break;
         case 4:
-            SDL_RenderCopy(renderer, textures[7], NULL, &rect);
+            SDL_RenderCopy(renderer, textures[TOMBSTONE], NULL, &rect);
             break;
         default:
-            SDL_RenderCopy(renderer, textures[7], NULL, &rect);
+            SDL_RenderCopy(renderer, textures[TOMBSTONE], NULL, &rect);
             break;
     }
 }
