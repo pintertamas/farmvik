@@ -23,9 +23,9 @@ int main( int argc, char **argv ) {
             if( windowEvent.type == SDL_QUIT )
             {
                 if(player == true)
-                    send(ONE); // adatok kiírása .txt-be
+                    save(ONE); // adatok kiírása .txt-be
                 else
-                    send(TWO);
+                    save(TWO);
                 running = false;
                 break;
             }
