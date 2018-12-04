@@ -5,17 +5,17 @@
 #include "global.h"
 #include "fields.h"
 
-void setupFields(int row, int column)
+void setupFields(int column, int row)
 {
-    fields = (Field**)malloc(row*sizeof(Field*));
+    fields = (Field**)malloc(column*sizeof(Field*));
     if(fields != NULL) {
-        for(int i=0;i<row;i++)
-            fields[i] = (Field*)malloc(column*sizeof(Field));
+        for(int i=0;i<column;i++)
+            fields[i] = (Field*)malloc(row*sizeof(Field));
 
         int width = (int)round(agyas*SCREEN_WIDTH);
 
-        for(int i=0;i<row;i++) {
-            for(int j=0;j<column;j++) {
+        for(int i=0;i<column;i++) {
+            for(int j=0;j<row;j++) {
                 fields[i][j].x = 2*d + i * width;
                 fields[i][j].y = 7*d + j * width;
                 fields[i][j].w = width;
@@ -26,11 +26,42 @@ void setupFields(int row, int column)
             }
         }
 
-        rows = row;
         columns = column;
+        rows = row;
     } else {
         rows = columns = 0;
-        printf("Couldn't allocate memory for fields!\n");
+        printf("Couldn't allocate memory for fields in setupFields!\n");
+    }
+}
+
+void addColumn()
+{
+    Field **new_fields = (Field**)malloc(columns*sizeof(Field*));
+    if(new_fields != NULL) {
+        columns++;
+        for(int i=0;i<columns;i++)
+            new_fields[i] = (Field*)malloc(rows*sizeof(Field));
+
+        for(int i=0;i<columns-1;i++)
+            for(int j=0;j<rows;j++)
+                new_fields[i][j] = fields[i][j];
+
+        int width = (int)round(agyas*SCREEN_WIDTH);
+
+        for(int j=0;j<rows;j++) {
+            fields[columns-1][j].x = 2*d + columns-1 * width;
+            fields[columns-1][j].y = 7*d + j * width;
+            fields[columns-1][j].w = width;
+            fields[columns-1][j].timePlanted = 0;
+            fields[columns-1][j].type = pt_APPLE;
+            fields[columns-1][j].age = a_PLAIN;
+            fields[columns-1][j].index = DIRT;
+        }
+
+        freeFields();
+        fields = new_fields;
+    } else {
+        printf("Couldn't allocate memory for fields in addColumn!\n");
     }
 }
 

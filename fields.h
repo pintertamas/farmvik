@@ -22,7 +22,8 @@ typedef struct Field{
 Field **fields = NULL;
 int rows, columns;
 
-void setupFields(int row, int column);
+void setupFields(int rows, int row);
+void addColumn();
 bool isOverField(Field actual);
 void bed(Field *field, PlantType type);
 void growFields();
