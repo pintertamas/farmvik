@@ -128,8 +128,8 @@ int plantnumber()
 
                 if(clickevent.button.x != -1 && clickevent.button.y != -1)
                 {
-                    buttonx = clickevent.button.x - 2*SCREEN_WIDTH / 50; // A cella fölött lévo rész mérete. Gyakorlatilag megkapom a koordinátáját a kattintásnak a cella koordinátarendszerében
-                    buttony = clickevent.button.y - 7*SCREEN_WIDTH / 50; // Szintén.
+                    buttonx = clickevent.button.x; // A cella fölött lévo rész mérete. Gyakorlatilag megkapom a koordinátáját a kattintásnak a cella koordinátarendszerében
+                    buttony = clickevent.button.y; // Szintén.
                 }
             }
             break;
@@ -142,10 +142,7 @@ int plantnumber()
     }
 
     if(click == true) {
-        if( buttonx > 0 && buttonx < n && buttony > 0 && buttony < 3 * n )
-            return (buttony / n) + 1;
-        else if( buttonx > n && buttonx < 2 * n && buttony > 0 && buttony < 3 * n )
-            return (buttony / n) + 4;
+        return 1;
     }
     plantnumber();
 }

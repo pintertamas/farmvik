@@ -29,6 +29,7 @@ Element harvest;
 Element resetButton;
 Element change;
 Element destroy;
+Element move;
 
 bool isOverElement(Element actual);
 void setupElements();
