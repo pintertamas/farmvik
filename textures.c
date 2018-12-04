@@ -173,6 +173,7 @@ void score()
     SDL_FreeSurface(balance);
 }
 
+/*
 void bed(int x, int y, int i, int t)
 {
     int n = (int)(agyas*SCREEN_WIDTH);
@@ -201,7 +202,9 @@ void bed(int x, int y, int i, int t)
             break;
     }
 }
+ */
 
+/*
 void renderState()
 {
     int n = (int)(agyas*SCREEN_WIDTH);
@@ -223,3 +226,4 @@ void renderState()
         }
     }
 }
+ */

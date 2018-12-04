@@ -37,6 +37,20 @@ void setupFields(int row, int column)
     }
 }
 
+bool isOverField(Field actual)
+{
+    if(mouseX > actual.x && mouseX < actual.x + actual.w && mouseY > actual.y && mouseY < actual.y + actual.w)
+        return true;
+    else
+        return false;
+}
+
+void bed(Field *field, PlantType type)
+{
+    field->type = type;
+    field->timePlanted = time(0);
+}
+
 void growField(Field *field)
 {
     if( field->type != PLAIN ) {
@@ -54,9 +68,22 @@ void growFields()
     for(int i=0;i<rows;i++) {
         for(int j=0;j<columns;j++) {
             growField(&fields[i][j]);
-            switch(fields[i][j].type) {
-                case t_APPLE:
-                    fields[i][j].index =
+            switch(fields[i][j].age) {
+                case PLAIN:
+                    fields[i][j].index = DIRT;
+                    break;
+                case SEED:
+                    fields[i][j].index = M_ALMA + fields[i][j].type;
+                    break;
+                case SPORE:
+                    fields[i][j].index = CS_ALMA + fields[i][j].type;
+                    break;
+                case BIG:
+                    fields[i][j].index = N_ALMA + fields[i][j].type;
+                    break;
+                case DEAD:
+                    fields[i][j].index = TOMBSTONE;
+                    break;
                 default:
                     fields[i][j].index = DIRT;
                     break;
