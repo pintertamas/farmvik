@@ -116,14 +116,6 @@ void doRender() {
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
     SDL_RenderDrawRect(renderer, &smallrect);
 
-    //*************
-
-    SDL_Rect rectbuy = { 41 * d, 7 * d - SCREEN_WIDTH / 120, buttonw, buttonh };
-    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-    SDL_RenderCopy(renderer, textures[4], NULL, &rectbuy);
-
-    //******************
-
     // gombok grafikus megjelenitese
     for(int i=0; i<NUMBER_OF_IMAGES;i++)
     {
@@ -151,8 +143,6 @@ void doRender() {
     SDL_Rect destroy = { 3*SCREEN_WIDTH / 4 + 3*d, fejlec + 14*d, 5*d, 2*d };
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
     SDL_RenderCopy(renderer, textures[11], NULL, &destroy);
-
-    //SDL_RenderDrawPoint(renderer, 1060, 7 * d - SCREEN_WIDTH / 120);
 }
 
 int digit(int num)
