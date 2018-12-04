@@ -23,7 +23,7 @@ Mezo hely[6];
 extern int const SCREEN_WIDTH;
 extern int const SCREEN_HEIGHT;
 int d;
-extern int times[6];
+int mouseX, mouseY;
 bool player;
 typedef enum Players {ONE,TWO}Players;
 int money;

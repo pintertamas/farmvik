@@ -4,17 +4,9 @@
 
 #include "elements.h"
 
-int mx, my;
-
-void setMousePos(int x, int y)
+bool isOverElement(Element actual)
 {
-    mx = x;
-    my = y;
-}
-
-bool isOver(Element actual)
-{
-    if(mx > actual.x && mx < actual.x + actual.w && my > actual.y && my < actual.y + actual.h)
+    if(mouseX > actual.x && mouseX < actual.x + actual.w && mouseY > actual.y && mouseY < actual.y + actual.h)
         return true;
     else
         return false;
@@ -77,7 +69,7 @@ void renderElement(Element element)
 {
     SDL_Rect dest = { element.x, element.y, element.w, element.h };
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-    SDL_RenderCopy(renderer, getElementTexture(element.index), NULL, &dest);
+    SDL_RenderCopy(renderer, getTexture(element.index), NULL, &dest);
 }
 
 void renderElementRect(Element element)

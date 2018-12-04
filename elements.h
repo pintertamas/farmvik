@@ -27,10 +27,8 @@ Element harvest;
 Element resetButton;
 Element change;
 Element destroy;
-Element **cells;
 
-void setMousePos(int x, int y);
-bool isOver(Element actual);
+bool isOverElement(Element actual);
 void setupElements();
 void renderElements();
 

@@ -27,7 +27,7 @@ SDL_Texture *loadTexture(char *path)
     return texture;
 }
 
-SDL_Texture* getElementTexture(textureIndex index)
+SDL_Texture* getTexture(textureIndex index)
 {
     return textures[index];
 }

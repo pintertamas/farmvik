@@ -6,7 +6,6 @@
 
 int const SCREEN_WIDTH = 1440;
 int const SCREEN_HEIGHT = 900;
-int times[6] = {0};
 bool player = true;
 int buy_price[3] = {20, 15, 40};
 int sell_price[3] = {250, 100, 330};

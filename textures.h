@@ -26,7 +26,7 @@ TTF_Font *font;
 
 SDL_Texture *loadTexture(char *path);
 
-SDL_Texture* getElementTexture(textureIndex index);
+SDL_Texture* getTexture(textureIndex index);
 void loadImage();
 void background();
 void doRender();
