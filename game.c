@@ -9,8 +9,7 @@
 #include "elements.h"
 #include "fields.h"
 
-ElementType currentAction = false;
-PlantType   currentPlant  = t_APPLE;
+ElementType currentAction = et_RESET;
 
 int init() {
 
@@ -119,7 +118,6 @@ void handleButtons()
         if( isOverElement(buy[i])) {
             if(money >= buy_price[buy[i].e_type]) {
                 currentAction = BUY1 + i;
-                currentPlant  = t_APPLE + i;
                 money -= buy_price[buy[i].e_type];
             }
         } else if( isOverElement(sell[i])) {
@@ -181,7 +179,7 @@ void handleFields()
                     case BUY1:
                     case BUY2:
                     case BUY3:
-                        bed(&fields[i][j],currentPlant);
+                        bed(&fields[i][j],(PlantType)currentAction);
                         break;
                     case et_HARVEST:
                         break;
