@@ -176,20 +176,21 @@ void handleFields()
 {
     for(int i=0;i<rows;i++) {
         for(int j=0;j<columns;j++){
-            switch(currentAction) {
-                case BUY1:
-                case BUY2:
-                case BUY3:
-                    if(isOverField(fields[i][j]))
+            if(isOverField(fields[i][j])) {
+                switch(currentAction) {
+                    case BUY1:
+                    case BUY2:
+                    case BUY3:
                         bed(&fields[i][j],currentPlant);
-                    break;
-                case et_HARVEST:
-                    break;
-                case et_DESTROY:
-                    break;
-                default:
-                    /*semmi*/
-                    break;
+                        break;
+                    case et_HARVEST:
+                        break;
+                    case et_DESTROY:
+                        break;
+                    default:
+                        /*semmi*/
+                        break;
+                }
             }
         }
     }
