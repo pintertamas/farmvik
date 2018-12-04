@@ -23,7 +23,6 @@ typedef struct Element{
 Element buy[3];
 Element sell[3];
 Element goods[3];
-Element rects[3];
 Element harvest;
 Element resetButton;
 Element change;

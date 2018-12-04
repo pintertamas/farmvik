@@ -33,7 +33,6 @@ int tomato;
 int buy_price[3];
 int sell_price[3];
 extern double agyas;
-SDL_Event windowEvent;
 SDL_Renderer *renderer;
 SDL_Event clickevent;
 SDL_Color bggreen;

@@ -29,7 +29,7 @@ int main( int argc, char **argv ) {
 
         SDL_RenderPresent(renderer);
         //SDL_Delay(10); // fps problémák miatt
-
+        SDL_Event windowEvent;
         while( SDL_PollEvent( &windowEvent ) != 0 )
         {
             if( windowEvent.type == SDL_QUIT )

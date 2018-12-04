@@ -94,22 +94,11 @@ void doRender() {
     for(int i=0;i<NUMBER_OF_IMAGES;i++)
     {
         SDL_Rect icon = { d, (i+1)*d , d, d };
-        SDL_RenderCopy(renderer, icon_textures[i+1], NULL, &icon);
+        SDL_RenderCopy(renderer, textures[APPLE + i], NULL, &icon);
     }
     // jobb oldalon a pénz ikon
     SDL_Rect coin = { 3*SCREEN_WIDTH / 4, d , d, d };
-    SDL_RenderCopy(renderer, icon_textures[0], NULL, &coin);
-
-    // ikonok a boltban
-    for(int i=0; i<NUMBER_OF_IMAGES; i++)
-    {
-        SDL_Rect shop = { 3*SCREEN_WIDTH / 4 + d, 2*(i+1)*d + fejlec , SCREEN_WIDTH / 30, SCREEN_WIDTH / 30 };
-        SDL_RenderCopy(renderer, icon_textures[i+1], NULL, &shop);
-
-        SDL_Rect shoprect = { 3*SCREEN_WIDTH / 4 + d, 2*(i+1)*d + fejlec , SCREEN_WIDTH / 30, SCREEN_WIDTH / 30 };
-        SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-        SDL_RenderDrawRect(renderer, &shoprect);
-    }
+    SDL_RenderCopy(renderer, textures[COIN], NULL, &coin);
 
     // a nagy negyzet az egesz cucc kozepen meg a jobb oldali
     SDL_Rect bigrect = { d, d + fejlec, 3*SCREEN_WIDTH / 4 - 2*d, SCREEN_HEIGHT - 2*d - fejlec };
