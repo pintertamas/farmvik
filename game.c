@@ -61,13 +61,20 @@ void scan(Players players)
     }
 
     if (data != NULL) {
-        for(int i=0;i<6;i++)
-            fscanf(data, "%d %d\n", &hely[i].type, &hely[i].size);
 
-        for(int i=0;i<6;i++)
-            fscanf(data, "%d ", &times[i]);
+        fscanf(data, "%d %d %d %d", &money, &apple, &potato, &tomato);
 
-        fscanf(data, "%d\n%d %d %d", &money, &apple, &potato, &tomato);
+        int row, column;
+        fscanf(data, "%d %d\n", &row, &column);
+        setupFields(row, column);
+
+        for(int i=0;i<rows;i++)
+            for(int j=0;j<columns;j++)
+            {
+                fscanf(data, "%d %d %d %d %d %d\n", &fields[i][j].x, &fields[i][j].y, &fields[i][j].timePlanted, &fields[i][j].age, &fields[i][j].type, &fields[i][j].index);
+            }
+
+
         fclose(data);
     } else {
         printf("Error: Could not open the file");
@@ -83,12 +90,18 @@ void send(Players players)
     else if(players == TWO)
         data = fopen("gameDataPlayer2.txt", "w");
 
-    if(data != NULL) {
-        for(int i=0;i<6;i++)
-            fprintf(data, "%d %d\n", hely[i].type, hely[i].size);
-        for(int i=0;i<6;i++)
-            fprintf(data, "%d ",  times[i]);
-        fprintf(data, "\n%d\n%d %d %d", money, apple, potato, tomato);
+    if (data != NULL) {
+
+        fprintf(data, "%d %d %d %d", money, apple, potato, tomato);
+
+        fprintf(data, "%d %d\n", rows, columns);
+
+        for(int i=0;i<rows;i++)
+            for(int j=0;j<columns;j++)
+            {
+                fprintf(data, "%d %d %d %d %d %d\n", fields[i][j].x, fields[i][j].y, fields[i][j].timePlanted, fields[i][j].age, fields[i][j].type, fields[i][j].index);
+            }
+
         fclose(data);
     } else {
         printf("Error: Could not open the file");
@@ -97,19 +110,10 @@ void send(Players players)
 
 void reset()
 {
-    FILE* data;
-    data = fopen("gameDataNull.txt", "r");
+    freeFields();
+    setupFields(1, 3);
 
-    for(int i=0;i<6;i++)
-        fscanf(data, "%d %d\n", &hely[i].type, &hely[i].size);
-    for(int i=0;i<6;i++)
-        fscanf(data, "%d ", &times[i]);
-    fscanf(data, "\n%d\n%d %d %d", &money, &apple, &potato, &tomato);
-
-    if (data != NULL)
-        fclose(data);
-    else
-        printf("Error: Could not open the file");
+    money = apple = potato = tomato = 0;
 }
 
 void handleButtons()
