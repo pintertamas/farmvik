@@ -14,12 +14,6 @@
 #include <math.h>
 #include <time.h>
 
-typedef struct Mezo{
-    int type;
-    int size;
-}Mezo;
-
-Mezo hely[6];
 extern int const SCREEN_WIDTH;
 extern int const SCREEN_HEIGHT;
 int d;
