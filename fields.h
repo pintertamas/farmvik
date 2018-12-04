@@ -19,6 +19,9 @@ typedef struct Field{
     textureIndex index;
 }Field;
 
+Field **fields = NULL;
+int rows, columns;
+
 void setupFields(int row, int column);
 bool isOverField(Field actual);
 void bed(Field *field, PlantType type);

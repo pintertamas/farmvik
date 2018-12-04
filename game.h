@@ -14,7 +14,7 @@ void reset();
 int init();
 void timePassed();
 int plantnumber();
-int buttonEventHandler();
+void eventHandler();
 void planting();
 
 #endif //FARMVILLE2_GAME_H
