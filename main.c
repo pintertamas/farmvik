@@ -17,10 +17,11 @@ int main( int argc, char **argv ) {
 
     while( running )
     {
-        SDL_Event windowEvent;
-        while( SDL_PollEvent( &windowEvent ) != 0 )
+        SDL_Event event;
+        while( SDL_PollEvent( &event ) != 0 )
         {
-            if( windowEvent.type == SDL_QUIT )
+            eventHandler(event);
+            if( event.type == SDL_QUIT )
             {
                 if(player == true)
                     save(ONE); // adatok kiírása .txt-be
@@ -31,7 +32,6 @@ int main( int argc, char **argv ) {
             }
         }
 
-        eventHandler();
         growFields();
 
         SDL_RenderClear(renderer);

@@ -92,15 +92,13 @@ void save(Players players)
 
     if (data != NULL) {
 
-        fprintf(data, "%d %d %d %d", money, apple, potato, tomato);
+        fprintf(data, "%d %d %d %d\n", money, apple, potato, tomato);
 
-        fprintf(data, "%d %d\n", rows, columns);
+        fprintf(data, "%d %d\n", columns, rows);
 
-        for(int i=0;i<rows;i++)
-            for(int j=0;j<columns;j++)
-            {
+        for(int i=0;i<columns;i++)
+            for(int j=0;j<rows;j++)
                 fprintf(data, "%d %d %d %d\n", fields[i][j].timePlanted, fields[i][j].age, fields[i][j].type, fields[i][j].index);
-            }
 
         fclose(data);
     } else {
@@ -113,7 +111,8 @@ void reset()
     freeFields();
     setupFields(1, 3);
 
-    money = apple = potato = tomato = 0;
+    money = 1000;
+    apple = potato = tomato = 0;
 }
 
 void handleButtons()
@@ -176,8 +175,8 @@ void handleButtons()
 
 void handleFields()
 {
-    for(int i=0;i<rows;i++) {
-        for(int j=0;j<columns;j++){
+    for(int i=0;i<columns;i++) {
+        for(int j=0;j<rows;j++){
             if(isOverField(fields[i][j])) {
                 switch(currentAction) {
                     case et_BUY1:
@@ -198,15 +197,14 @@ void handleFields()
     }
 }
 
-void eventHandler()
+void eventHandler(SDL_Event event)
 {
-    SDL_WaitEvent(&clickevent);
-    if(clickevent.type == SDL_MOUSEBUTTONDOWN) {
-        if (clickevent.button.button == SDL_BUTTON_LEFT) {
+    if(event.type == SDL_MOUSEBUTTONDOWN) {
+        if (event.button.button == SDL_BUTTON_LEFT) {
 
-            if(clickevent.button.x != -1 && clickevent.button.y != -1) {
-                mouseX = clickevent.button.x;
-                mouseY = clickevent.button.y;
+                if(event.button.x != -1 && event.button.y != -1) {
+                mouseX = event.button.x;
+                mouseY = event.button.y;
             }
 
             handleButtons();

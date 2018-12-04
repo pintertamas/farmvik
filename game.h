@@ -12,6 +12,6 @@ void scan(Players players);
 void save(Players players);
 void reset();
 int init();
-void eventHandler();
+void eventHandler(SDL_Event event);
 
 #endif //FARMVILLE2_GAME_H

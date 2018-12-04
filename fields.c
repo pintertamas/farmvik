@@ -81,11 +81,13 @@ void bed(Field *field, PlantType type)
 
 void growField(Field *field)
 {
-    if( field->type != a_PLAIN ) {
-        if( time(0) - field->timePlanted == 4 && field->age == a_SEED )
-            field->age++;
-        else if( time(0) - field->timePlanted == 8 && field->age == a_SPORE )
-            field->age++;
+    if( field->timePlanted != 0 ) {
+        if(field->age == a_PLAIN)
+            field->age = a_SEED;
+        else if( time(0) - field->timePlanted >= 4 && field->age == a_SEED )
+            field->age = a_SPORE;
+        else if( time(0) - field->timePlanted >= 8 && field->age == a_SPORE )
+            field->age = a_BIG;
         else if( time(0) - field->timePlanted >= 25 && field->age == a_BIG )
             field->age = a_DEAD;
     }
