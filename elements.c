@@ -99,7 +99,7 @@ void renderElements()
         renderElement(buy[i]);
         renderElement(sell[i]);
         renderElement(goods[i]);
-        renderElementRect(goods[i]);
+        renderElementRect(goods[i]); // a bolt ikonjai körül lévő négyzetek renderelése
     }
     renderElement(harvest);
     renderElement(resetButton);

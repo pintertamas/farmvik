@@ -71,7 +71,7 @@ void scan(Players players)
         for(int i=0;i<rows;i++)
             for(int j=0;j<columns;j++)
             {
-                fscanf(data, "%d %d %d %d %d %d\n", &fields[i][j].x, &fields[i][j].y, &fields[i][j].timePlanted, &fields[i][j].age, &fields[i][j].type, &fields[i][j].index);
+                fscanf(data, "%d %d %d %d\n", &fields[i][j].timePlanted, &fields[i][j].age, &fields[i][j].type, &fields[i][j].index);
             }
 
 
@@ -92,14 +92,14 @@ void save(Players players)
 
     if (data != NULL) {
 
-        fprintf(data, "%d %d %d %d", money, apple, potato, tomato);
+        fprintf(data, "%d %d %d %d\n", money, apple, potato, tomato);
 
         fprintf(data, "%d %d\n", rows, columns);
 
         for(int i=0;i<rows;i++)
             for(int j=0;j<columns;j++)
             {
-                fprintf(data, "%d %d %d %d %d %d\n", fields[i][j].x, fields[i][j].y, fields[i][j].timePlanted, fields[i][j].age, fields[i][j].type, fields[i][j].index);
+                fprintf(data, "%d %d %d %d\n", fields[i][j].timePlanted, fields[i][j].age, fields[i][j].type, fields[i][j].index);
             }
 
         fclose(data);
@@ -183,7 +183,7 @@ void handleFields()
                     case et_BUY1:
                     case et_BUY2:
                     case et_BUY3:
-                        bed(&fields[i][j],(PlantType)currentAction);
+                        bed(&fields[i][j],(PlantType)currentAction); // nem változtat semmit az értékén, csak PlantType típusú enumot vár a függvény, ezért átkonvertálom
                         break;
                     case et_HARVEST:
                         break;
