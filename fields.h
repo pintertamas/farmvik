@@ -7,8 +7,8 @@
 
 #include "textures.h"
 
-typedef enum Age{PLAIN,SEED,SPORE,BIG,DEAD}Age;
-typedef enum PlantType{t_APPLE,t_POTATO,t_TOMATO}PlantType;
+typedef enum Age{a_PLAIN,a_SEED,a_SPORE,a_BIG,a_DEAD}Age;
+typedef enum PlantType{pt_APPLE,pt_POTATO,pt_TOMATO}PlantType;
 
 typedef struct Field{
     int x, y;

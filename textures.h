@@ -17,10 +17,6 @@ typedef enum textureIndex{
 }textureIndex;
 
 SDL_Texture *textures[25];
-SDL_Texture *icon_textures[4];
-SDL_Texture *mag_textures[3];
-SDL_Texture *csira_textures[3];
-SDL_Texture *nagy_textures[3];
 SDL_Surface *balance;
 TTF_Font *font;
 
@@ -31,7 +27,5 @@ void loadImage();
 void background();
 void doRender();
 void score();
-//void renderState();
-//void bed(int x, int y, int i, int t);
 
 #endif //FARMVILLE2_TEXTURES_H

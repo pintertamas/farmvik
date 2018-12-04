@@ -20,6 +20,7 @@ int main( int argc, char **argv ) {
     while( running )
     {
         eventHandler();
+        growFields();
 
         SDL_RenderClear(renderer);
 

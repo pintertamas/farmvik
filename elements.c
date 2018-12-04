@@ -21,21 +21,21 @@ void setupElements()
         buy[i].y = fejlec + 2*(i+1)*d + SCREEN_WIDTH / 120;
         buy[i].w = 2*d;
         buy[i].h = d;
-        buy[i].e_type = BUY1 + i;
+        buy[i].e_type = et_BUY1 + i;
         buy[i].index = BUY;
 
         sell[i].x = 3*SCREEN_WIDTH / 4 + 4*d + SCREEN_WIDTH / 20 + SCREEN_WIDTH / 100;
         sell[i].y = fejlec + 2*(i+1)*d + SCREEN_WIDTH / 120;
         sell[i].w = 2*d;
         sell[i].h = d;
-        sell[i].e_type = SELL1 + i;
+        sell[i].e_type = et_SELL1 + i;
         sell[i].index = SELL;
 
         goods[i].x =  3*SCREEN_WIDTH / 4 + d;
         goods[i].y = 2*(i+1)*d + SCREEN_WIDTH / 10;
         goods[i].w = SCREEN_WIDTH / 30;
         goods[i].h = SCREEN_WIDTH / 30;
-        goods[i].e_type = STATIC;
+        goods[i].e_type = et_STATIC;
         goods[i].index = APPLE+i;
     }
 
