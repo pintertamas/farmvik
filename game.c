@@ -81,7 +81,7 @@ void scan(Players players)
     }
 }
 
-void send(Players players)
+void save(Players players)
 {
     FILE* data = NULL;
 
@@ -157,11 +157,11 @@ void handleButtons()
         currentAction = et_CHANGE;
         if(player == true) {
             scan(TWO);
-            send(TWO);
+            save(TWO);
             player = false;
         } else {
             scan(ONE);
-            send(ONE);
+            save(ONE);
             player = true;
         }
     } else if(isOverElement(harvest)) {

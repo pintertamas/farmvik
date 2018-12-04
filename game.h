@@ -9,12 +9,9 @@
 
 SDL_Window *window;
 void scan(Players players);
-void send(Players players);
+void save(Players players);
 void reset();
 int init();
-void timePassed();
-int plantnumber();
 void eventHandler();
-void planting();
 
 #endif //FARMVILLE2_GAME_H
