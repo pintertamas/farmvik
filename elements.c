@@ -21,22 +21,21 @@ bool isOver(Element actual){
 
 void setupElements()
 {
-    printf("%d %d\n", 41 * d, 7 * d - SCREEN_WIDTH / 120);
-    printf("%d %d\n", 3*SCREEN_WIDTH / 4 + 3*d + d / 2, d/5 + SCREEN_WIDTH / 120);
-
-
+    int fejlec = (int) round((double) SCREEN_WIDTH / 10);
+    int buttonw = 2*d;
+    int buttonh = d;
 
     for(int i=0;i<3;i++) {
-        buy[i].x = 41 * d;
-        buy[i].y = 7 * d - SCREEN_WIDTH / 120;
-        buy[i].w = 2 * d;
-        buy[i].h = d;
+        buy[i].x = 3*SCREEN_WIDTH / 4 + 3*d + d / 2;
+        buy[i].y = fejlec + 2*(i+1)*d + SCREEN_WIDTH / 120;
+        buy[i].w = buttonw;
+        buy[i].h = buttonh;
         buy[i].texture = textures[4];
 
-        sell[i].x = 41 * d + 3 * d;
-        sell[i].y = 7 * d - SCREEN_WIDTH / 120 + 2 * i * d;
-        sell[i].w = 2 * d;
-        sell[i].h = d;
+        sell[i].x = 3*SCREEN_WIDTH / 4 + 4*d + SCREEN_WIDTH / 20 + SCREEN_WIDTH / 100;
+        sell[i].y = fejlec + 2*(i+1)*d + SCREEN_WIDTH / 120;
+        sell[i].w = buttonw;
+        sell[i].h = buttonh;
         sell[i].texture = textures[5];
 
         goods[i].x =  3*SCREEN_WIDTH / 4 + d;

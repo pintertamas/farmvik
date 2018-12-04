@@ -74,7 +74,7 @@ void doRender() {
     // setting up the design
     int fejlec = (int) round((double) SCREEN_WIDTH / 10);
     int buttonh = d;
-    int buttonw = (int) round((double) SCREEN_WIDTH / 20);
+    int buttonw = 2*d;
 
     // logo
     SDL_Rect logo = {SCREEN_WIDTH / 2 - SCREEN_WIDTH / 20, 0, fejlec, fejlec};
@@ -116,8 +116,15 @@ void doRender() {
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
     SDL_RenderDrawRect(renderer, &smallrect);
 
-    // gombok grafikus megjelenitese
+    //*************
 
+    SDL_Rect rectbuy = { 41 * d, 7 * d - SCREEN_WIDTH / 120, buttonw, buttonh };
+    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+    SDL_RenderCopy(renderer, textures[4], NULL, &rectbuy);
+
+    //******************
+
+    // gombok grafikus megjelenitese
     for(int i=0; i<NUMBER_OF_IMAGES;i++)
     {
         SDL_Rect rectbuy = { 3*SCREEN_WIDTH / 4 + 3*d + d / 2, fejlec + 2*(i+1)*d + SCREEN_WIDTH / 120, buttonw, buttonh };
