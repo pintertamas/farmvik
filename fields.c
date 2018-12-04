@@ -20,8 +20,8 @@ void setupFields(int row, int column)
                 fields[i][j].y = 7*d + j * width;
                 fields[i][j].w = width;
                 fields[i][j].timePlanted = 0;
-                fields[i][j].type = t_APPLE;
-                fields[i][j].age = PLAIN;
+                fields[i][j].type = pt_APPLE;
+                fields[i][j].age = a_PLAIN;
                 fields[i][j].index = DIRT;
             }
         }
@@ -50,13 +50,13 @@ void bed(Field *field, PlantType type)
 
 void growField(Field *field)
 {
-    if( field->type != PLAIN ) {
-        if( time(0) - field->timePlanted == 4 && field->age == SEED )
+    if( field->type != a_PLAIN ) {
+        if( time(0) - field->timePlanted == 4 && field->age == a_SEED )
             field->age++;
-        else if( time(0) - field->timePlanted == 8 && field->age == SPORE )
+        else if( time(0) - field->timePlanted == 8 && field->age == a_SPORE )
             field->age++;
-        else if( time(0) - field->timePlanted >= 25 && field->age == BIG )
-            field->age = DEAD;
+        else if( time(0) - field->timePlanted >= 25 && field->age == a_BIG )
+            field->age = a_DEAD;
     }
 }
 
@@ -66,19 +66,19 @@ void growFields()
         for(int j=0;j<columns;j++) {
             growField(&fields[i][j]);
             switch(fields[i][j].age) {
-                case PLAIN:
+                case a_PLAIN:
                     fields[i][j].index = DIRT;
                     break;
-                case SEED:
+                case a_SEED:
                     fields[i][j].index = M_ALMA + fields[i][j].type;
                     break;
-                case SPORE:
+                case a_SPORE:
                     fields[i][j].index = CS_ALMA + fields[i][j].type;
                     break;
-                case BIG:
+                case a_BIG:
                     fields[i][j].index = N_ALMA + fields[i][j].type;
                     break;
-                case DEAD:
+                case a_DEAD:
                     fields[i][j].index = TOMBSTONE;
                     break;
                 default:

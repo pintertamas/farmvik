@@ -117,26 +117,26 @@ void handleButtons()
     for(int i=0; i<3;i++) {
         if( isOverElement(buy[i])) {
             if(money >= buy_price[buy[i].e_type]) {
-                currentAction = BUY1 + i;
+                currentAction = et_BUY1 + i;
                 money -= buy_price[buy[i].e_type];
             }
         } else if( isOverElement(sell[i])) {
             switch(sell[i].e_type) {
-                case SELL1:
+                case et_SELL1:
                     if(apple > 0) {
-                        money += apple * sell_price[sell[i].e_type - SELL1];
+                        money += apple * sell_price[sell[i].e_type - et_SELL1];
                         apple = 0;
                     }
                     break;
-                case SELL2:
+                case et_SELL2:
                     if(potato > 0) {
-                        money += potato * sell_price[sell[i].e_type - SELL1];
+                        money += potato * sell_price[sell[i].e_type - et_SELL1];
                         potato = 0;
                     }
                     break;
-                case SELL3:
+                case et_SELL3:
                     if(tomato > 0) {
-                        money += tomato * sell_price[sell[i].e_type - SELL1];
+                        money += tomato * sell_price[sell[i].e_type - et_SELL1];
                         tomato = 0;
                     }
                     break;
@@ -176,9 +176,9 @@ void handleFields()
         for(int j=0;j<columns;j++){
             if(isOverField(fields[i][j])) {
                 switch(currentAction) {
-                    case BUY1:
-                    case BUY2:
-                    case BUY3:
+                    case et_BUY1:
+                    case et_BUY2:
+                    case et_BUY3:
                         bed(&fields[i][j],(PlantType)currentAction);
                         break;
                     case et_HARVEST:

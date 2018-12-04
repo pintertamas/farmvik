@@ -9,10 +9,10 @@
 #include "textures.h"
 
 typedef enum ElementType{
-    SELL1, SELL2, SELL3,
-    BUY1, BUY2, BUY3,
+    et_BUY1, et_BUY2, et_BUY3,
+    et_SELL1, et_SELL2, et_SELL3,
     et_HARVEST, et_RESET, et_CHANGE, et_DESTROY, et_MOVE,
-    STATIC
+    et_STATIC
 }ElementType;
 
 typedef struct Element{
