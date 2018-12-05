@@ -117,10 +117,7 @@ void handleButtons()
 {
     for(int i=0; i<3;i++) {
         if( isOverElement(buy[i])) {
-            if(money >= buy_price[buy[i].e_type]) {
-                currentAction = et_BUY1 + i;
-                money -= buy_price[buy[i].e_type];
-            }
+            currentAction = et_BUY1 + i;
         } else if( isOverElement(sell[i])) {
             switch(sell[i].e_type) {
                 case et_SELL1:
@@ -164,10 +161,10 @@ void handleButtons()
     } else if(isOverElement(harvest)) {
         currentAction = et_HARVEST;
     } else if(isOverElement(destroy)) {
-        if(money >= 5000) {
-            currentAction = et_DESTROY;
-            money -= 5000;
-        }
+        currentAction = et_DESTROY;
+    } else if(isOverElement(move)) {
+        currentAction = et_MOVE;
+        addColumn();
     }
 }
 
@@ -180,11 +177,33 @@ void handleFields()
                     case et_BUY1:
                     case et_BUY2:
                     case et_BUY3:
-                        bed(&fields[i][j],(PlantType)currentAction); // nem változtat semmit az értékén, csak PlantType típusú enumot vár a függvény, ezért átkonvertálom
+                        if(money >= buy_price[buy[i].e_type]) {
+                            money -= buy_price[buy[i].e_type];
+                            bed(&fields[i][j],(PlantType)currentAction); // nem változtat semmit az értékén, csak PlantType típusú enumot vár a függvény, ezért átkonvertálom
+                        }
                         break;
                     case et_HARVEST:
+                        resetFieldData(&fields[i][j]);
+                        switch(fields[i][j].type) {
+                            case pt_APPLE:
+                                apple += 5;
+                                break;
+                            case pt_POTATO:
+                                potato += 5;
+                                break;
+                            case pt_TOMATO:
+                                tomato += 5;
+                                break;
+                            default:
+                                /*semmmi*/
+                                break;
+                        }
                         break;
                     case et_DESTROY:
+                        if(money >= 500) {
+                            resetFieldData(&fields[i][j]);
+                            money -= 500;
+                        }
                         break;
                     default:
                         /*semmi*/

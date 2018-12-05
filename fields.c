@@ -5,6 +5,14 @@
 #include "global.h"
 #include "fields.h"
 
+void resetFieldData(Field *field)
+{
+    field->timePlanted = 0;
+    field->type = pt_APPLE;
+    field->age = a_PLAIN;
+    field->index = DIRT;
+}
+
 void setupFields(int column, int row)
 {
     fields = (Field**)malloc(column*sizeof(Field*));
@@ -19,10 +27,7 @@ void setupFields(int column, int row)
                 fields[i][j].x = 2*d + i * width;
                 fields[i][j].y = 7*d + j * width;
                 fields[i][j].w = width;
-                fields[i][j].timePlanted = 0;
-                fields[i][j].type = pt_APPLE;
-                fields[i][j].age = a_PLAIN;
-                fields[i][j].index = DIRT;
+                resetFieldData(&fields[i][j]);
             }
         }
 
@@ -36,30 +41,27 @@ void setupFields(int column, int row)
 
 void addColumn()
 {
-    Field **new_fields = (Field**)malloc(columns*sizeof(Field*));
+    Field **new_fields = (Field**)malloc((columns+1)*sizeof(Field*));
     if(new_fields != NULL) {
-        columns++;
-        for(int i=0;i<columns;i++)
+        for(int i=0;i<(columns+1);i++)
             new_fields[i] = (Field*)malloc(rows*sizeof(Field));
 
-        for(int i=0;i<columns-1;i++)
+        for(int i=0;i<columns;i++)
             for(int j=0;j<rows;j++)
                 new_fields[i][j] = fields[i][j];
 
         int width = (int)round(agyas*SCREEN_WIDTH);
 
         for(int j=0;j<rows;j++) {
-            fields[columns-1][j].x = 2*d + columns-1 * width;
-            fields[columns-1][j].y = 7*d + j * width;
-            fields[columns-1][j].w = width;
-            fields[columns-1][j].timePlanted = 0;
-            fields[columns-1][j].type = pt_APPLE;
-            fields[columns-1][j].age = a_PLAIN;
-            fields[columns-1][j].index = DIRT;
+            new_fields[columns][j].x = 2*d + columns * width;
+            new_fields[columns][j].y = 7*d + j * width;
+            new_fields[columns][j].w = width;
+            resetFieldData(&new_fields[columns][j]);
         }
 
         freeFields();
         fields = new_fields;
+        columns++;
     } else {
         printf("Couldn't allocate memory for fields in addColumn!\n");
     }

@@ -23,6 +23,7 @@ typedef struct Field{
 Field **fields;
 int rows, columns;
 
+void resetFieldData(Field *field);
 void setupFields(int column, int row);
 void addColumn();
 bool isOverField(Field actual);
