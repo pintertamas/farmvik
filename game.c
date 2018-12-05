@@ -164,7 +164,10 @@ void handleButtons()
         currentAction = et_DESTROY;
     } else if(isOverElement(move)) {
         currentAction = et_MOVE;
-        addColumn();
+        if(columns < 4 && money >= 10000) {
+            addColumn();
+            money -= 10000;
+        }
     }
 }
 
@@ -183,24 +186,28 @@ void handleFields()
                         }
                         break;
                     case et_HARVEST:
-                        resetFieldData(&fields[i][j]);
-                        switch(fields[i][j].type) {
-                            case pt_APPLE:
-                                apple += 5;
-                                break;
-                            case pt_POTATO:
-                                potato += 5;
-                                break;
-                            case pt_TOMATO:
-                                tomato += 5;
-                                break;
-                            default:
-                                /*semmmi*/
-                                break;
+                        if(fields[i][j].age != a_DEAD) {
+                            if(fields[i][j].age == a_BIG) {
+                                switch(fields[i][j].type) {
+                                    case pt_APPLE:
+                                        apple += 5;
+                                        break;
+                                    case pt_POTATO:
+                                        potato += 5;
+                                        break;
+                                    case pt_TOMATO:
+                                        tomato += 5;
+                                        break;
+                                    default:
+                                        /*semmmi*/
+                                        break;
+                                }
+                            }
+                            resetFieldData(&fields[i][j]);
                         }
                         break;
                     case et_DESTROY:
-                        if(money >= 500) {
+                        if(fields[i][j].age == a_DEAD &&  money >= 500) {
                             resetFieldData(&fields[i][j]);
                             money -= 500;
                         }
@@ -219,7 +226,7 @@ void eventHandler(SDL_Event event)
     if(event.type == SDL_MOUSEBUTTONDOWN) {
         if (event.button.button == SDL_BUTTON_LEFT) {
 
-                if(event.button.x != -1 && event.button.y != -1) {
+            if(event.button.x != -1 && event.button.y != -1) {
                 mouseX = event.button.x;
                 mouseY = event.button.y;
             }

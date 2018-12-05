@@ -90,7 +90,7 @@ void growField(Field *field)
             field->age = a_SPORE;
         else if( time(0) - field->timePlanted >= 8 && field->age == a_SPORE )
             field->age = a_BIG;
-        else if( time(0) - field->timePlanted >= 25 && field->age == a_BIG )
+        else if( time(0) - field->timePlanted >= 10 && field->age == a_BIG ) //25
             field->age = a_DEAD;
     }
 }

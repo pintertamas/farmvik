@@ -148,6 +148,7 @@ void score()
     moneytxt = SDL_CreateTextureFromSurface(renderer, balance);
     SDL_Rect moneybox = { 3*SCREEN_WIDTH / 4 + 2*d, d , digit(money)*charwidth + 5*charwidth, d };
     SDL_RenderCopy(renderer, moneytxt, NULL, &moneybox);
+    SDL_DestroyTexture(moneytxt);
     SDL_FreeSurface(balance);
 
     SDL_Texture *appletxt;
@@ -155,6 +156,7 @@ void score()
     appletxt = SDL_CreateTextureFromSurface(renderer, balance);
     SDL_Rect applebox = { 2*d, d , digit(apple)*charwidth, d };
     SDL_RenderCopy(renderer, appletxt, NULL, &applebox);
+    SDL_DestroyTexture(appletxt);
     SDL_FreeSurface(balance);
 
     SDL_Texture *potatotxt;
@@ -162,6 +164,7 @@ void score()
     potatotxt = SDL_CreateTextureFromSurface(renderer, balance);
     SDL_Rect potatobox = { 2*d, 2*d , digit(potato)*charwidth, d };
     SDL_RenderCopy(renderer, potatotxt, NULL, &potatobox);
+    SDL_DestroyTexture(potatotxt);
     SDL_FreeSurface(balance);
 
     SDL_Texture *tomatotxt;
@@ -169,5 +172,6 @@ void score()
     tomatotxt = SDL_CreateTextureFromSurface(renderer, balance);
     SDL_Rect tomatobox = { 2*d, 3*d , digit(tomato)*charwidth, d };
     SDL_RenderCopy(renderer, tomatotxt, NULL, &tomatobox);
+    SDL_DestroyTexture(tomatotxt);
     SDL_FreeSurface(balance);
 }
