@@ -7,11 +7,12 @@
 int main( int argc, char **argv ) {
 
     d = SCREEN_WIDTH/50;
+    Players player = ONE;
 
     init(); // inicializalas
     loadImage(); // kepek betoltese memoriaba
     setupElements();
-    scan(ONE); // adatok beolvasása
+    scan(player); // adatok beolvasása
 
     bool running = true;
 
@@ -20,13 +21,10 @@ int main( int argc, char **argv ) {
         SDL_Event event;
         while( SDL_PollEvent( &event ) != 0 )
         {
-            eventHandler(event);
+            eventHandler(event,&player);
             if( event.type == SDL_QUIT )
             {
-                if(player == true)
-                    save(ONE); // adatok kiírása .txt-be
-                else
-                    save(TWO);
+                save(player);
                 running = false;
                 break;
             }

@@ -54,11 +54,10 @@ void scan(Players players)
 {
     FILE* data = NULL;
 
-    if(players == ONE) {
+    if(players == ONE)
         data = fopen("gameData.txt", "r");
-    } else if(players == TWO) {
+    else if(players == TWO)
         data = fopen("gameDataPlayer2.txt", "r");
-    }
 
     if (data != NULL) {
 
@@ -70,9 +69,8 @@ void scan(Players players)
 
         for(int i=0;i<columns;i++)
             for(int j=0;j<rows;j++)
-            {
                 fscanf(data, "%d %d %d %d\n", &fields[i][j].timePlanted, &fields[i][j].age, &fields[i][j].type, &fields[i][j].index);
-            }
+
         fclose(data);
     } else {
         printf("Error: Could not open the file");
@@ -113,7 +111,7 @@ void reset()
     apple = potato = tomato = 0;
 }
 
-void handleButtons()
+void handleButtons(Players *player)
 {
     for(int i=0; i<3;i++) {
         if( isOverElement(buy[i])) {
@@ -149,15 +147,11 @@ void handleButtons()
         reset();
     } else if(isOverElement(change)) {
         currentAction = et_CHANGE;
-        if(player == true) {
-            scan(TWO);
-            save(TWO);
-            player = false;
-        } else {
-            scan(ONE);
-            save(ONE);
-            player = true;
-        }
+        save(*player);
+        freeFields();
+        if(*player == TWO) *player = ONE;
+        else               *player = TWO;
+        scan(*player);
     } else if(isOverElement(harvest)) {
         currentAction = et_HARVEST;
     } else if(isOverElement(destroy)) {
@@ -221,7 +215,7 @@ void handleFields()
     }
 }
 
-void eventHandler(SDL_Event event)
+void eventHandler(SDL_Event event, Players *player)
 {
     if(event.type == SDL_MOUSEBUTTONDOWN) {
         if (event.button.button == SDL_BUTTON_LEFT) {
@@ -231,7 +225,7 @@ void eventHandler(SDL_Event event)
                 mouseY = event.button.y;
             }
 
-            handleButtons();
+            handleButtons(player);
             handleFields();
         }
     }

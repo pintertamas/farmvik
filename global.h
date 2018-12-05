@@ -18,7 +18,6 @@ extern int const SCREEN_WIDTH;
 extern int const SCREEN_HEIGHT;
 int d;
 int mouseX, mouseY;
-bool player;
 typedef enum Players {ONE,TWO}Players;
 int money;
 int apple;
@@ -28,7 +27,6 @@ int buy_price[3];
 int sell_price[3];
 extern double agyas;
 SDL_Renderer *renderer;
-SDL_Event clickevent;
 SDL_Color bggreen;
 
 #endif //FARMVILLE2_GLOBAL_H
