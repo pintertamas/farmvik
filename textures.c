@@ -5,32 +5,28 @@
 #include "textures.h"
 
 // initializing pictures
-SDL_Texture *loadTexture(char *path)
-{
+SDL_Texture *loadTexture(char *path) {
     SDL_Texture *texture = NULL;
     SDL_Surface *image = IMG_Load(path);
 
-    if( NULL == image )
-    {
-        printf( "Error1: %s\n", SDL_GetError( ) );
+    if (NULL == image) {
+        printf("Error1: %s\n", SDL_GetError());
     } else {
         texture = SDL_CreateTextureFromSurface(renderer, image);
 
-        if( NULL == texture )
-        {
-            printf( "Error2: %s\n", SDL_GetError( ) );
+        if (NULL == texture) {
+            printf("Error2: %s\n", SDL_GetError());
         }
         SDL_FreeSurface(image);
     }
     return texture;
 }
 
-SDL_Texture* getTexture(textureIndex index)
-{
+SDL_Texture *getTexture(textureIndex index) {
     return textures[index]; // visszaadja a textúrát index alapján
 }
 
-void loadImage() // ÚJABB KÉP FELTÖLTÉSE UTÁN A TÖMB MÉRETÉT IS NÖVELNI KELL A global.h-BAN ÉS A global.c-BEN IS!
+void loadImage() // ÚJABB KÉP FELTÖLTÉSE UTÁN A TÖMB MÉRETÉT IS NÖVELNI KELL!
 {
     textures[0] = loadTexture("Textures/logo_300x300.png");
     textures[1] = loadTexture("Textures/logo_bal.png");
@@ -64,8 +60,7 @@ void loadImage() // ÚJABB KÉP FELTÖLTÉSE UTÁN A TÖMB MÉRETÉT IS NÖVELNI
 }
 
 
-void background()
-{
+void background() {
     SDL_Rect background = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
     SDL_SetRenderDrawColor(renderer, bggreen.r, bggreen.g, bggreen.b, bggreen.a);
     SDL_RenderFillRect(renderer, &background);
@@ -90,54 +85,51 @@ void doRender() {
     SDL_RenderCopy(renderer, textures[2], NULL, &logojobb);
 
     // bal oldali kis ikonok és a pénz jobb oldalon
-    for(int i=0;i<NUMBER_OF_IMAGES;i++)
-    {
-        SDL_Rect icon = { d, (i+1)*d , d, d };
+    for (int i = 0; i < NUMBER_OF_IMAGES; i++) {
+        SDL_Rect icon = {d, (i + 1) * d, d, d};
         SDL_RenderCopy(renderer, textures[APPLE + i], NULL, &icon);
     }
     // jobb oldalon a pénz ikon
-    SDL_Rect coin = { 3*SCREEN_WIDTH / 4, d , d, d };
+    SDL_Rect coin = {3 * SCREEN_WIDTH / 4, d, d, d};
     SDL_RenderCopy(renderer, textures[COIN], NULL, &coin);
 
     // a nagy negyzet az egesz cucc kozepen meg a jobb oldali
-    SDL_Rect bigrect = { d, d + fejlec, 3*SCREEN_WIDTH / 4 - 2*d, SCREEN_HEIGHT - 2*d - fejlec };
+    SDL_Rect bigrect = {d, d + fejlec, 3 * SCREEN_WIDTH / 4 - 2 * d, SCREEN_HEIGHT - 2 * d - fejlec};
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
     SDL_RenderDrawRect(renderer, &bigrect);
 
-    SDL_Rect smallrect = { 3*SCREEN_WIDTH / 4, fejlec + d, SCREEN_WIDTH / 4 - d, SCREEN_HEIGHT - fejlec - 2*d };
+    SDL_Rect smallrect = {3 * SCREEN_WIDTH / 4, fejlec + d, SCREEN_WIDTH / 4 - d, SCREEN_HEIGHT - fejlec - 2 * d};
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
     SDL_RenderDrawRect(renderer, &smallrect);
 }
 
-int digit(int num)
-{
+int digit(int num) { // számjegyek száma
     int counter = 0;
-    while(num != 0)
-    {
+    while (num != 0) {
         num /= 10;
         ++counter;
     }
-    if(counter == 0) return 1;
+    if (counter == 0) return 1;
     return counter;
 }
 
-void score()
-{
+void score() {
     TTF_CloseFont(font);
     font = TTF_OpenFont("Prototype.ttf", 25);
 
-    if(!font) {
+    if (!font) {
         printf("TTF_OpenFont: %s\n", TTF_GetError());
     }
 
-    int charwidth = (int)round((double)SCREEN_WIDTH / 100);
+    int charwidth = (int) round((double) SCREEN_WIDTH / 100);
 
-    SDL_Color black = { 255, 255, 255 };
+    SDL_Color black = {255, 255, 255}; // a számok színe
+    // egy tömb, amibe a számokat másolom szövegként
     char moneybuffer[50];
     char applebuffer[50];
     char potatobuffer[50];
     char tomatobuffer[50];
-
+    // ekkor rakom bele
     sprintf(moneybuffer, "%d gold", money);
     sprintf(applebuffer, "%d", apple);
     sprintf(potatobuffer, "%d", potato);
@@ -146,7 +138,7 @@ void score()
     SDL_Texture *moneytxt;
     balance = TTF_RenderText_Solid(font, moneybuffer, black);
     moneytxt = SDL_CreateTextureFromSurface(renderer, balance);
-    SDL_Rect moneybox = { 3*SCREEN_WIDTH / 4 + 2*d, d , digit(money)*charwidth + 5*charwidth, d };
+    SDL_Rect moneybox = {3 * SCREEN_WIDTH / 4 + 2 * d, d, digit(money) * charwidth + 5 * charwidth, d};
     SDL_RenderCopy(renderer, moneytxt, NULL, &moneybox);
     SDL_DestroyTexture(moneytxt);
     SDL_FreeSurface(balance);
@@ -154,7 +146,7 @@ void score()
     SDL_Texture *appletxt;
     balance = TTF_RenderText_Solid(font, applebuffer, black);
     appletxt = SDL_CreateTextureFromSurface(renderer, balance);
-    SDL_Rect applebox = { 2*d, d , digit(apple)*charwidth, d };
+    SDL_Rect applebox = {2 * d, d, digit(apple) * charwidth, d};
     SDL_RenderCopy(renderer, appletxt, NULL, &applebox);
     SDL_DestroyTexture(appletxt);
     SDL_FreeSurface(balance);
@@ -162,7 +154,7 @@ void score()
     SDL_Texture *potatotxt;
     balance = TTF_RenderText_Solid(font, potatobuffer, black);
     potatotxt = SDL_CreateTextureFromSurface(renderer, balance);
-    SDL_Rect potatobox = { 2*d, 2*d , digit(potato)*charwidth, d };
+    SDL_Rect potatobox = {2 * d, 2 * d, digit(potato) * charwidth, d};
     SDL_RenderCopy(renderer, potatotxt, NULL, &potatobox);
     SDL_DestroyTexture(potatotxt);
     SDL_FreeSurface(balance);
@@ -170,7 +162,7 @@ void score()
     SDL_Texture *tomatotxt;
     balance = TTF_RenderText_Solid(font, tomatobuffer, black);
     tomatotxt = SDL_CreateTextureFromSurface(renderer, balance);
-    SDL_Rect tomatobox = { 2*d, 3*d , digit(tomato)*charwidth, d };
+    SDL_Rect tomatobox = {2 * d, 3 * d, digit(tomato) * charwidth, d};
     SDL_RenderCopy(renderer, tomatotxt, NULL, &tomatobox);
     SDL_DestroyTexture(tomatotxt);
     SDL_FreeSurface(balance);

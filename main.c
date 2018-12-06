@@ -4,9 +4,9 @@
 #include "elements.h"
 #include "fields.h"
 
-int main( int argc, char **argv ) {
+int main(int argc, char **argv) {
 
-    d = SCREEN_WIDTH/50;
+    d = SCREEN_WIDTH / 50;
     Players player = ONE;
 
     init(); // inicializalas
@@ -16,14 +16,11 @@ int main( int argc, char **argv ) {
 
     bool running = true;
 
-    while( running )
-    {
+    while (running) {
         SDL_Event event;
-        while( SDL_PollEvent( &event ) != 0 )
-        {
-            eventHandler(event,&player);
-            if( event.type == SDL_QUIT )
-            {
+        while (SDL_PollEvent(&event) != 0) {
+            eventHandler(event, &player);
+            if (event.type == SDL_QUIT) {
                 save(player);
                 running = false;
                 break;
