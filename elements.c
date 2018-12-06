@@ -16,7 +16,8 @@ void setupElements()
 {
     int fejlec = (int) round((double) SCREEN_WIDTH / 10);
 
-    for(int i=0;i<3;i++) {
+    for(int i=0;i<3;i++)
+    {
         buy[i].x = 3*SCREEN_WIDTH / 4 + 3*d + d / 2;
         buy[i].y = fejlec + 2*(i+1)*d + SCREEN_WIDTH / 120;
         buy[i].w = 2*d;
@@ -95,7 +96,8 @@ void renderElementRect(Element element)
 
 void renderElements()
 {
-    for(int i=0;i<3;i++) {
+    for(int i=0;i<3;i++)
+    {
         renderElement(buy[i]);
         renderElement(sell[i]);
         renderElement(goods[i]);

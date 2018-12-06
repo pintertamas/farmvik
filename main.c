@@ -30,14 +30,14 @@ int main( int argc, char **argv ) {
             }
         }
 
-        growFields();
+        growFields(); // ettől nőnek a mezők
 
         SDL_RenderClear(renderer);
 
-        background();
+        background(); // háttér betöltése
         doRender(); // renderelek mindent
-        renderElements();
-        renderFields();
+        renderElements(); // ikonok/elemek renderelése
+        renderFields(); // a mezők renderelése
         score(); // a pénz és a takarmányok kiírasa
 
         SDL_RenderPresent(renderer);

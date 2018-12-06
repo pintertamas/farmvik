@@ -174,7 +174,8 @@ void handleFields()
                     case et_BUY1:
                     case et_BUY2:
                     case et_BUY3:
-                        if(money >= buy_price[buy[i].e_type]) {
+                        if(money >= buy_price[buy[i].e_type])
+                        {
                             money -= buy_price[buy[i].e_type];
                             bed(&fields[i][j],(PlantType)currentAction); // nem változtat semmit az értékén, csak PlantType típusú enumot vár a függvény, ezért átkonvertálom
                         }

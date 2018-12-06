@@ -27,7 +27,7 @@ SDL_Texture *loadTexture(char *path)
 
 SDL_Texture* getTexture(textureIndex index)
 {
-    return textures[index];
+    return textures[index]; // visszaadja a textúrát index alapján
 }
 
 void loadImage() // ÚJABB KÉP FELTÖLTÉSE UTÁN A TÖMB MÉRETÉT IS NÖVELNI KELL A global.h-BAN ÉS A global.c-BEN IS!
