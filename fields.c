@@ -16,14 +16,17 @@ void resetFieldData(Field *field)
 void setupFields(int column, int row)
 {
     fields = (Field**)malloc(column*sizeof(Field*));
-    if(fields != NULL) {
+    if(fields != NULL)
+    {
         for(int i=0;i<column;i++)
             fields[i] = (Field*)malloc(row*sizeof(Field));
 
         int width = (int)round(agyas*SCREEN_WIDTH);
 
-        for(int i=0;i<column;i++) {
-            for(int j=0;j<row;j++) {
+        for(int i=0;i<column;i++)
+        {
+            for(int j=0;j<row;j++)
+            {
                 fields[i][j].x = 2*d + i * width;
                 fields[i][j].y = 7*d + j * width;
                 fields[i][j].w = width;
@@ -42,7 +45,8 @@ void setupFields(int column, int row)
 void addColumn()
 {
     Field **new_fields = (Field**)malloc((columns+1)*sizeof(Field*));
-    if(new_fields != NULL) {
+    if(new_fields != NULL)
+    {
         for(int i=0;i<(columns+1);i++)
             new_fields[i] = (Field*)malloc(rows*sizeof(Field));
 
@@ -52,7 +56,8 @@ void addColumn()
 
         int width = (int)round(agyas*SCREEN_WIDTH);
 
-        for(int j=0;j<rows;j++) {
+        for(int j=0;j<rows;j++)
+        {
             new_fields[columns][j].x = 2*d + columns * width;
             new_fields[columns][j].y = 7*d + j * width;
             new_fields[columns][j].w = width;
@@ -97,10 +102,13 @@ void growField(Field *field)
 
 void growFields()
 {
-    for(int i=0;i<columns;i++) {
-        for(int j=0;j<rows;j++) {
+    for(int i=0;i<columns;i++)
+    {
+        for(int j=0;j<rows;j++)
+        {
             growField(&fields[i][j]);
-            switch(fields[i][j].age) {
+            switch(fields[i][j].age)
+            {
                 case a_PLAIN:
                     fields[i][j].index = DIRT;
                     break;

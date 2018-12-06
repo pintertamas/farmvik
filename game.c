@@ -59,7 +59,8 @@ void scan(Players players)
     else if(players == TWO)
         data = fopen("gameDataPlayer2.txt", "r");
 
-    if (data != NULL) {
+    if (data != NULL)
+    {
 
         fscanf(data, "%d %d %d %d", &money, &apple, &potato, &tomato);
 
@@ -86,7 +87,8 @@ void save(Players players)
     else if(players == TWO)
         data = fopen("gameDataPlayer2.txt", "w");
 
-    if (data != NULL) {
+    if (data != NULL)
+    {
 
         fprintf(data, "%d %d %d %d\n", money, apple, potato, tomato);
 
@@ -113,25 +115,31 @@ void reset()
 
 void handleButtons(Players *player)
 {
-    for(int i=0; i<3;i++) {
-        if( isOverElement(buy[i])) {
+    for(int i=0; i<3;i++)
+    {
+        if( isOverElement(buy[i]))
+        {
             currentAction = et_BUY1 + i;
         } else if( isOverElement(sell[i])) {
-            switch(sell[i].e_type) {
+            switch(sell[i].e_type)
+            {
                 case et_SELL1:
-                    if(apple > 0) {
+                    if(apple > 0)
+                    {
                         money += apple * sell_price[sell[i].e_type - et_SELL1];
                         apple = 0;
                     }
                     break;
                 case et_SELL2:
-                    if(potato > 0) {
+                    if(potato > 0)
+                    {
                         money += potato * sell_price[sell[i].e_type - et_SELL1];
                         potato = 0;
                     }
                     break;
                 case et_SELL3:
-                    if(tomato > 0) {
+                    if(tomato > 0)
+                    {
                         money += tomato * sell_price[sell[i].e_type - et_SELL1];
                         tomato = 0;
                     }
@@ -142,23 +150,29 @@ void handleButtons(Players *player)
             }
         }
     }
-    if(isOverElement(resetButton)) {
+    if(isOverElement(resetButton))
+    {
         currentAction = et_RESET;
         reset();
-    } else if(isOverElement(change)) {
+    } else if(isOverElement(change))
+    {
         currentAction = et_CHANGE;
         save(*player);
         freeFields();
         if(*player == TWO) *player = ONE;
         else               *player = TWO;
         scan(*player);
-    } else if(isOverElement(harvest)) {
+    } else if(isOverElement(harvest))
+    {
         currentAction = et_HARVEST;
-    } else if(isOverElement(destroy)) {
+    } else if(isOverElement(destroy))
+    {
         currentAction = et_DESTROY;
-    } else if(isOverElement(move)) {
+    } else if(isOverElement(move))
+    {
         currentAction = et_MOVE;
-        if(columns < 4 && money >= 10000) {
+        if(columns < 4 && money >= 10000)
+        {
             addColumn();
             money -= 10000;
         }
@@ -167,10 +181,14 @@ void handleButtons(Players *player)
 
 void handleFields()
 {
-    for(int i=0;i<columns;i++) {
-        for(int j=0;j<rows;j++){
-            if(isOverField(fields[i][j])) {
-                switch(currentAction) {
+    for(int i=0;i<columns;i++)
+    {
+        for(int j=0;j<rows;j++)
+        {
+            if(isOverField(fields[i][j]))
+            {
+                switch(currentAction)
+                {
                     case et_BUY1:
                     case et_BUY2:
                     case et_BUY3:
@@ -181,9 +199,12 @@ void handleFields()
                         }
                         break;
                     case et_HARVEST:
-                        if(fields[i][j].age != a_DEAD) {
-                            if(fields[i][j].age == a_BIG) {
-                                switch(fields[i][j].type) {
+                        if(fields[i][j].age != a_DEAD)
+                        {
+                            if(fields[i][j].age == a_BIG)
+                            {
+                                switch(fields[i][j].type)
+                                {
                                     case pt_APPLE:
                                         apple += 5;
                                         break;
@@ -202,7 +223,8 @@ void handleFields()
                         }
                         break;
                     case et_DESTROY:
-                        if(fields[i][j].age == a_DEAD &&  money >= 500) {
+                        if(fields[i][j].age == a_DEAD &&  money >= 500)
+                        {
                             resetFieldData(&fields[i][j]);
                             money -= 500;
                         }
@@ -218,10 +240,13 @@ void handleFields()
 
 void eventHandler(SDL_Event event, Players *player)
 {
-    if(event.type == SDL_MOUSEBUTTONDOWN) {
-        if (event.button.button == SDL_BUTTON_LEFT) {
+    if(event.type == SDL_MOUSEBUTTONDOWN)
+    {
+        if (event.button.button == SDL_BUTTON_LEFT)
+        {
 
-            if(event.button.x != -1 && event.button.y != -1) {
+            if(event.button.x != -1 && event.button.y != -1)
+            {
                 mouseX = event.button.x;
                 mouseY = event.button.y;
             }
